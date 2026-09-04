@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiếng Na Uy — Phần 7: Tính từ, so sánh, giới từ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16202B; --ink-soft:#4A5A6B; --snow:#EDF0F1; --paper:#FBFCFC;
+  --fjord:#2B4C6F; --fjord-pale:#DDE6EE; --lamp:#C98A14; --lamp-pale:#F6EBD2;
+  --varsel:#A62B39; --varsel-pale:#F5E2E4; --grønn:#2F6B4F; --grønn-pale:#DEEBE3;
+  --line:#C9D3DA;
+  --sans:"Be Vietnam Pro",system-ui,sans-serif; --serif:"Source Serif 4",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--snow);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.shell{display:grid;grid-template-columns:230px minmax(0,1fr);max-width:1180px;margin:0 auto}
+nav{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:36px 20px 40px 24px;border-right:1px solid var(--line)}
+nav .navtitle{font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.3;margin-bottom:18px}
+nav .navtitle small{display:block;font-family:var(--sans);font-weight:500;font-size:12px;color:var(--ink-soft);margin-top:4px}
+nav a{display:block;padding:6px 10px;margin:1px 0 1px -10px;border-radius:5px;color:var(--ink-soft);text-decoration:none;font-size:14px}
+nav a:hover{background:var(--fjord-pale);color:var(--fjord)}
+nav a.on{background:var(--fjord);color:#fff}
+nav .back{margin:0 0 16px -10px;font-size:13px;color:var(--fjord);border-bottom:1px solid var(--line);padding-bottom:14px;border-radius:0}
+nav .back:hover{background:none;text-decoration:underline}
+main{padding:0 44px 120px;background:var(--paper);min-width:0}
+section{padding-top:56px;scroll-margin-top:24px}
+h2{font-family:var(--serif);font-size:30px;line-height:1.2;margin:0 0 6px;font-weight:700}
+h3{font-family:var(--serif);font-size:20px;margin:34px 0 10px;font-weight:600}
+p{max-width:64ch;margin:0 0 14px}
+.lede{color:var(--ink-soft);max-width:60ch;margin-bottom:26px}
+header.hero{padding:64px 0 8px;border-bottom:1px solid var(--line)}
+.adjhero{margin:0;font-family:var(--serif);font-weight:700;font-size:clamp(42px,8vw,96px);line-height:1;letter-spacing:-.02em}
+.adjhero span{opacity:0;animation:rise .5s ease forwards}
+.adjhero .mark{color:var(--lamp);animation-delay:.28s}
+.adjhero .mid{color:var(--fjord);animation-delay:.14s}
+.adjhero .end{color:var(--lamp);animation-delay:.42s}
+.adjhero .base{color:var(--fjord);animation-delay:.05s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.adjhero span{animation:none;opacity:1}}
+.hero h1{font-family:var(--sans);font-weight:800;font-size:26px;letter-spacing:-.01em;margin:22px 0 8px}
+.hero p{font-size:17px;color:var(--ink-soft);max-width:56ch;margin-bottom:34px}
+#voicewarn{display:none;margin:0 0 26px;padding:14px 16px;border-left:3px solid var(--lamp);background:var(--lamp-pale);font-size:14px;line-height:1.55;max-width:64ch}
+.play{border:1px solid var(--line);background:#fff;color:var(--fjord);width:26px;height:26px;min-width:26px;border-radius:50%;cursor:pointer;font-size:12px;line-height:1;display:inline-flex;align-items:center;justify-content:center;padding:0;transition:background .12s,border-color .12s}
+.play:hover{background:var(--fjord);border-color:var(--fjord);color:#fff}
+.play:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--lamp);outline-offset:2px}
+.no{font-family:var(--serif);font-weight:600;color:var(--fjord)}
+.vn{font-family:var(--sans);font-weight:600;color:var(--ink)}
+.vn::before{content:"[";color:var(--ink-soft);font-weight:400}
+.vn::after{content:"]";color:var(--ink-soft);font-weight:400}
+table{border-collapse:collapse;width:100%;margin:16px 0 26px;font-size:15px}
+th{text-align:left;font-weight:600;font-size:13px;color:var(--ink-soft);border-bottom:1px solid var(--ink);padding:0 12px 7px 0}
+td{border-bottom:1px solid var(--line);padding:10px 12px 10px 0;vertical-align:top}
+td:last-child,th:last-child{padding-right:0}
+tr:hover td{background:#F4F7F8}
+.ex{font-size:14px;color:var(--ink-soft)}
+.note{border-left:3px solid var(--fjord);background:var(--fjord-pale);padding:14px 16px;margin:20px 0;max-width:64ch;font-size:15px}
+.warn{border-left:3px solid var(--varsel);background:var(--varsel-pale);padding:14px 16px;margin:20px 0;max-width:64ch;font-size:15px}
+.tip{border-left:3px solid var(--grønn);background:var(--grønn-pale);padding:14px 16px;margin:20px 0;max-width:64ch;font-size:15px}
+.note p,.warn p,.tip p{margin:0 0 8px;max-width:none}
+.note p:last-child,.warn p:last-child,.tip p:last-child{margin:0}
+/* ba dạng tính từ */
+.tre{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:20px 0}
+.t{background:#fff;padding:15px 16px 17px}
+.t .lab{font-size:12.5px;color:var(--ink-soft)}
+.t .form{font-family:var(--serif);font-size:27px;font-weight:700;line-height:1.1;margin:3px 0 8px}
+.t.a .form{color:var(--fjord)} .t.b .form{color:var(--varsel)} .t.c .form{color:var(--lamp)}
+.t .rule{font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:8px}
+.t .ex2{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--fjord);line-height:1.75}
+/* bảng chia tính từ */
+.adjtab td .f{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--fjord)}
+.adjtab td .fx{color:var(--lamp)}
+.adjtab tr.unreg td{background:var(--lamp-pale)}
+.adjtab tr.unreg:hover td{background:#F0E0BC}
+/* máy ghép */
+.build{border:1px solid var(--line);background:#fff;padding:20px;margin:20px 0;max-width:660px}
+.buildrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:12px}
+.piece{font-family:var(--serif);font-size:21px;font-weight:700;padding:4px 12px;border-radius:3px}
+.piece.det{background:var(--lamp-pale);color:var(--lamp)}
+.piece.adj{background:var(--fjord-pale);color:var(--fjord)}
+.piece.noun{background:var(--lamp-pale);color:var(--lamp)}
+.build p{margin:0;font-size:14px;color:var(--ink-soft);max-width:none}
+/* cặp đúng sai */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:18px 0;max-width:740px}
+.pair>div{background:#fff;padding:13px 15px}
+.pair .bad{background:var(--varsel-pale)}
+.pair .good{background:var(--grønn-pale)}
+.pair .tag{font-size:12px;font-weight:600;margin-bottom:5px}
+.pair .bad .tag{color:var(--varsel)} .pair .good .tag{color:var(--grønn)}
+.pair .sent{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--fjord);line-height:1.35}
+.pair .bad .sent{text-decoration:line-through;text-decoration-color:var(--varsel);color:var(--ink-soft)}
+.pair .vi{font-size:13.5px;color:var(--ink-soft);margin-top:3px}
+/* danh sách từ */
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:20px 0}
+.w{background:#fff;padding:11px 13px;display:flex;gap:10px;align-items:flex-start}
+.w .l1{font-family:var(--serif);font-size:16.5px;font-weight:600;color:var(--fjord);line-height:1.3}
+.w .l2{font-size:12.5px;font-weight:600;margin-top:1px}
+.w .l3{font-size:13px;color:var(--ink-soft);margin-top:2px}
+/* cặp trái nghĩa */
+.motsatt{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:20px 0}
+.mo{background:#fff;padding:11px 13px;display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center}
+.mo .side{min-width:0}
+.mo .n{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--fjord);line-height:1.25}
+.mo .p{font-size:12px;font-weight:600}
+.mo .m{font-size:12.5px;color:var(--ink-soft)}
+.mo .sep{color:var(--line);font-family:var(--serif);font-size:18px}
+/* máy luyện */
+.drill{border:1px solid var(--line);background:#fff;padding:22px;max-width:520px;margin:20px 0}
+.drill .ask{font-size:14px;color:var(--ink-soft);margin:0 0 6px}
+.drill .word{font-family:var(--serif);font-size:25px;font-weight:700;color:var(--fjord);margin:0 0 4px;line-height:1.3}
+.drill .sub{font-size:14px;color:var(--ink-soft);margin:0 0 16px}
+.drill .opts{display:grid;gap:7px}
+.drill .opt{text-align:left;font-family:var(--serif);font-size:17px;font-weight:600;color:var(--fjord);padding:10px 14px;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:3px}
+.drill .opt:hover:not(:disabled){border-color:var(--fjord)}
+.drill .opt:disabled{cursor:default}
+.drill .opt.right{border-color:var(--grønn);background:var(--grønn-pale)}
+.drill .opt.wrong{border-color:var(--varsel);background:var(--varsel-pale)}
+.drill .fb{font-size:14px;color:var(--ink-soft);margin:14px 0 0;min-height:22px}
+.drill .bar{display:flex;align-items:center;gap:12px;margin-top:14px}
+/* flashcard */
+.cardwrap{max-width:470px;margin:22px 0}
+.card{border:1px solid var(--line);background:#fff;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 22px;cursor:pointer;user-select:none}
+.card:hover{border-color:var(--fjord)}
+.card .big{font-family:var(--serif);font-size:30px;font-weight:700;color:var(--fjord);line-height:1.2}
+.card .sub{font-size:15px;margin-top:12px;line-height:1.8}
+.card .hint{font-size:12px;color:var(--ink-soft);margin-top:16px}
+.cardbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:12px;font-size:14px;color:var(--ink-soft)}
+.btn{font:inherit;font-size:14px;font-weight:500;padding:7px 15px;border:1px solid var(--fjord);background:#fff;color:var(--fjord);cursor:pointer;border-radius:3px}
+.btn:hover{background:var(--fjord);color:#fff}
+.btn.solid{background:var(--fjord);color:#fff}
+.btn.solid:hover{background:var(--ink)}
+/* quiz */
+.quiz{max-width:640px}
+.q{border-top:1px solid var(--line);padding:20px 0 4px}
+.q:first-child{border-top:0}
+.qn{font-size:13px;color:var(--ink-soft);margin-bottom:4px}
+.qt{font-size:17px;margin-bottom:12px;font-weight:500}
+.opts{display:grid;gap:7px;max-width:480px}
+.opt{text-align:left;font:inherit;font-size:15px;padding:9px 14px;cursor:pointer;border:1px solid var(--line);background:#fff;border-radius:3px}
+.opt:hover:not(:disabled){border-color:var(--fjord)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--grønn);background:var(--grønn-pale);font-weight:600}
+.opt.wrong{border-color:var(--varsel);background:var(--varsel-pale)}
+.why{font-size:14px;color:var(--ink-soft);margin:10px 0 0;max-width:52ch;display:none}
+.why.show{display:block}
+.score{position:sticky;bottom:0;background:var(--paper);border-top:1px solid var(--line);padding:12px 0;font-size:15px;font-weight:600;margin-top:20px}
+.road{list-style:none;padding:0;margin:18px 0;max-width:60ch}
+.road li{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.road .num{font-family:var(--serif);font-weight:700;color:var(--fjord);min-width:24px}
+.road .now{color:var(--lamp)} .road .fer{color:var(--grønn)}
+footer{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-soft)}
+@media print{nav,.play,.cardwrap,.drill,#voicewarn{display:none}.shell{display:block}main{padding:0}body{background:#fff}}
+@media (max-width:820px){
+  .shell{display:block}
+  nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:4px;padding:14px 18px}
+  nav .navtitle,nav .back{width:100%;margin-bottom:8px}
+  nav a{margin:0}
+  main{padding:0 18px 80px}
+  table{font-size:14px}
+  .pair{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<nav id="nav">
+  <div class="navtitle">Norsk for vietnamesere<small>Phần 7 · Tính từ &amp; giới từ</small></div>
+  <a class="back" href="phan-6.html">← Phần 6: Quá khứ &amp; tương lai</a>
+  <a href="#treformer">Ba dạng tính từ</a>
+  <a href="#unntak">Khi nào không thêm t</a>
+  <a href="#uregelrett">Tính từ bất quy tắc</a>
+  <a href="#dobbel">Xác định kép</a>
+  <a href="#eiendom">Sau từ sở hữu</a>
+  <a href="#gradbojning">So sánh</a>
+  <a href="#uregkomp">So sánh bất quy tắc</a>
+  <a href="#sammenlikne">Câu so sánh</a>
+  <a href="#adjliste">40 tính từ</a>
+  <a href="#farger">Màu sắc</a>
+  <a href="#preposisjon">Giới từ</a>
+  <a href="#ipa">i hay på</a>
+  <a href="#drill">Máy luyện</a>
+  <a href="#kort">Flashcard</a>
+  <a href="#quiz">Quiz</a>
+  <a href="#rad">Mẹo học</a>
+  <a href="#neste">Phần tiếp theo</a>
+</nav>
+
+<main>
+
+<header class="hero">
+  <p class="adjhero">
+    <span class="mark">den</span> <span class="mid">store</span> <span class="end">bilen</span>
+  </p>
+  <h1>Hai dấu hiệu xác định trong cùng một cụm</h1>
+  <p>Tiếng Na Uy đánh dấu "cái đó" hai lần khi có tính từ xen vào: một lần bằng từ đứng trước, một lần bằng đuôi dính vào danh từ. Không ngôn ngữ nào bạn biết làm vậy. Phần này giải thích tại sao, và dạy nốt so sánh cùng giới từ.</p>
+</header>
+
+<div id="voicewarn">
+  <b>Máy bạn chưa có giọng đọc tiếng Na Uy.</b> Các nút 🔊 sẽ dùng giọng khác nên đọc sai.
+  Windows: <i>Settings → Time &amp; language → Language &amp; region → Add a language → Norsk bokmål</i>, nhớ tick <i>Speech</i>.
+  macOS: <i>System Settings → Accessibility → Spoken Content → System Voice → Manage Voices → Norwegian</i>.
+</div>
+
+<section id="treformer">
+  <h2>Ba dạng tính từ</h2>
+  <p class="lede">Tính từ đổi hình dạng theo danh từ đứng cạnh nó. Chỉ có ba dạng, ít hơn danh từ một dạng.</p>
+
+  <div class="tre">
+    <div class="t a">
+      <div class="lab">Đi với en và ei</div>
+      <div class="form">stor</div>
+      <div class="rule">Dạng gốc, không thêm gì</div>
+      <div class="ex2">en stor bil<br>ei stor bok</div>
+    </div>
+    <div class="t b">
+      <div class="lab">Đi với et</div>
+      <div class="form">stort</div>
+      <div class="rule">Thêm <b>-t</b></div>
+      <div class="ex2">et stort hus<br>et stort barn</div>
+    </div>
+    <div class="t c">
+      <div class="lab">Số nhiều và dạng xác định</div>
+      <div class="form">store</div>
+      <div class="rule">Thêm <b>-e</b></div>
+      <div class="ex2">store biler<br>den store bilen</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <p>Nhắc lại từ phần 3: giống của danh từ quyết định mọi thứ. Bạn không thể chọn dạng tính từ nếu không nhớ danh từ đó là <span class="no">en</span>, <span class="no">ei</span> hay <span class="no">et</span>. Đây là lý do tôi bắt bạn ghi mạo từ kèm mỗi danh từ ngay từ phần 3.</p>
+  </div>
+
+  <h3>Tính từ đứng sau động từ <span class="no">er</span> cũng phải chia</h3>
+  <p>Không chỉ khi đứng trước danh từ. Câu <span class="no">Huset er stort</span> vẫn phải thêm <span class="no">-t</span> vì <span class="no">hus</span> là trung tính.</p>
+  <div class="words" id="predikativ"></div>
+</section>
+
+<section id="unntak">
+  <h2>Khi nào không thêm <span class="no">-t</span></h2>
+  <p class="lede">Bốn nhóm tính từ giữ nguyên hình dạng với danh từ trung tính. Nhóm đầu là nhóm bạn gặp nhiều nhất.</p>
+  <table>
+    <thead><tr><th style="width:44px">#</th><th style="width:230px">Trường hợp</th><th>Ví dụ</th></tr></thead>
+    <tbody id="unntakstabell"></tbody>
+  </table>
+  <div class="tip">
+    <p>Nhóm <span class="no">-ig</span> rất lớn và toàn từ thông dụng: <span class="no">hyggelig, viktig, billig, vanskelig, deilig, kjedelig, ferdig</span>. Nhớ một quy tắc này là xử lý được hàng chục từ.</p>
+  </div>
+
+  <h3>Thêm <span class="no">-t</span> nhưng có biến đổi</h3>
+  <table>
+    <thead><tr><th style="width:230px">Trường hợp</th><th>Ví dụ</th></tr></thead>
+    <tbody id="endringstabell"></tbody>
+  </table>
+</section>
+
+<section id="uregelrett">
+  <h2>Tính từ bất quy tắc</h2>
+  <p class="lede">Hàng nền vàng là những từ không theo mẫu. <span class="no">liten</span> là từ bướng nhất trong cả tiếng Na Uy.</p>
+  <table class="adjtab">
+    <thead><tr><th style="width:130px">en / ei</th><th style="width:130px">et</th><th style="width:130px">số nhiều</th><th style="width:150px">dạng xác định</th><th>Nghĩa</th></tr></thead>
+    <tbody id="uregtabell"></tbody>
+  </table>
+  <div class="warn">
+    <p><span class="no">liten</span> có tận năm dạng khác nhau: <span class="no">en liten bil</span>, <span class="no">ei lita bok</span>, <span class="no">et lite hus</span>, <span class="no">små biler</span>, <span class="no">den lille bilen</span>. Không có từ nào khác phức tạp bằng. Học riêng nó như một trường hợp đặc biệt.</p>
+  </div>
+</section>
+
+<section id="dobbel">
+  <h2>Xác định kép</h2>
+  <p>Ở phần 3 bạn học rằng "chiếc xe đó" là <span class="no">bilen</span> — mạo từ dính đuôi, không có từ nào đứng trước. Nhưng khi chèn một tính từ vào giữa, tiếng Na Uy bắt bạn thêm <b>một dấu hiệu xác định thứ hai</b> ở phía trước.</p>
+
+  <div class="build">
+    <div class="buildrow">
+      <span class="piece det">den</span><span class="piece adj">store</span><span class="piece noun">bilen</span>
+      <span style="color:var(--ink-soft)">·</span>
+      <span class="ex">chiếc xe to đó</span>
+      <button class="play" onclick="say('den store bilen')" aria-label="Nghe">🔊</button>
+    </div>
+    <p>Ô vàng là hai dấu hiệu xác định. Ô xanh là tính từ, luôn ở dạng <span class="no">-e</span>.</p>
+  </div>
+
+  <table>
+    <thead><tr><th style="width:100px">Giống</th><th style="width:210px">Cụm xác định</th><th>Nghĩa</th></tr></thead>
+    <tbody id="dobbeltabell"></tbody>
+  </table>
+
+  <div class="tip">
+    <p><b>Công thức cố định:</b> <span class="no">den / det / de</span> + tính từ đuôi <span class="no">-e</span> + danh từ dạng xác định. Tính từ ở đây <em>luôn</em> lấy đuôi <span class="no">-e</span>, bất kể giống hay số. Đó là phần dễ nhất của cấu trúc này.</p>
+  </div>
+  <div id="dobbelpar"></div>
+</section>
+
+<section id="eiendom">
+  <h2>Tính từ sau từ sở hữu</h2>
+  <p>Nối tiếp phần 5. Khi có tính từ, nó vẫn lấy đuôi <span class="no">-e</span>, còn danh từ theo quy tắc của vị trí từ sở hữu.</p>
+  <div class="words" id="eiendomsord"></div>
+  <div class="note">
+    <p>Nhìn <span class="no">min store bil</span> — tính từ lấy đuôi <span class="no">-e</span> dù <span class="no">bil</span> là số ít giống đực. Sau từ sở hữu, tính từ luôn ở dạng <span class="no">-e</span>, giống như trong cụm xác định kép.</p>
+  </div>
+</section>
+
+<section id="gradbojning">
+  <h2>So sánh</h2>
+  <p class="lede">Ba bậc: gốc, hơn, nhất. Quy tắc chung là thêm <span class="no">-ere</span> và <span class="no">-est</span>.</p>
+  <table>
+    <thead><tr><th style="width:150px">Gốc</th><th style="width:170px">Hơn (-ere)</th><th style="width:170px">Nhất (-est)</th><th>Nghĩa</th></tr></thead>
+    <tbody id="gradtabell"></tbody>
+  </table>
+
+  <h3>Tính từ dài dùng <span class="no">mer</span> và <span class="no">mest</span></h3>
+  <p>Tính từ từ ba âm tiết trở lên, hoặc kết thúc bằng <span class="no">-isk, -ende</span>, thì không thêm đuôi mà dùng từ đứng trước — giống <i>more / most</i> trong tiếng Anh.</p>
+  <div class="words" id="merord"></div>
+</section>
+
+<section id="uregkomp">
+  <h2>So sánh bất quy tắc</h2>
+  <p class="lede">Mười từ này đổi hẳn gốc. Tất cả đều là từ dùng hằng ngày nên phải thuộc.</p>
+  <table class="adjtab">
+    <thead><tr><th style="width:150px">Gốc</th><th style="width:150px">Hơn</th><th style="width:150px">Nhất</th><th>Nghĩa</th></tr></thead>
+    <tbody id="uregkomptabell"></tbody>
+  </table>
+  <div class="tip">
+    <p>Nếu bạn biết tiếng Anh thì nhiều cặp trùng khớp: <span class="no">god – bedre – best</span> so với <i>good – better – best</i>, <span class="no">mange – flere – flest</span> so với <i>many – more – most</i>. Nhưng cẩn thận <span class="no">stor – større – størst</span>, chỗ này tiếng Anh lại theo quy tắc.</p>
+  </div>
+</section>
+
+<section id="sammenlikne">
+  <h2>Câu so sánh</h2>
+  <div class="words" id="sammenord"></div>
+  <div class="note">
+    <p>Ba mẫu câu cần thuộc: <span class="no">… -ere enn …</span> (hơn), <span class="no">like … som …</span> (bằng), <span class="no">ikke så … som …</span> (không bằng). Chúng bao hết mọi phép so sánh ở trình độ A1.</p>
+  </div>
+</section>
+
+<section id="adjliste">
+  <h2>40 tính từ, xếp theo cặp trái nghĩa</h2>
+  <p class="lede">Học theo cặp nhanh hơn học rời, vì não neo hai từ vào nhau.</p>
+  <div class="motsatt" id="motsattliste"></div>
+</section>
+
+<section id="farger">
+  <h2>Màu sắc</h2>
+  <p class="lede">Để ý cột dạng trung tính — nhiều màu có biến đổi khi thêm <span class="no">-t</span>.</p>
+  <table class="adjtab">
+    <thead><tr><th style="width:140px">en / ei</th><th style="width:140px">et</th><th style="width:140px">số nhiều</th><th>Nghĩa</th></tr></thead>
+    <tbody id="fargetabell"></tbody>
+  </table>
+</section>
+
+<section id="preposisjon">
+  <h2>Giới từ chỉ nơi chốn</h2>
+  <div class="words" id="preposisjoner"></div>
+  <div class="note">
+    <p><span class="no">hos</span> không có tương đương gọn trong tiếng Việt. Nó nghĩa là "ở chỗ của ai đó": <span class="no">hos legen</span> (ở chỗ bác sĩ), <span class="no">hos meg</span> (ở chỗ tôi), <span class="no">hos Ingrid</span> (ở nhà Ingrid). Rất hay dùng.</p>
+  </div>
+
+  <h3>Đứng yên hay di chuyển</h3>
+  <p>Tiếng Na Uy phân biệt vị trí và hướng đi bằng giới từ khác nhau. Tiếng Việt dùng chung "ở" và "đến" nên chỗ này phải để ý.</p>
+  <table>
+    <thead><tr><th style="width:44%">Đang ở đó</th><th>Đang đi tới đó</th></tr></thead>
+    <tbody id="bevegelse"></tbody>
+  </table>
+  <div class="tip">
+    <p>Ba cặp bất quy tắc phải thuộc riêng: <span class="no">hjemme</span> (ở nhà) và <span class="no">hjem</span> (về nhà), <span class="no">ute</span> (ở ngoài) và <span class="no">ut</span> (ra ngoài), <span class="no">inne</span> (ở trong) và <span class="no">inn</span> (vào trong). Dạng dài là vị trí, dạng ngắn là hướng đi.</p>
+  </div>
+</section>
+
+<section id="ipa">
+  <h2><span class="no">i</span> hay <span class="no">på</span></h2>
+  <p>Câu hỏi này không có lời giải logic. Ngay cả người Na Uy cũng không giải thích được vì sao là <span class="no">i Norge</span> nhưng <span class="no">på Island</span>. Cách duy nhất là học thuộc từng cụm.</p>
+  <div class="words" id="ipaliste"></div>
+  <div class="warn">
+    <p><b>Một chỗ thật sự lạ:</b> hầu hết thành phố dùng <span class="no">i</span> — <span class="no">i Oslo, i Bergen, i Hanoi</span>. Nhưng một số thị trấn trong đất liền lại dùng <span class="no">på</span> — <span class="no">på Hamar, på Lillehammer, på Gjøvik</span>. Đảo cũng dùng <span class="no">på</span>: <span class="no">på Island</span>. Người bản xứ chỉ biết theo thói quen, không theo quy tắc.</p>
+    <p>Đừng để chuyện này làm bạn chậm lại. Dùng sai <span class="no">i</span> hay <span class="no">på</span> không làm ai hiểu nhầm, chỉ nghe hơi lạ. Đây là lỗi đáng chấp nhận nhất trong toàn bộ khóa này.</p>
+  </div>
+</section>
+
+<section id="drill">
+  <h2>Máy luyện chia tính từ</h2>
+  <p class="lede">Cho danh từ và tính từ, chọn dạng đúng. Trộn cả câu về so sánh.</p>
+  <div class="drill">
+    <p class="ask" id="d-ask"></p>
+    <p class="word" id="d-word"></p>
+    <p class="sub" id="d-sub"></p>
+    <div class="opts" id="d-opts"></div>
+    <p class="fb" id="d-fb"></p>
+    <div class="bar">
+      <button class="btn solid" id="d-next">Câu tiếp →</button>
+      <span id="d-score">0 / 0</span>
+    </div>
+  </div>
+</section>
+
+<section id="kort">
+  <h2>Flashcard</h2>
+  <p class="lede">Tính từ, màu sắc và giới từ. Tự dịch trước khi lật.</p>
+  <div class="cardwrap">
+    <div class="card" id="card" role="button" tabindex="0" aria-label="Lật thẻ"></div>
+    <div class="cardbar">
+      <button class="btn" id="prev">← Trước</button>
+      <button class="btn solid" id="next">Sau →</button>
+      <button class="btn" id="shuffle">Xáo trộn</button>
+      <button class="btn" id="onlyprep">Chỉ giới từ</button>
+      <span id="cardpos"></span>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <h2>Kiểm tra</h2>
+  <p class="lede">Mười câu. Dưới 8 điểm thì quay lại mục ba dạng tính từ và mục xác định kép.</p>
+  <div class="quiz" id="quizbox"></div>
+  <div class="score" id="score">Chưa trả lời câu nào</div>
+</section>
+
+<section id="rad">
+  <h2>Mẹo học</h2>
+
+  <h3>Ba câu hỏi trước mỗi tính từ</h3>
+  <p>Mỗi lần định đặt một tính từ vào câu, tự hỏi theo đúng thứ tự này: <b>Danh từ giống gì? Số ít hay số nhiều? Có xác định không?</b> Trả lời xong ba câu là dạng tính từ tự hiện ra. Ban đầu chậm, sau vài tuần thành phản xạ.</p>
+
+  <h3>Học cặp trái nghĩa, không học từ lẻ</h3>
+  <p>Bảng 40 tính từ ở trên xếp theo cặp là có chủ ý. <span class="no">stor</span> và <span class="no">liten</span> đi cùng nhau trong trí nhớ chắc hơn nhiều so với học rời từng từ. Khi ôn, nhớ một từ rồi tự bật ra từ đối lập.</p>
+
+  <h3>Mô tả đồ vật quanh bạn thành tiếng</h3>
+  <p>Nhìn quanh phòng, mỗi vật nói một câu đầy đủ: <span class="no">Dette er et stort bord. Bordet er brunt.</span> Bài tập này ép bạn dùng cả giống danh từ lẫn dạng tính từ trong cùng một câu — đúng hai thứ hay quên nhất.</p>
+
+  <h3>Đừng cầu toàn về <span class="no">i</span> và <span class="no">på</span></h3>
+  <p>Đây là chỗ duy nhất trong khóa này tôi khuyên bạn chấp nhận sai. Dùng nhầm giới từ nơi chốn không làm ai hiểu sai ý, và ngay cả người Na Uy cũng chỉ đi theo thói quen. Dành sức nhớ cho những chỗ sai thì gây hiểu lầm thật, như trật tự từ hay giống danh từ.</p>
+
+  <h3>Đừng học cái này ở phần 7</h3>
+  <p>Bạn có thể tò mò về trạng từ và cách chúng khác tính từ. Thực tế ở A1 bạn dùng được ngay mà không cần lý thuyết: nhiều trạng từ trùng dạng trung tính của tính từ (<span class="no">Han snakker fort</span>). Cứ dùng, đừng phân tích.</p>
+</section>
+
+<section id="neste">
+  <h2>Phần tiếp theo</h2>
+  <ul class="road">
+    <li><span class="num fer">1</span><span>Phát âm &amp; bảng chữ cái — <a href="phan-1.html">xem lại</a></span></li>
+    <li><span class="num fer">2</span><span>Chào hỏi, giới thiệu, số đếm — <a href="phan-2.html">xem lại</a></span></li>
+    <li><span class="num fer">3</span><span>Danh từ, giống, số nhiều — <a href="phan-3.html">xem lại</a></span></li>
+    <li><span class="num fer">4</span><span>Động từ hiện tại, V2, câu hỏi — <a href="phan-4.html">xem lại</a></span></li>
+    <li><span class="num fer">5</span><span>Gia đình, nhà cửa, giờ giấc — <a href="phan-5.html">xem lại</a></span></li>
+    <li><span class="num fer">6</span><span>Quá khứ, tương lai, mệnh đề phụ — <a href="phan-6.html">xem lại</a></span></li>
+    <li><span class="num now">7</span><span><b>Tính từ, so sánh, giới từ</b> — phần này</span></li>
+    <li><span class="num">8</span><span>Hội thoại thực tế: mua sắm, đi lại, đặt lịch hẹn</span></li>
+  </ul>
+  <footer>
+    Bảy phần này là toàn bộ ngữ pháp A1. Phần 8 không thêm quy tắc mới nào — nó đem tất cả ra dùng trong những tình huống bạn sẽ gặp thật.
+  </footer>
+</section>
+
+</main>
+</div>
+
+<script>
+/* ============ DỮ LIỆU ============ */
+const PREDIKATIV = [
+  ["Bilen er stor.","bí-lơn er stur","Chiếc xe thì to — bil là en"],
+  ["Huset er stort.","húy-sơ er stut","Ngôi nhà thì to — hus là et"],
+  ["Bilene er store.","bí-lơ-nơ er stú-rơ","Những chiếc xe thì to — số nhiều"],
+  ["Boka er ny.","bú-ka er nuy","Quyển sách thì mới"],
+  ["Eplet er rødt.","ép-lơ er rớt","Quả táo thì đỏ"],
+  ["Barna er små.","bá-na er smô","Bọn trẻ thì nhỏ"]
+];
+const UNNTAK = [
+  ["1","Kết thúc bằng <b>-ig</b>","et hyggelig hus|ngôi nhà dễ chịu · et viktig brev|lá thư quan trọng"],
+  ["2","Kết thúc bằng <b>-sk</b> chỉ quốc tịch","et norsk hus|ngôi nhà kiểu Na Uy · et vietnamesisk ord|một từ tiếng Việt"],
+  ["3","Đã kết thúc bằng <b>-t</b>","et lett spørsmål|câu hỏi dễ · et svart bord|cái bàn đen"],
+  ["4","Kết thúc bằng <b>-e</b>","et moderne hus|ngôi nhà hiện đại · et spennende liv|cuộc sống hấp dẫn"]
+];
+const ENDRING = [
+  ["Kết thúc bằng nguyên âm: thêm <b>-tt</b>","ny → nytt|mới · blå → blått|xanh dương"],
+  ["Kết thúc bằng phụ âm đôi: bớt một chữ","grønn → grønt|xanh lá · tynn → tynt|mỏng"],
+  ["Kết thúc bằng <b>-d</b>: đổi thành <b>-tt</b> hoặc <b>-dt</b>","god → godt|tốt · rød → rødt|đỏ"],
+  ["<b>-el, -en, -er</b>: bỏ nguyên âm ở dạng -e","gammel → gamle|cũ · sulten → sultne|đói"]
+];
+const UREGADJ = [
+  ["liten","lite","små","den lille","nhỏ (dạng ei là lita)",1],
+  ["gammel","gammelt","gamle","den gamle","cũ, già",1],
+  ["god","godt","gode","den gode","tốt",1],
+  ["ny","nytt","nye","den nye","mới",1],
+  ["blå","blått","blå","den blå","xanh dương",1],
+  ["annen","annet","andre","den andre","khác",1],
+  ["egen","eget","egne","den egne","riêng",1],
+  ["stor","stort","store","den store","to",0],
+  ["fin","fint","fine","den fine","đẹp, ổn",0],
+  ["billig","billig","billige","den billige","rẻ",0]
+];
+const DOBBEL = [
+  ["en (đực)","den store bilen","chiếc xe to đó"],
+  ["ei (cái)","den nye boka","quyển sách mới đó"],
+  ["et (trung)","det store huset","ngôi nhà to đó"],
+  ["số nhiều","de store bilene","những chiếc xe to đó"]
+];
+const DOBBELPAR = [
+  ["den stor bilen","den store bilen","Chiếc xe to đó — tính từ trong cụm xác định luôn có đuôi -e"],
+  ["den store bil","den store bilen","Danh từ phải ở dạng xác định, không phải dạng gốc"],
+  ["det store hus","det store huset","Trung tính dùng det, và danh từ vẫn phải xác định"]
+];
+const EIENDOM = [
+  ["min store bil","min stú-rơ bil","chiếc xe to của tôi"],
+  ["den store bilen min","đen stú-rơ bí-lơn min","chiếc xe to đó của tôi"],
+  ["mitt nye hus","mit núy-ơ huys","ngôi nhà mới của tôi"],
+  ["mine gamle bøker","mí-nơ gám-lơ bớ-kơr","những quyển sách cũ của tôi"]
+];
+const GRAD = [
+  ["pen","penere","penest","đẹp"],
+  ["billig","billigere","billigst","rẻ"],
+  ["kald","kaldere","kaldest","lạnh"],
+  ["rask","raskere","raskest","nhanh"],
+  ["morsom","morsommere","morsomst","vui nhộn"],
+  ["sterk","sterkere","sterkest","mạnh"]
+];
+const MERORD = [
+  ["interessant – mer interessant – mest interessant","ín-tơ-rơ-sant","thú vị"],
+  ["praktisk – mer praktisk – mest praktisk","prák-tisk","tiện dụng"],
+  ["spennende – mer spennende – mest spennende","spén-nơn-nơ","hấp dẫn"]
+];
+const UREGKOMP = [
+  ["god","bedre","best","tốt",1],
+  ["dårlig","verre","verst","tệ",1],
+  ["stor","større","størst","to",1],
+  ["liten","mindre","minst","nhỏ",1],
+  ["gammel","eldre","eldst","già, cũ",1],
+  ["ung","yngre","yngst","trẻ",1],
+  ["lang","lengre","lengst","dài",1],
+  ["mange","flere","flest","nhiều (đếm được)",1],
+  ["mye","mer","mest","nhiều (không đếm)",1],
+  ["få","færre","færrest","ít",1]
+];
+const SAMMEN = [
+  ["Bilen min er større enn bilen din.","bí-lơn min er stớr-rơ en bí-lơn đin","Xe tôi to hơn xe bạn"],
+  ["Han er like gammel som meg.","han er lí-kơ gám-mơl som mây","Anh ấy bằng tuổi tôi"],
+  ["Norsk er ikke så vanskelig som tysk.","nosk er ík-kơ sô váns-kơ-li som tuysk","Tiếng Na Uy không khó bằng tiếng Đức"],
+  ["Dette er den beste boka.","đét-tơ er đen bés-tơ bú-ka","Đây là quyển sách hay nhất"],
+  ["Hun er yngst i familien.","huyn er uyngst i fa-mí-li-ơn","Cô ấy nhỏ nhất nhà"],
+  ["Det blir kaldere om vinteren.","đe blir kál-đơ-rơ om vín-tơ-rơn","Mùa đông trời lạnh hơn"]
+];
+const MOTSATT = [
+  ["stor|stur|to","liten|lí-tơn|nhỏ"],
+  ["ny|nuy|mới","gammel|gám-mơl|cũ"],
+  ["god|gu|tốt","dårlig|đór-li|tệ"],
+  ["lang|lang|dài","kort|kot|ngắn"],
+  ["høy|hới|cao","lav|lav|thấp"],
+  ["varm|varm|ấm","kald|kal|lạnh"],
+  ["dyr|đuyr|đắt","billig|bíl-li|rẻ"],
+  ["tung|tung|nặng","lett|let|nhẹ, dễ"],
+  ["vanskelig|váns-kơ-li|khó","enkel|éng-kơl|đơn giản"],
+  ["rask|rask|nhanh","sakte|sák-tơ|chậm"],
+  ["ren|rên|sạch","skitten|shít-tơn|bẩn"],
+  ["glad|gla|vui","lei seg|lây sây|buồn"],
+  ["frisk|frisk|khoẻ","syk|suyk|ốm"],
+  ["sulten|súyl-tơn|đói","mett|met|no"],
+  ["morsom|mó-som|vui nhộn","kjedelig|khê-đơ-li|chán"],
+  ["snill|snil|tốt bụng","slem|slem|xấu tính"],
+  ["sterk|stæk|mạnh","svak|svak|yếu"],
+  ["pen|pên|đẹp","stygg|stuyg|xấu"],
+  ["ung|ung|trẻ","gammel|gám-mơl|già"],
+  ["våken|vó-kơn|tỉnh táo","trøtt|trớt|buồn ngủ"]
+];
+const FARGER = [
+  ["rød","rødt","røde","đỏ",1],
+  ["blå","blått","blå","xanh dương",1],
+  ["grønn","grønt","grønne","xanh lá",1],
+  ["gul","gult","gule","vàng",0],
+  ["hvit","hvitt","hvite","trắng",1],
+  ["svart","svart","svarte","đen",1],
+  ["brun","brunt","brune","nâu",0],
+  ["grå","grått","grå","xám",1],
+  ["rosa","rosa","rosa","hồng — không đổi",1]
+];
+const PREP = [
+  ["i","i","trong, ở trong"],
+  ["på","pô","trên, ở tại"],
+  ["under","úy-nơr","dưới"],
+  ["over","ố-vơr","phía trên"],
+  ["ved","ve","cạnh, gần"],
+  ["ved siden av","ve sí-đơn av","bên cạnh"],
+  ["mellom","mél-lom","giữa hai thứ"],
+  ["bak","bak","phía sau"],
+  ["foran","fó-ran","phía trước"],
+  ["til","til","đến, tới"],
+  ["fra","fra","từ"],
+  ["gjennom","yén-nom","xuyên qua"],
+  ["hos","hus","ở chỗ của ai đó"],
+  ["med","me","với, cùng"],
+  ["uten","úy-tơn","không có"],
+  ["mot","mut","về phía"]
+];
+const BEVEGELSE = [
+  ["Jeg er på skolen.|yây er pô skú-lơn|Tôi đang ở trường","Jeg går til skolen.|yây gôr til skú-lơn|Tôi đi tới trường"],
+  ["Jeg er hjemme.|yây er yém-mơ|Tôi đang ở nhà","Jeg går hjem.|yây gôr yem|Tôi đi về nhà"],
+  ["Hun er ute.|huyn er úy-tơ|Cô ấy ở bên ngoài","Hun går ut.|huyn gôr uyt|Cô ấy đi ra ngoài"],
+  ["Vi er inne.|vi er ín-nơ|Chúng tôi ở trong nhà","Vi går inn.|vi gôr in|Chúng tôi đi vào trong"]
+];
+const IPA = [
+  ["i Norge","i nor-ghơ","ở Na Uy"],["i Oslo","i ós-lu","ở Oslo"],
+  ["i Vietnam","i vi-et-nam","ở Việt Nam"],["på Island","pô ís-lan","ở Iceland — đảo dùng på"],
+  ["på Hamar","pô há-mar","ở Hamar — một số thị trấn dùng på"],
+  ["i byen","i búy-ơn","trong thành phố"],["på landet","pô lán-nơ","ở nông thôn"],
+  ["på jobb","pô yob","ở chỗ làm"],["på skolen","pô skú-lơn","ở trường"],
+  ["på kino","pô khí-nu","ở rạp phim"],["i butikken","i buy-tík-kơn","trong cửa hàng"],
+  ["i banken","i báng-kơn","trong ngân hàng"],["på hotellet","pô hu-tél-lơ","ở khách sạn"],
+  ["i parken","i pár-kơn","trong công viên"]
+];
+const DRILL_FORM = [
+  {n:"et ___ hus",adj:"stor",o:["stor","stort","store","storen"],a:1,w:"hus là trung tính nên tính từ thêm -t."},
+  {n:"ei ___ bok",adj:"ny",o:["ny","nytt","nye","nyt"],a:0,w:"Giống cái dùng dạng gốc, không thêm gì."},
+  {n:"___ biler",adj:"stor",o:["stor","stort","store","størst"],a:2,w:"Số nhiều luôn thêm -e."},
+  {n:"et ___ hus",adj:"norsk",o:["norsk","norskt","norske","norsket"],a:0,w:"Tính từ -sk chỉ quốc tịch không thêm -t."},
+  {n:"et ___ hus",adj:"hyggelig",o:["hyggelig","hyggeligt","hyggelige","hyggeligst"],a:0,w:"Tính từ kết thúc -ig không thêm -t."},
+  {n:"den ___ bilen",adj:"stor",o:["stor","stort","store","størst"],a:2,w:"Trong cụm xác định kép, tính từ luôn có đuôi -e."},
+  {n:"et ___ eple",adj:"rød",o:["rød","rødt","røde","rødet"],a:1,w:"Đuôi -d đổi thành -dt với danh từ trung tính."},
+  {n:"et ___ hus",adj:"blå",o:["blå","blåt","blått","blåe"],a:2,w:"Tính từ kết thúc bằng nguyên âm thêm hẳn -tt."},
+  {n:"de ___ husene",adj:"gammel",o:["gammel","gammelt","gammele","gamle"],a:3,w:"gammel bỏ nguyên âm ở dạng -e, thành gamle."},
+  {n:"et ___ barn",adj:"liten",o:["liten","litet","lite","lille"],a:2,w:"liten có dạng riêng cho trung tính là lite."}
+];
+const DRILL_KOMP = [
+  {base:"god",ask:"Bậc so sánh hơn",o:["godere","bedre","gode","bedst"],a:1,w:"Bất quy tắc: god – bedre – best."},
+  {base:"stor",ask:"Bậc so sánh hơn",o:["storere","større","store","størst"],a:1,w:"Bất quy tắc: stor – større – størst."},
+  {base:"gammel",ask:"Bậc so sánh hơn",o:["gammelere","eldre","gamlere","eldst"],a:1,w:"Bất quy tắc: gammel – eldre – eldst."},
+  {base:"billig",ask:"Bậc so sánh hơn",o:["billigere","billigst","mer billig","billige"],a:0,w:"Theo quy tắc: thêm -ere."},
+  {base:"liten",ask:"Bậc so sánh nhất",o:["litest","minst","mindre","lillest"],a:1,w:"Bất quy tắc: liten – mindre – minst."},
+  {base:"interessant",ask:"Bậc so sánh hơn",o:["interessantere","mer interessant","interessanter","interessantest"],a:1,w:"Tính từ dài dùng mer thay vì thêm đuôi."}
+];
+const QUIZ = [
+  {q:"<span class='no'>et ___ hus</span> với tính từ <span class='no'>stor</span>:",o:["stor","stort","store","større"],a:1,
+   w:"Danh từ trung tính thì tính từ thêm -t."},
+  {q:"Câu nào đúng cho 'chiếc xe to đó'?",
+   o:["den stor bilen","den store bil","den store bilen","store bilen"],a:2,
+   w:"Xác định kép: den + tính từ đuôi -e + danh từ dạng xác định."},
+  {q:"<span class='no'>et ___ hus</span> với tính từ <span class='no'>hyggelig</span>:",
+   o:["hyggeligt","hyggelig","hyggelige","hyggeligst"],a:1,
+   w:"Tính từ kết thúc bằng -ig không thêm -t. Nhóm này rất lớn."},
+  {q:"Bậc so sánh hơn của <span class='no'>god</span> là gì?",o:["godere","bedre","best","mer god"],a:1,
+   w:"Bất quy tắc, giống good – better – best trong tiếng Anh."},
+  {q:"Bậc so sánh hơn của <span class='no'>stor</span> là gì?",o:["storere","større","størst","mer stor"],a:1,
+   w:"stor – større – størst. Chỗ này tiếng Anh theo quy tắc còn tiếng Na Uy thì không."},
+  {q:"Trong tiếng Na Uy, 'hơn' trong câu so sánh là từ nào?",o:["som","enn","mer","av"],a:1,
+   w:"Han er større enn meg. Còn like … som dùng để nói bằng nhau."},
+  {q:"<span class='no'>et ___ eple</span> với tính từ <span class='no'>rød</span>:",o:["rød","rødt","røde","rødet"],a:1,
+   w:"Đuôi -d chuyển thành -dt khi đi với danh từ trung tính."},
+  {q:"Câu nào đúng cho 'Tôi đi về nhà'?",o:["Jeg går hjemme.","Jeg går hjem.","Jeg er hjem.","Jeg går til hjemme."],a:1,
+   w:"hjem là hướng đi, hjemme là vị trí. Dạng ngắn chỉ chuyển động."},
+  {q:"Dạng trung tính của <span class='no'>liten</span> là gì?",o:["litet","liten","lite","lille"],a:2,
+   w:"liten có năm dạng: liten, lita, lite, små, lille. Đây là tính từ bất quy tắc nhất."},
+  {q:"Vì sao là <span class='no'>i Norge</span> nhưng <span class='no'>på Island</span>?",
+   o:["Vì Island không thuộc Bắc Âu","Vì đảo dùng på, không có lý do sâu xa hơn","Vì Island là giống trung tính","Vì cả hai đều sai"],a:1,
+   w:"Không có quy tắc suy ra được. Đảo và một số thị trấn trong đất liền dùng på, phải học thuộc."}
+];
+
+/* ============ ÂM THANH ============ */
+let voice = null;
+function pickVoice(){
+  if(!("speechSynthesis" in window)) return;
+  const vs = speechSynthesis.getVoices(); if(!vs.length) return;
+  voice = vs.find(v=>/^(nb|nn|no)\b/i.test(v.lang)) || vs.find(v=>/norw|norsk/i.test(v.name)) || null;
+  if(!voice) document.getElementById("voicewarn").style.display = "block";
+}
+if("speechSynthesis" in window){
+  pickVoice(); speechSynthesis.onvoiceschanged = pickVoice; setTimeout(pickVoice,700);
+} else { document.getElementById("voicewarn").style.display = "block"; }
+function say(t){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(t);
+  u.lang = "nb-NO"; if(voice) u.voice = voice; u.rate = 0.82;
+  speechSynthesis.speak(u);
+}
+function esc(s){ return s.replace(/'/g,"\\'"); }
+function playBtn(t){ return `<button class="play" onclick="say('${esc(t)}')" aria-label="Nghe">🔊</button>`; }
+
+/* ============ DỰNG NỘI DUNG ============ */
+function words(id, arr){
+  document.getElementById(id).innerHTML = arr.map(([n,v,m])=>
+    `<div class="w">${playBtn(n)}<div>
+      <div class="l1">${n}</div><div class="l2">[${v}]</div><div class="l3">${m}</div>
+    </div></div>`).join("");
+}
+words("predikativ",PREDIKATIV); words("eiendomsord",EIENDOM); words("merord",MERORD);
+words("sammenord",SAMMEN); words("preposisjoner",PREP); words("ipaliste",IPA);
+
+document.getElementById("unntakstabell").innerHTML = UNNTAK.map(([n,r,ex])=>
+  `<tr><td class="no" style="font-size:17px">${n}</td><td>${r}</td>
+   <td class="ex">${ex.split(" · ").map(e=>{
+     const [a,b] = e.split("|");
+     return `<span class="no">${a}</span> ${b} ${playBtn(a)}`;
+   }).join("<br>")}</td></tr>`).join("");
+
+document.getElementById("endringstabell").innerHTML = ENDRING.map(([r,ex])=>
+  `<tr><td>${r}</td><td class="ex">${ex.split(" · ").map(e=>{
+     const [a,b] = e.split("|");
+     return `<span class="no">${a}</span> ${b}`;
+   }).join("<br>")}</td></tr>`).join("");
+
+function adjTable(id, data, cols){
+  document.getElementById(id).innerHTML = data.map(row=>{
+    const irr = row[row.length-1];
+    const cells = row.slice(0, cols).map((c,i)=>
+      `<td><span class="f ${i===1?'fx':''}">${c}</span></td>`).join("");
+    return `<tr class="${irr?'unreg':''}">${cells}<td class="ex">${row[cols]} ${playBtn(row[0])}</td></tr>`;
+  }).join("");
+}
+adjTable("uregtabell", UREGADJ, 4);
+adjTable("fargetabell", FARGER, 3);
+adjTable("uregkomptabell", UREGKOMP, 3);
+
+document.getElementById("dobbeltabell").innerHTML = DOBBEL.map(([g,f,m])=>
+  `<tr><td class="ex">${g}</td><td><span class="no" style="font-size:17px">${f}</span> ${playBtn(f)}</td>
+   <td class="ex">${m}</td></tr>`).join("");
+
+document.getElementById("dobbelpar").innerHTML = DOBBELPAR.map(([bad,good,vi])=>`
+  <div class="pair">
+    <div class="bad"><div class="tag">Sai</div><div class="sent">${bad}</div><div class="vi">${vi}</div></div>
+    <div class="good"><div class="tag">Đúng</div><div class="sent">${good}</div>
+      <div class="vi">${vi} ${playBtn(good)}</div></div>
+  </div>`).join("");
+
+document.getElementById("gradtabell").innerHTML = GRAD.map(([a,b,c,m])=>
+  `<tr><td><span class="no">${a}</span> ${playBtn(a)}</td>
+   <td><span class="no" style="color:var(--lamp)">${b}</span> ${playBtn(b)}</td>
+   <td><span class="no">${c}</span></td><td class="ex">${m}</td></tr>`).join("");
+
+document.getElementById("motsattliste").innerHTML = MOTSATT.map(([l,r])=>{
+  const [ln,lp,lm] = l.split("|"), [rn,rp,rm] = r.split("|");
+  return `<div class="mo">
+    <div class="side"><div class="n">${ln} ${playBtn(ln)}</div><div class="p">[${lp}]</div><div class="m">${lm}</div></div>
+    <div class="sep">↔</div>
+    <div class="side"><div class="n">${rn} ${playBtn(rn)}</div><div class="p">[${rp}]</div><div class="m">${rm}</div></div>
+  </div>`;
+}).join("");
+
+document.getElementById("bevegelse").innerHTML = BEVEGELSE.map(pair=>
+  `<tr>${pair.map(c=>{
+    const [n,v,m] = c.split("|");
+    return `<td><span class="no" style="font-size:16px">${n}</span> ${playBtn(n)}
+            <br><span class="vn">${v}</span><br><span class="ex">${m}</span></td>`;
+  }).join("")}</tr>`).join("");
+
+/* ============ MÁY LUYỆN ============ */
+const POOL = [
+  ...DRILL_FORM.map(d=>({type:"form", ...d})),
+  ...DRILL_KOMP.map(d=>({type:"komp", ...d}))
+];
+let dScore = 0, dTotal = 0, dLocked = false, dCur = null, dOrder = [], dPos = 0;
+function reshuffle(){
+  dOrder = POOL.map((_,i)=>i);
+  for(let i=dOrder.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [dOrder[i],dOrder[j]]=[dOrder[j],dOrder[i]]; }
+  dPos = 0;
+}
+reshuffle();
+function newDrill(){
+  if(dPos >= dOrder.length) reshuffle();
+  dCur = POOL[dOrder[dPos++]];
+  if(dCur.type === "form"){
+    document.getElementById("d-ask").textContent = "Chọn dạng tính từ đúng";
+    document.getElementById("d-word").textContent = dCur.n;
+    document.getElementById("d-sub").textContent = "tính từ gốc: " + dCur.adj;
+  } else {
+    document.getElementById("d-ask").textContent = dCur.ask;
+    document.getElementById("d-word").textContent = dCur.base;
+    document.getElementById("d-sub").textContent = "";
+  }
+  document.getElementById("d-fb").textContent = "";
+  document.getElementById("d-opts").innerHTML = dCur.o.map((o,i)=>
+    `<button class="opt" data-i="${i}">${o}</button>`).join("");
+  dLocked = false;
+}
+document.getElementById("d-opts").addEventListener("click", e=>{
+  const b = e.target.closest(".opt"); if(!b || dLocked) return;
+  dLocked = true; dTotal++;
+  const i = +b.dataset.i, ok = i === dCur.a;
+  if(ok) dScore++;
+  document.querySelectorAll("#d-opts .opt").forEach((btn,j)=>{
+    btn.disabled = true;
+    if(j === dCur.a) btn.classList.add("right");
+    else if(j === i) btn.classList.add("wrong");
+  });
+  document.getElementById("d-fb").textContent = (ok ? "Đúng. " : "Chưa đúng. ") + dCur.w;
+  document.getElementById("d-score").textContent = `${dScore} / ${dTotal}`;
+  say(dCur.o[dCur.a]);
+});
+document.getElementById("d-next").onclick = newDrill;
+newDrill();
+
+/* ============ FLASHCARD ============ */
+const ADJCARDS = MOTSATT.flatMap(pair=>pair.map(c=>{
+  const [n,p,m] = c.split("|"); return [n,p,m];
+}));
+const FARGECARDS = FARGER.map(([a,b,c,m])=>[a,"",m]);
+const PREPCARDS = PREP.map(([n,p,m])=>[n,p,m]);
+let full = [...ADJCARDS,...FARGECARDS,...PREPCARDS], deck = full.slice(), idx = 0, flipped = false, prepMode = false;
+const cardEl = document.getElementById("card"), posEl = document.getElementById("cardpos");
+function drawCard(){
+  const [n,v,m] = deck[idx];
+  cardEl.innerHTML = flipped
+    ? `<div class="big">${n}</div><div class="sub">${v?`<span class="vn">${v}</span><br>`:""}${m}</div>
+       <div class="hint">Bấm để lật lại</div>`
+    : `<div class="big">${n}</div><div class="hint">Tự dịch, rồi bấm để kiểm tra</div>`;
+  posEl.textContent = `${idx+1} / ${deck.length}`;
+}
+function flip(){ flipped = !flipped; drawCard(); if(flipped) say(deck[idx][0]); }
+cardEl.addEventListener("click", flip);
+cardEl.addEventListener("keydown", e=>{ if(e.key===" "||e.key==="Enter"){e.preventDefault();flip();} });
+document.getElementById("next").onclick = ()=>{ idx=(idx+1)%deck.length; flipped=false; drawCard(); };
+document.getElementById("prev").onclick = ()=>{ idx=(idx-1+deck.length)%deck.length; flipped=false; drawCard(); };
+document.getElementById("shuffle").onclick = ()=>{
+  for(let i=deck.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [deck[i],deck[j]]=[deck[j],deck[i]]; }
+  idx=0; flipped=false; drawCard();
+};
+document.getElementById("onlyprep").onclick = e=>{
+  prepMode = !prepMode;
+  deck = prepMode ? PREPCARDS.slice() : full.slice();
+  e.target.textContent = prepMode ? "Tất cả thẻ" : "Chỉ giới từ";
+  idx=0; flipped=false; drawCard();
+};
+drawCard();
+
+/* ============ QUIZ ============ */
+let done = 0, right = 0;
+document.getElementById("quizbox").innerHTML = QUIZ.map((q,qi)=>`
+  <div class="q">
+    <div class="qn">Câu ${qi+1}</div>
+    <div class="qt">${q.q}</div>
+    <div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-q="${qi}" data-o="${oi}">${o}</button>`).join("")}</div>
+    <p class="why" id="why${qi}">${q.w}</p>
+  </div>`).join("");
+document.getElementById("quizbox").addEventListener("click", e=>{
+  const b = e.target.closest(".opt"); if(!b || b.disabled) return;
+  const qi = +b.dataset.q, oi = +b.dataset.o, q = QUIZ[qi];
+  b.parentElement.querySelectorAll(".opt").forEach((btn,i)=>{
+    btn.disabled = true;
+    if(i === q.a) btn.classList.add("right");
+    else if(i === oi) btn.classList.add("wrong");
+  });
+  document.getElementById("why"+qi).classList.add("show");
+  done++; if(oi === q.a) right++;
+  const s = document.getElementById("score");
+  s.textContent = done < QUIZ.length ? `Đúng ${right} / ${done} câu đã làm`
+    : (right >= 8 ? `Xong: ${right}/10. Tốt — sẵn sàng cho phần 8.`
+                  : `Xong: ${right}/10. Nên xem lại mục ba dạng tính từ và mục xác định kép.`);
+});
+
+/* ============ ĐIỀU HƯỚNG ============ */
+const links = [...document.querySelectorAll('nav a:not(.back)')];
+const secs = links.map(a=>document.querySelector(a.getAttribute("href")));
+const io = new IntersectionObserver(en=>{
+  en.forEach(e=>{ if(e.isIntersecting){
+    links.forEach(l=>l.classList.remove("on"));
+    const i = secs.indexOf(e.target); if(i>-1) links[i].classList.add("on");
+  }});
+}, {rootMargin:"-10% 0px -75% 0px"});
+secs.forEach(s=>s && io.observe(s));
+</script>
+</body>
+</html>

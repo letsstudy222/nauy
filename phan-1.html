@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiếng Na Uy — Phần 1: Phát âm &amp; bảng chữ cái</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16202B;
+  --ink-soft:#4A5A6B;
+  --snow:#EDF0F1;
+  --paper:#FBFCFC;
+  --fjord:#2B4C6F;
+  --fjord-pale:#DDE6EE;
+  --lamp:#C98A14;
+  --lamp-pale:#F6EBD2;
+  --varsel:#A62B39;
+  --varsel-pale:#F5E2E4;
+  --grønn:#2F6B4F;
+  --grønn-pale:#DEEBE3;
+  --line:#C9D3DA;
+  --sans:"Be Vietnam Pro",system-ui,sans-serif;
+  --serif:"Source Serif 4",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--snow);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+/* ---------- layout ---------- */
+.shell{display:grid;grid-template-columns:230px minmax(0,1fr);gap:0;max-width:1180px;margin:0 auto}
+nav{
+  position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;
+  padding:36px 20px 40px 24px;border-right:1px solid var(--line);
+}
+nav .navtitle{font-family:var(--serif);font-weight:700;font-size:17px;line-height:1.3;margin-bottom:20px}
+nav .navtitle small{display:block;font-family:var(--sans);font-weight:500;font-size:12px;color:var(--ink-soft);letter-spacing:.02em;margin-top:4px}
+nav a{
+  display:block;padding:6px 10px;margin:1px 0 1px -10px;border-radius:5px;
+  color:var(--ink-soft);text-decoration:none;font-size:14px;
+}
+nav a:hover{background:var(--fjord-pale);color:var(--fjord)}
+nav a.on{background:var(--fjord);color:#fff}
+main{padding:0 44px 120px;background:var(--paper);min-width:0}
+section{padding-top:56px;scroll-margin-top:24px}
+h2{font-family:var(--serif);font-size:30px;line-height:1.2;margin:0 0 6px;font-weight:700}
+h3{font-family:var(--serif);font-size:20px;margin:34px 0 10px;font-weight:600}
+p{max-width:64ch;margin:0 0 14px}
+.lede{color:var(--ink-soft);max-width:60ch;margin-bottom:26px}
+/* ---------- hero ---------- */
+header.hero{padding:64px 0 8px;border-bottom:1px solid var(--line)}
+.trio{font-family:var(--serif);font-weight:700;font-size:clamp(72px,13vw,152px);line-height:.86;letter-spacing:-.03em;color:var(--fjord);margin:0}
+.trio span{opacity:0;animation:rise .5s ease forwards}
+.trio span:nth-child(1){animation-delay:.05s}
+.trio span:nth-child(2){animation-delay:.18s}
+.trio span:nth-child(3){animation-delay:.31s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.trio span{animation:none;opacity:1}}
+.hero h1{font-family:var(--sans);font-weight:800;font-size:26px;letter-spacing:-.01em;margin:22px 0 8px}
+.hero p{font-size:17px;color:var(--ink-soft);max-width:56ch;margin-bottom:34px}
+/* ---------- audio banner ---------- */
+#voicewarn{
+  display:none;margin:0 0 26px;padding:14px 16px;border-left:3px solid var(--lamp);
+  background:var(--lamp-pale);font-size:14px;line-height:1.55;max-width:64ch;
+}
+#voicewarn b{font-weight:600}
+/* ---------- word chip ---------- */
+.play{
+  border:1px solid var(--line);background:#fff;color:var(--fjord);
+  width:26px;height:26px;min-width:26px;border-radius:50%;cursor:pointer;
+  font-size:12px;line-height:1;display:inline-flex;align-items:center;justify-content:center;
+  padding:0;transition:background .12s,border-color .12s;
+}
+.play:hover{background:var(--fjord);border-color:var(--fjord);color:#fff}
+.play:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--lamp);outline-offset:2px}
+.no{font-family:var(--serif);font-weight:600;color:var(--fjord)}
+.vn{font-family:var(--sans);font-weight:600;color:var(--ink)}
+.vn::before{content:"[";color:var(--ink-soft);font-weight:400}
+.vn::after{content:"]";color:var(--ink-soft);font-weight:400}
+.ipa{font-family:var(--serif);color:var(--ink-soft);font-size:14px}
+/* ---------- alphabet grid ---------- */
+.alfa{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:22px 0}
+.alfa button{
+  background:#fff;border:0;padding:12px 10px 11px;text-align:left;cursor:pointer;font:inherit;
+  display:block;transition:background .12s;
+}
+.alfa button:hover{background:var(--fjord-pale)}
+.alfa .ch{font-family:var(--serif);font-size:23px;font-weight:600;line-height:1.1;color:var(--fjord)}
+.alfa .nm{font-family:var(--serif);font-size:14px;color:var(--ink-soft);margin-top:2px}
+.alfa .rd{font-size:13px;font-weight:600;margin-top:1px}
+.alfa button.trap{background:var(--varsel-pale)}
+.alfa button.trap:hover{background:#F0D2D6}
+.alfa button.trap .ch{color:var(--varsel)}
+.alfa button.extra .ch{color:var(--lamp)}
+/* ---------- tables ---------- */
+table{border-collapse:collapse;width:100%;margin:16px 0 26px;font-size:15px}
+th{
+  text-align:left;font-weight:600;font-size:13px;color:var(--ink-soft);
+  border-bottom:1px solid var(--ink);padding:0 12px 7px 0;
+}
+td{border-bottom:1px solid var(--line);padding:10px 12px 10px 0;vertical-align:top}
+td:last-child,th:last-child{padding-right:0}
+tr:hover td{background:#F4F7F8}
+.ex{font-size:14px;color:var(--ink-soft)}
+.ex b{font-family:var(--serif);color:var(--fjord);font-weight:600}
+/* ---------- callouts ---------- */
+.note{border-left:3px solid var(--fjord);background:var(--fjord-pale);padding:14px 16px;margin:20px 0;max-width:64ch;font-size:15px}
+.warn{border-left:3px solid var(--varsel);background:var(--varsel-pale);padding:14px 16px;margin:20px 0;max-width:64ch;font-size:15px}
+.tip{border-left:3px solid var(--grønn);background:var(--grønn-pale);padding:14px 16px;margin:20px 0;max-width:64ch;font-size:15px}
+.note p,.warn p,.tip p{margin:0 0 8px;max-width:none}
+.note p:last-child,.warn p:last-child,.tip p:last-child{margin:0}
+/* ---------- spelling machine ---------- */
+.spell{border:1px solid var(--line);background:#fff;padding:20px;margin:20px 0}
+.spellrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px}
+.piece{
+  font-family:var(--serif);font-size:22px;font-weight:600;color:var(--fjord);
+  background:var(--fjord-pale);padding:4px 12px;border-radius:3px;
+}
+.plus{color:var(--ink-soft);font-size:17px}
+.arrow{color:var(--ink-soft);font-size:17px;padding:0 4px}
+.whole{font-family:var(--serif);font-size:24px;font-weight:700}
+.spell .say{font-size:14px;color:var(--ink-soft);margin:0}
+/* ---------- word list ---------- */
+.words{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:20px 0}
+.w{background:#fff;padding:11px 13px;display:flex;gap:10px;align-items:flex-start}
+.w .txt{min-width:0}
+.w .l1{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--fjord);line-height:1.25}
+.w .l2{font-size:14px;font-weight:600}
+.w .l3{font-size:13px;color:var(--ink-soft)}
+/* ---------- flashcards ---------- */
+.cardwrap{max-width:440px;margin:22px 0}
+.card{
+  border:1px solid var(--line);background:#fff;min-height:190px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:28px 22px;cursor:pointer;user-select:none;
+}
+.card:hover{border-color:var(--fjord)}
+.card .big{font-family:var(--serif);font-size:38px;font-weight:700;color:var(--fjord);line-height:1.15}
+.card .sub{font-size:15px;margin-top:10px}
+.card .hint{font-size:12px;color:var(--ink-soft);margin-top:16px}
+.cardbar{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:14px;color:var(--ink-soft)}
+.btn{
+  font:inherit;font-size:14px;font-weight:500;padding:7px 15px;border:1px solid var(--fjord);
+  background:#fff;color:var(--fjord);cursor:pointer;border-radius:3px;
+}
+.btn:hover{background:var(--fjord);color:#fff}
+.btn.solid{background:var(--fjord);color:#fff}
+.btn.solid:hover{background:var(--ink)}
+/* ---------- quiz ---------- */
+.quiz{max-width:640px}
+.q{border-top:1px solid var(--line);padding:20px 0 4px}
+.q:first-child{border-top:0}
+.qn{font-size:13px;color:var(--ink-soft);margin-bottom:4px}
+.qt{font-size:17px;margin-bottom:12px;font-weight:500}
+.qt .no{font-size:19px}
+.opts{display:grid;gap:7px;max-width:460px}
+.opt{
+  text-align:left;font:inherit;font-size:15px;padding:9px 14px;cursor:pointer;
+  border:1px solid var(--line);background:#fff;border-radius:3px;transition:border-color .12s;
+}
+.opt:hover:not(:disabled){border-color:var(--fjord)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--grønn);background:var(--grønn-pale);font-weight:600}
+.opt.wrong{border-color:var(--varsel);background:var(--varsel-pale)}
+.why{font-size:14px;color:var(--ink-soft);margin:10px 0 0;max-width:52ch;display:none}
+.why.show{display:block}
+.score{
+  position:sticky;bottom:0;background:var(--paper);border-top:1px solid var(--line);
+  padding:12px 0;font-size:15px;font-weight:600;margin-top:20px;
+}
+/* ---------- roadmap ---------- */
+.road{list-style:none;padding:0;margin:18px 0;max-width:60ch}
+.road li{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+.road .num{font-family:var(--serif);font-weight:700;color:var(--fjord);min-width:24px}
+.road .now{color:var(--lamp)}
+footer{margin-top:70px;padding-top:22px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-soft)}
+@media print{
+  nav,.play,.cardwrap,#voicewarn{display:none}
+  .shell{display:block}main{padding:0}body{background:#fff}
+}
+@media (max-width:820px){
+  .shell{display:block}
+  nav{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);
+      display:flex;flex-wrap:wrap;gap:4px;padding:14px 18px}
+  nav .navtitle{width:100%;margin-bottom:8px}
+  nav a{margin:0}
+  main{padding:0 18px 80px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<nav id="nav">
+  <div class="navtitle">Norsk for vietnamesere<small>Phần 1 · Phát âm</small></div>
+  <a href="#alfabet">Bảng chữ cái</a>
+  <a href="#vokal">Nguyên âm</a>
+  <a href="#konsonant">Phụ âm</a>
+  <a href="#klynge">Tổ hợp phụ âm</a>
+  <a href="#stum">Chữ câm</a>
+  <a href="#stave">Đánh vần</a>
+  <a href="#tone">Thanh điệu</a>
+  <a href="#ord">40 từ luyện tập</a>
+  <a href="#kort">Flashcard</a>
+  <a href="#quiz">Quiz</a>
+  <a href="#rad">Mẹo học</a>
+  <a href="#neste">Phần tiếp theo</a>
+</nav>
+
+<main>
+
+<header class="hero">
+  <p class="trio"><span>Æ</span><span>Ø</span><span>Å</span></p>
+  <h1>Ba chữ cái này là thứ đầu tiên bạn phải làm quen</h1>
+  <p>Chúng đứng cuối bảng chữ cái tiếng Na Uy, không có trong tiếng Việt, và xuất hiện trong những từ bạn dùng mỗi ngày. Trang này dạy bạn đọc được toàn bộ chữ viết tiếng Na Uy — từng chữ cái, từng tổ hợp, từng cái bẫy.</p>
+</header>
+
+<div id="voicewarn">
+  <b>Máy bạn chưa có giọng đọc tiếng Na Uy.</b> Các nút 🔊 sẽ dùng giọng khác nên đọc sai.
+  Cách khắc phục trên Windows: <i>Settings → Time &amp; language → Language &amp; region → Add a language → Norsk bokmål</i>, nhớ tick <i>Speech</i>. Trên macOS: <i>System Settings → Accessibility → Spoken Content → System Voice → Manage Voices → Norwegian</i>.
+  Trong lúc chờ, hãy tra từ trên <a href="https://forvo.com" target="_blank" rel="noopener">forvo.com</a> để nghe người bản xứ đọc.
+</div>
+
+<section id="alfabet">
+  <h2>Bảng chữ cái — 29 chữ</h2>
+  <p class="lede">Bấm vào bất kỳ ô nào để nghe. Ô đỏ là bẫy: chữ đó đọc khác hẳn tiếng Việt. Ô vàng là ba chữ riêng của tiếng Na Uy.</p>
+  <div class="alfa" id="alfa"></div>
+  <div class="warn">
+    <p><b>Ba cái bẫy chết người ngay từ bảng chữ cái:</b></p>
+    <p>• Chữ <span class="no">O</span> đọc là <span class="vn">u</span>, không phải "o". <span class="no">bok</span> = <span class="vn">buk</span> (sách).</p>
+    <p>• Chữ <span class="no">J</span> đọc là <span class="vn">y</span>. <span class="no">ja</span> = <span class="vn">ya</span> (vâng).</p>
+    <p>• Chữ <span class="no">U</span> và <span class="no">Y</span> đều nghe gần như <span class="vn">uy</span> nhưng khác nhau — mục nguyên âm bên dưới giải thích cách phân biệt.</p>
+  </div>
+</section>
+
+<section id="vokal">
+  <h2>9 nguyên âm</h2>
+  <p class="lede">Tiếng Việt có 11 nguyên âm đơn, tiếng Na Uy có 9. Sáu cái trùng gần khít với tiếng Việt. Ba cái còn lại — <span class="no">u</span>, <span class="no">y</span>, <span class="no">ø</span> — là phần bạn phải tập riêng.</p>
+
+  <h3>Sáu nguyên âm bạn đã biết sẵn</h3>
+  <table>
+    <thead><tr><th style="width:60px">Chữ</th><th style="width:120px">Đọc như</th><th style="width:80px">IPA</th><th>Ví dụ</th></tr></thead>
+    <tbody id="vok-easy"></tbody>
+  </table>
+
+  <h3>Ba nguyên âm phải tập</h3>
+  <table>
+    <thead><tr><th style="width:60px">Chữ</th><th style="width:120px">Gần nhất</th><th style="width:80px">IPA</th><th>Cách đặt miệng</th></tr></thead>
+    <tbody id="vok-hard"></tbody>
+  </table>
+  <div class="tip">
+    <p><b>Mẹo tập ba âm này trước gương:</b></p>
+    <p><span class="no">y</span> — nói "i" kéo dài, giữ nguyên lưỡi, rồi chu môi tròn lại như huýt sáo. Lưỡi không được nhúc nhích. Đó là <span class="no">y</span>.</p>
+    <p><span class="no">u</span> — làm y hệt như trên nhưng bắt đầu từ "ư" thay vì "i". Môi chu ra <em>phía trước</em>, không chỉ tròn.</p>
+    <p><span class="no">ø</span> — nói "ê", giữ lưỡi, chu môi. Ra "ơ" tròn môi. Người Việt hay đọc thành "ơ" thường — thiếu phần tròn môi là nghe ra ngay.</p>
+  </div>
+
+  <h3>Dài hay ngắn — quy tắc duy nhất cần nhớ</h3>
+  <p>Nguyên âm <b>dài</b> khi sau nó có một phụ âm hoặc không có phụ âm nào. Nguyên âm <b>ngắn</b> khi sau nó có hai phụ âm trở lên. Đây là lý do tiếng Na Uy hay gấp đôi phụ âm.</p>
+  <table>
+    <thead><tr><th style="width:180px">Dài</th><th style="width:180px">Ngắn</th><th>Khác nghĩa hoàn toàn</th></tr></thead>
+    <tbody id="lengde"></tbody>
+  </table>
+  <div class="note">
+    <p>Người Việt hay đọc mọi nguyên âm với độ dài như nhau. Trong tiếng Na Uy, dài/ngắn phân biệt nghĩa — giống hệt cách "ma" và "má" khác nhau trong tiếng Việt. Đọc <span class="no">tak</span> mà kéo dài thành <span class="no">tak</span> dài là bạn vừa nói "mái nhà" thay vì "cảm ơn".</p>
+  </div>
+</section>
+
+<section id="konsonant">
+  <h2>Phụ âm đơn</h2>
+  <p class="lede">Phần lớn phụ âm đọc gần giống tiếng Việt. Bảng dưới chỉ liệt kê những chữ có khác biệt đáng để ý.</p>
+  <table>
+    <thead><tr><th style="width:60px">Chữ</th><th style="width:180px">Đọc</th><th>Ví dụ</th></tr></thead>
+    <tbody id="kons"></tbody>
+  </table>
+  <div class="note">
+    <p><b>Về chữ R:</b> ở miền Đông (Oslo) là âm rung đầu lưỡi, gần giống <span class="no">r</span> trong "rổ rá" giọng miền Nam. Ở Bergen và miền Tây, người ta đọc <span class="no">r</span> ở cuống họng như tiếng Pháp. Cả hai đều đúng — bạn chọn một kiểu và giữ nhất quán.</p>
+  </div>
+</section>
+
+<section id="klynge">
+  <h2>Tổ hợp phụ âm — phần quyết định</h2>
+  <p class="lede">Đây là chỗ tiếng Na Uy trông một đằng đọc một nẻo. Học thuộc bảng này thì bạn đọc được 90% từ mới mà không cần tra.</p>
+  <table>
+    <thead><tr><th style="width:150px">Viết</th><th style="width:130px">Đọc</th><th>Ví dụ</th></tr></thead>
+    <tbody id="klynger"></tbody>
+  </table>
+
+  <div class="tip">
+    <p><b>Người Việt có lợi thế lớn ở âm <span class="no">sj / skj</span>.</b> Đó là âm "s" quặt lưỡi — đúng bằng chữ <b>s</b> trong giọng miền Nam ("sáu" chứ không phải "xáu"). Nếu bạn đọc được "sông sâu" kiểu miền Nam thì bạn đã có sẵn âm này.</p>
+  </div>
+
+  <div class="warn">
+    <p><b>Âm <span class="no">kj</span> là âm khó nhất.</b> Nó không có trong tiếng Việt. Cách tập: nói "khi" nhưng đẩy hơi ra ở giữa vòm miệng, lưỡi nâng gần ngạc như khi nói "ya". Tôi ghi phiên âm là <span class="vn">kh</span> nhưng đó chỉ là gần đúng.</p>
+    <p>Tin tốt: rất nhiều người Na Uy dưới 40 tuổi đã gộp <span class="no">kj</span> thành <span class="no">sj</span>. Họ đọc <span class="no">kjøtt</span> thành <span class="vn">sớt</span>. Nếu bạn dùng âm "s" quặt lưỡi cho cả hai, không ai hiểu nhầm bạn — chỉ có vài người lớn tuổi nhíu mày.</p>
+  </div>
+
+  <div class="note">
+    <p><b>Nhóm quặt lưỡi <span class="no">rd, rt, rn, rl, rs</span>:</b> chữ <span class="no">r</span> tan vào phụ âm sau nó, tạo thành một âm quặt lưỡi duy nhất. <span class="no">barn</span> (đứa trẻ) không đọc "bar-n" mà là một âm "n" cong lưỡi lên. Đừng cố phát âm chữ r riêng.</p>
+  </div>
+</section>
+
+<section id="stum">
+  <h2>Chữ câm — 6 quy tắc</h2>
+  <p class="lede">Tiếng Na Uy viết nhiều chữ hơn đọc. Sáu quy tắc dưới đây bao gần hết các trường hợp.</p>
+  <table>
+    <thead><tr><th style="width:44px">#</th><th style="width:230px">Quy tắc</th><th>Ví dụ</th></tr></thead>
+    <tbody id="stumme"></tbody>
+  </table>
+  <div class="tip">
+    <p>Bốn từ hỏi quan trọng nhất đều bắt đầu bằng <span class="no">hv-</span> câm, học một lượt cho xong: <span class="no">hva</span> <span class="vn">va</span> (cái gì) · <span class="no">hvem</span> <span class="vn">vem</span> (ai) · <span class="no">hvor</span> <span class="vn">vur</span> (ở đâu) · <span class="no">hvorfor</span> <span class="vn">vur-for</span> (tại sao).</p>
+  </div>
+</section>
+
+<section id="stave">
+  <h2>Đánh vần kiểu Na Uy</h2>
+  <p class="lede">Giống hệt cách bạn đánh vần "h-o-a → hoa", nhưng phải ghép theo âm chứ không theo chữ. Bấm từng mảnh để nghe.</p>
+  <div id="stavemaskin"></div>
+  <div class="note">
+    <p><b>Ba bước cố định khi gặp từ mới:</b></p>
+    <p>1. Tìm tổ hợp đặc biệt trước (<span class="no">kj skj sj gj hj rt rd rn ng</span>) — gạch chân chúng.<br>
+    2. Xoá chữ câm (<span class="no">h</span> trước v/j · <span class="no">d</span> cuối · <span class="no">g</span> trong -ig · <span class="no">t</span> trong -et).<br>
+    3. Đếm phụ âm sau nguyên âm để biết dài hay ngắn, rồi mới ghép.</p>
+  </div>
+</section>
+
+<section id="tone">
+  <h2>Thanh điệu từ — nơi bạn có lợi thế</h2>
+  <p>Tiếng Na Uy có hai kiểu ngữ điệu từ, gọi là <span class="no">tonelag</span>. Cùng một chuỗi âm, đổi đường lên xuống của giọng là đổi nghĩa. Người nói tiếng Anh vật lộn với chuyện này. Bạn thì không — tai người Việt đã quen với việc cao độ mang nghĩa từ khi biết nói.</p>
+  <table>
+    <thead><tr><th style="width:150px">Thanh 1</th><th style="width:150px">Thanh 2</th><th>Khác biệt</th></tr></thead>
+    <tbody id="toner"></tbody>
+  </table>
+  <p>Thanh 1 đi xuống rồi giữ. Thanh 2 hạ xuống rồi nhấc lên ở cuối, nghe như câu còn dang dở. Quy luật thô: từ một âm tiết gốc thường mang thanh 1, từ hai âm tiết gốc thường mang thanh 2.</p>
+  <div class="note">
+    <p><b>Đừng lo lắng về phần này ở trình độ A1.</b> Sai thanh điệu không làm người ta hiểu nhầm — ngữ cảnh cứu bạn. Nhưng nếu bạn nghe kỹ và bắt chước ngay từ đầu, giọng bạn sẽ tự nhiên hơn hẳn những người học nhiều năm mà bỏ qua nó. Ngoài ra: một số phương ngữ (Bergen, Bắc Na Uy) gần như không dùng thanh điệu.</p>
+  </div>
+</section>
+
+<section id="ord">
+  <h2>40 từ đầu tiên</h2>
+  <p class="lede">Chọn theo tần suất sử dụng, đồng thời mỗi từ chứa ít nhất một điểm phát âm vừa học. Bấm 🔊 để nghe.</p>
+  <div class="words" id="ordliste"></div>
+</section>
+
+<section id="kort">
+  <h2>Flashcard</h2>
+  <p class="lede">Nhìn từ tiếng Na Uy, tự đọc thành tiếng, rồi bấm để lật xem đúng chưa. Tự đọc <em>trước khi</em> lật mới có tác dụng.</p>
+  <div class="cardwrap">
+    <div class="card" id="card" role="button" tabindex="0" aria-label="Lật thẻ"></div>
+    <div class="cardbar">
+      <button class="btn" id="prev">← Trước</button>
+      <button class="btn solid" id="next">Sau →</button>
+      <button class="btn" id="shuffle">Xáo trộn</button>
+      <span id="cardpos"></span>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <h2>Kiểm tra</h2>
+  <p class="lede">Mười câu về đúng những cái bẫy phía trên. Làm xong mà dưới 8 điểm thì quay lại mục tổ hợp phụ âm và chữ câm.</p>
+  <div class="quiz" id="quizbox"></div>
+  <div class="score" id="score">Chưa trả lời câu nào</div>
+</section>
+
+<section id="rad">
+  <h2>Mẹo học</h2>
+
+  <h3>Bốn việc nên làm mỗi ngày, tổng 25 phút</h3>
+  <p><b>5 phút — đọc to bảng chữ cái.</b> Nghe nút 🔊 rồi lặp lại, không đọc thầm. Cơ miệng cần tập như cơ tay.</p>
+  <p><b>5 phút — chép chính tả.</b> Mở một từ bất kỳ trong danh sách 40 từ, nghe, viết lại mà không nhìn. Đây là bài tập hiệu quả nhất để nối âm với chữ.</p>
+  <p><b>10 phút — nghe thụ động có phụ đề.</b> NRK có phim và tin tức kèm phụ đề tiếng Na Uy. Bạn chưa hiểu gì cũng không sao, mục tiêu là quen nhịp điệu.</p>
+  <p><b>5 phút — nói theo bóng (shadowing).</b> Bật một câu, nói đè lên cùng lúc với người bản xứ, chậm hơn nửa giây. Ngượng nhưng hiệu quả nhất trong tất cả các bài tập.</p>
+
+  <h3>Ba lỗi người Việt hay mắc</h3>
+  <p><b>Nuốt phụ âm cuối.</b> Tiếng Việt chỉ có 8 âm cuối và không bật hơi. Tiếng Na Uy thì <span class="no">hus</span>, <span class="no">takk</span>, <span class="no">melk</span> đều phải nghe rõ đến chữ cuối. Tập cách phóng đại phụ âm cuối lúc đầu.</p>
+  <p><b>Bỏ cụm phụ âm đầu từ.</b> <span class="no">skrive</span>, <span class="no">stryke</span>, <span class="no">flink</span> — tiếng Việt không có ba phụ âm liền nhau nên miệng tự chèn nguyên âm vào giữa. Đọc chậm từng cụm rồi tăng tốc.</p>
+  <p><b>Thêm thanh điệu tiếng Việt.</b> Não sẽ tự gán dấu sắc/huyền cho các âm tiết. Tiếng Na Uy có thanh điệu riêng, không phải của tiếng Việt — hãy nghe và bắt chước, đừng suy ra.</p>
+
+  <h3>Tài nguyên miễn phí đáng dùng nhất</h3>
+  <p><b>forvo.com</b> — nghe từ bất kỳ do người bản xứ đọc, có ghi rõ vùng miền. Đây là công cụ tra phát âm tốt nhất, dùng thay từ điển.<br>
+  <b>ordbokene.no</b> — từ điển chính thức, có audio và cả dạng chia của từ.<br>
+  <b>NTNU "Norwegian on the Web"</b> — giáo trình A1–A2 miễn phí đầy đủ, có bài nghe.<br>
+  <b>Klar Tale</b> — báo viết bằng tiếng Na Uy đơn giản, có bản đọc.<br>
+  <b>NRK TV</b> — truyền hình quốc gia, nhiều chương trình có phụ đề tiếng Na Uy.</p>
+</section>
+
+<section id="neste">
+  <h2>Phần tiếp theo</h2>
+  <p class="lede">Toàn bộ trình độ A1 chia thành 8 phần. Bạn đang ở phần 1.</p>
+  <ul class="road">
+    <li><span class="num now">1</span><span><b>Phát âm &amp; bảng chữ cái</b> — phần này</span></li>
+    <li><span class="num">2</span><span>Chào hỏi, giới thiệu bản thân, số đếm 0–100</span></li>
+    <li><span class="num">3</span><span>Danh từ: giống, số nhiều, mạo từ dính đuôi</span></li>
+    <li><span class="num">4</span><span>Động từ hiện tại, trật tự từ V2, cách đặt câu hỏi</span></li>
+    <li><span class="num">5</span><span>Gia đình, nhà cửa, giờ giấc, sinh hoạt hằng ngày</span></li>
+    <li><span class="num">6</span><span>Quá khứ, tương lai, động từ khiếm khuyết</span></li>
+    <li><span class="num">7</span><span>Tính từ, so sánh, giới từ chỉ nơi chốn</span></li>
+    <li><span class="num">8</span><span>Hội thoại thực tế: mua sắm, đi lại, đặt lịch hẹn</span></li>
+  </ul>
+  <footer>
+    Phiên âm tiếng Việt trong trang này là <em>gần đúng</em>. Không ngôn ngữ nào ghi được chính xác âm của ngôn ngữ khác. Hãy dùng nó để khởi động, rồi thay dần bằng tai của bạn.
+  </footer>
+</section>
+
+</main>
+</div>
+
+<script>
+/* ============ TỪ ĐIỂN DỮ LIỆU ============ */
+const ALFA = [
+  ["A a","a","a"],["B b","be","bê"],["C c","se","xê"],["D d","de","đê"],
+  ["E e","e","ê"],["F f","eff","ép-fờ"],["G g","ge","ghê"],["H h","hå","hô"],
+  ["I i","i","i"],["J j","je","yê","trap"],["K k","kå","kô"],["L l","ell","e-lờ"],
+  ["M m","em","em"],["N n","enn","en-nờ"],["O o","o","u","trap"],["P p","pe","pê"],
+  ["Q q","ku","kuy"],["R r","ærr","e-rờ"],["S s","ess","ét-sờ"],["T t","te","tê"],
+  ["U u","u","uy","trap"],["V v","ve","vê"],["W w","dobbelt-ve","đúp-belt vê"],
+  ["X x","eks","ếch-xờ"],["Y y","y","uy","trap"],["Z z","sett","xét"],
+  ["Æ æ","æ","e","extra"],["Ø ø","ø","ơ","extra"],["Å å","å","ô","extra"]
+];
+
+const VOK_EASY = [
+  ["a","a","[ɑ]","bra|bra|tốt · katt|kat|con mèo"],
+  ["e dài","ê","[eː]","se|xê|nhìn · le|lê|cười"],
+  ["e ngắn","e","[ɛ]","penn|pen|cây bút · vennlig|ven-li|thân thiện"],
+  ["e không nhấn","ơ","[ə]","gutten|gút-tơn|cậu bé đó"],
+  ["i","i","[iː]","fin|fin|đẹp · si|si|nói"],
+  ["o dài","u","[uː]","bok|buk|sách · sol|sul|mặt trời"],
+  ["o ngắn","o","[ɔ]","topp|top|đỉnh · sonn|son|con trai"],
+  ["æ","e mở","[æː]","være|ve-rơ|thì, là · her|her|ở đây"],
+  ["å","ô","[oː]","gå|gô|đi · blå|blô|xanh dương"]
+];
+
+const VOK_HARD = [
+  ["u","uy","[ʉː]","Nói \"ư\" rồi chu môi ra phía trước như thổi nến. Lưỡi giữ nguyên ở giữa miệng. Ví dụ: hus|huys|nhà · du|duy|bạn"],
+  ["y","uy (mảnh hơn)","[yː]","Nói \"i\", giữ lưỡi sát ngạc trên, chỉ tròn môi lại. Nghe cao và mảnh hơn u. Ví dụ: ny|nuy|mới · by|buy|thành phố"],
+  ["ø","ơ tròn môi","[øː]","Nói \"ê\", giữ lưỡi, chu môi tròn. Không phải \"ơ\" thường. Ví dụ: øl|ơl|bia · smør|smơr|bơ"]
+];
+
+const LENGDE = [
+  ["takk|tak|mái nhà (tak)","takk|tak|cảm ơn (takk)","Một k = dài, hai k = ngắn"],
+  ["mate|ma-tơ|cho ăn","matte|mát-tơ|tấm thảm","Nguyên âm ngắn khi có phụ âm đôi"],
+  ["pen|pên|đẹp","penn|pen|cây bút","Nghe kỹ độ dài của ê"]
+];
+
+const KONS = [
+  ["d","đ (như tiếng Việt)","dag|đag|ngày · du|duy|bạn"],
+  ["g trước a o u å","g cứng","gate|ga-tơ|đường phố · god|gu|tốt"],
+  ["g trước i y ei","y","gi|yi|đưa · gift|yift|đã kết hôn"],
+  ["j","y","ja|ya|vâng · jeg|yây|tôi"],
+  ["k trước a o u å","k","kake|ka-kơ|bánh ngọt"],
+  ["k trước i y ei øy","kh (âm kj)","kino|khi-nu|rạp phim · kysse|khuýs-sơ|hôn"],
+  ["s","s (không rung)","sitte|sít-tơ|ngồi"],
+  ["v","v","vann|van|nước"],
+  ["ng","ng (như tiếng Việt)","mange|mang-ơ|nhiều · lang|lang|dài"]
+];
+
+const KLYNGER = [
+  ["kj · tj · ki · ky","kh (gió)","kjøtt|khớt|thịt · tjue|khuy-ơ|hai mươi · kino|khi-nu|rạp phim"],
+  ["sj · skj · sk+i,y,øy","s quặt lưỡi","sjø|sơ|biển · skje|sê|cái thìa · ski|si|ván trượt tuyết"],
+  ["gj · hj · lj","y","gjøre|yơ-rơ|làm · hjelp|yelp|giúp đỡ · hjerte|yer-tơ|trái tim"],
+  ["-sjon","-sun","stasjon|sta-sun|nhà ga · nasjon|na-sun|quốc gia"],
+  ["rs","s quặt lưỡi","norsk|nosk|tiếng Na Uy · person|pe-sun|người"],
+  ["rd","d quặt lưỡi, r biến mất","bord|bur|cái bàn · gjerde|yer-ơ|hàng rào"],
+  ["rt · rn · rl","quặt lưỡi","bort|bot|đi khỏi · barn|ban|đứa trẻ · perle|pe-lơ|ngọc trai"],
+  ["eg cuối từ","ây","jeg|yây|tôi · meg|mây|tôi (tân ngữ) · deg|đây|bạn (tân ngữ)"]
+];
+
+const STUMME = [
+  ["1","<b>h</b> câm trước v và j","hva|va|cái gì · hvor|vur|ở đâu · hjem|yem|về nhà"],
+  ["2","<b>d</b> câm ở cuối từ sau nguyên âm hoặc sau l, n","god|gu|tốt · med|me|với · land|lan|đất nước · glad|gla|vui"],
+  ["3","<b>g</b> câm trong đuôi -ig","viktig|vík-ti|quan trọng · dårlig|đór-li|tệ"],
+  ["4","<b>t</b> câm trong det và đuôi -et","det|đe|nó, cái đó · huset|huy-sơ|căn nhà đó"],
+  ["5","<b>v</b> câm trong vài từ quen thuộc","selv|sel|tự · tolv|tol|mười hai · halv|hal|một nửa"],
+  ["6","<b>g</b> câm trước j","gjøre|yơ-rơ|làm · gjerne|yer-nơ|sẵn lòng"]
+];
+
+const STAVE = [
+  {parts:["h","u","s"],whole:"hus",vn:"huys",mean:"ngôi nhà",note:"u đọc là uy môi chu. s cuối phải nghe rõ."},
+  {parts:["sk","o","le"],whole:"skole",vn:"skú-lơ",mean:"trường học",note:"o dài thành u. e cuối không nhấn thành ơ."},
+  {parts:["kj","ø","tt"],whole:"kjøtt",vn:"khớt",mean:"thịt",note:"kj là âm gió. tt đôi nên ø đọc ngắn."},
+  {parts:["h","v","or"],whole:"hvor",vn:"vur",mean:"ở đâu",note:"h câm. o dài thành u. r quặt lưỡi."},
+  {parts:["g","o","d"],whole:"god",vn:"gu",mean:"tốt",note:"o thành u, d cuối câm. Chỉ còn hai âm."},
+  {parts:["n","or","sk"],whole:"norsk",vn:"nosk",mean:"tiếng Na Uy",note:"rs gộp thành một âm s quặt lưỡi."}
+];
+
+const TONER = [
+  ["bønner|bơn-nơr|hạt đậu","bønder|bơn-nơr|nông dân","Viết khác, đọc giống hệt trừ thanh điệu"],
+  ["ånden|ôn-nơn|linh hồn","anden|an-nơn|con vịt","Cặp kinh điển trong sách giáo khoa"],
+  ["hender|hen-nơr|những bàn tay","hender|hen-nơr|xảy ra","Cùng một chữ viết, hai nghĩa"]
+];
+
+const ORD = [
+  ["hei","hây","chào"],["takk","tak","cảm ơn"],["ja","ya","vâng"],["nei","nây","không"],
+  ["unnskyld","uyn-shuyl","xin lỗi"],["hva","va","cái gì"],["hvem","vem","ai"],["hvor","vur","ở đâu"],
+  ["hvorfor","vur-for","tại sao"],["hvordan","vur-đan","như thế nào"],["jeg","yây","tôi"],["du","duy","bạn"],
+  ["han","han","anh ấy"],["hun","huyn","cô ấy"],["vi","vi","chúng tôi"],["de","đi","họ"],
+  ["er","er","thì, là"],["har","har","có"],["snakke","snák-kơ","nói"],["forstå","fo-stô","hiểu"],
+  ["norsk","nosk","tiếng Na Uy"],["Norge","no-ghơ","Na Uy"],["språk","sprôk","ngôn ngữ"],["lære","le-rơ","học"],
+  ["hus","huys","ngôi nhà"],["skole","skú-lơ","trường học"],["bok","buk","quyển sách"],["by","buy","thành phố"],
+  ["mat","mat","đồ ăn"],["vann","van","nước"],["brød","brơ","bánh mì"],["melk","melk","sữa"],
+  ["kaffe","káf-fơ","cà phê"],["øl","ơl","bia"],["venn","ven","bạn bè"],["familie","fa-mí-li-ơ","gia đình"],
+  ["gutt","gut","cậu bé"],["jente","yén-tơ","cô gái"],["dag","đag","ngày"],["natt","nat","đêm"]
+];
+
+const QUIZ = [
+  {q:"Từ <span class='no'>bok</span> (sách) đọc thế nào?",o:["bok","buk","bôk","bơk"],a:1,
+   w:"Chữ o trong tiếng Na Uy thường đọc là u. Đây là bẫy số một với người mới học."},
+  {q:"Từ <span class='no'>hva</span> (cái gì) đọc thế nào?",o:["hơ-va","kh-va","va","hva"],a:2,
+   w:"h luôn câm khi đứng trước v hoặc j. hva → va, hvem → vem, hjem → yem."},
+  {q:"Tổ hợp <span class='no'>sj</span> và <span class='no'>skj</span> đọc là âm gì?",
+   o:["s quặt lưỡi, như s giọng miền Nam","x như trong xa","kh như trong khô","y như trong yêu"],a:0,
+   w:"Đây là âm [ʂ] quặt lưỡi. Người nói giọng miền Nam đã có sẵn âm này trong chữ s."},
+  {q:"Tại sao <span class='no'>takk</span> có nguyên âm ngắn còn <span class='no'>tak</span> có nguyên âm dài?",
+   o:["Vì takk là từ mượn","Vì hai phụ âm sau nguyên âm làm nó ngắn lại","Vì nó có thanh điệu 2","Không có quy tắc, phải học thuộc"],a:1,
+   w:"Quy tắc: một phụ âm theo sau thì nguyên âm dài, từ hai phụ âm trở lên thì ngắn."},
+  {q:"Từ <span class='no'>god</span> (tốt) đọc thế nào?",o:["gôđ","gót","gu","gu-đơ"],a:2,
+   w:"o thành u, và d cuối từ sau nguyên âm thì câm. Chỉ còn lại hai âm."},
+  {q:"Ba nguyên âm nào không có tương đương trong tiếng Việt?",
+   o:["a, e, i","æ, å, o","u, y, ø","e, æ, å"],a:2,
+   w:"Cả ba đều cần tròn môi ở vị trí lưỡi mà tiếng Việt không tròn môi."},
+  {q:"Từ <span class='no'>jeg</span> (tôi) đọc thế nào?",o:["yeg","yây","giếch","yơg"],a:1,
+   w:"j đọc là y, và đuôi -eg trong nhóm jeg, meg, deg đọc thành ây."},
+  {q:"Trong <span class='no'>barn</span> (đứa trẻ), tổ hợp <span class='no'>rn</span> xử lý ra sao?",
+   o:["Đọc rõ cả r rồi tới n","Gộp thành một âm n quặt lưỡi, r biến mất","n câm, chỉ đọc r","Thêm nguyên âm ơ vào giữa"],a:1,
+   w:"Nhóm rd, rt, rn, rl, rs đều gộp thành một âm quặt lưỡi duy nhất ở giọng miền Đông."},
+  {q:"Từ <span class='no'>viktig</span> (quan trọng) đọc thế nào?",o:["vík-tig","vík-ti","vík-tikh","vík-tiy"],a:1,
+   w:"Chữ g trong đuôi -ig luôn câm: viktig, dårlig, hyggelig."},
+  {q:"Tiếng Na Uy có <span class='no'>tonelag</span> — hai thanh điệu từ. Vì sao người Việt có lợi thế?",
+   o:["Vì thanh điệu Na Uy giống hệt dấu sắc và dấu huyền","Vì tai đã quen với việc cao độ làm đổi nghĩa từ","Vì tiếng Việt cũng có đúng hai thanh","Vì tiếng Na Uy mượn thanh điệu từ châu Á"],a:1,
+   w:"Cao độ mang nghĩa là chuyện hiển nhiên với người Việt, còn người nói tiếng Anh phải học lại từ đầu. Nhưng lưu ý: hai hệ thanh điệu này khác nhau, đừng gán dấu tiếng Việt vào từ Na Uy."}
+];
+
+/* ============ ÂM THANH ============ */
+let voice = null;
+function pickVoice(){
+  if(!("speechSynthesis" in window)) return;
+  const vs = speechSynthesis.getVoices();
+  if(!vs.length) return;
+  voice = vs.find(v=>/^(nb|nn|no)\b/i.test(v.lang)) ||
+          vs.find(v=>/norw|norsk/i.test(v.name)) || null;
+  if(!voice) document.getElementById("voicewarn").style.display = "block";
+}
+if("speechSynthesis" in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+  setTimeout(pickVoice, 700);
+} else {
+  document.getElementById("voicewarn").style.display = "block";
+}
+function say(text){
+  if(!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "nb-NO";
+  if(voice) u.voice = voice;
+  u.rate = 0.82;
+  speechSynthesis.speak(u);
+}
+function playBtn(text){
+  return `<button class="play" onclick="say('${text.replace(/'/g,"\\'")}')" aria-label="Nghe ${text}">🔊</button>`;
+}
+
+/* ============ DỰNG NỘI DUNG ============ */
+// ví dụ dạng "norsk|phiên âm|nghĩa · norsk|phiên âm|nghĩa"
+function renderEx(str){
+  return str.split(" · ").map(chunk=>{
+    const [n,v,m] = chunk.split("|");
+    return `<span class="no">${n}</span> <span class="vn">${v}</span> ${m?m:""} ${playBtn(n)}`;
+  }).join("<br>");
+}
+
+// Bảng chữ cái
+document.getElementById("alfa").innerHTML = ALFA.map(([ch,nm,rd,cls])=>
+  `<button class="${cls||''}" onclick="say('${ch.split(' ')[0]}')">
+     <div class="ch">${ch}</div><div class="nm">${nm}</div><div class="rd">[${rd}]</div>
+   </button>`).join("");
+
+// Nguyên âm dễ
+document.getElementById("vok-easy").innerHTML = VOK_EASY.map(([c,v,i,ex])=>
+  `<tr><td class="no" style="font-size:18px">${c}</td><td class="vn">${v}</td>
+   <td class="ipa">${i}</td><td class="ex">${renderEx(ex)}</td></tr>`).join("");
+
+// Nguyên âm khó
+document.getElementById("vok-hard").innerHTML = VOK_HARD.map(([c,v,i,d])=>{
+  const [txt, ...rest] = d.split("Ví dụ: ");
+  return `<tr><td class="no" style="font-size:22px">${c}</td><td class="vn">${v}</td>
+   <td class="ipa">${i}</td><td>${txt}<div class="ex" style="margin-top:6px">${rest.length?renderEx(rest[0]):""}</div></td></tr>`;
+}).join("");
+
+// Dài / ngắn
+document.getElementById("lengde").innerHTML = LENGDE.map(r=>
+  `<tr>${r.map((c,idx)=>{
+    if(idx===2) return `<td class="ex">${c}</td>`;
+    const [n,v,m] = c.split("|");
+    return `<td><span class="no" style="font-size:17px">${n}</span> ${playBtn(n)}<br><span class="vn">${v}</span> <span class="ex">${m}</span></td>`;
+  }).join("")}</tr>`).join("");
+
+// Phụ âm
+document.getElementById("kons").innerHTML = KONS.map(([c,v,ex])=>
+  `<tr><td class="no" style="font-size:17px">${c}</td><td>${v}</td><td class="ex">${renderEx(ex)}</td></tr>`).join("");
+
+// Tổ hợp
+document.getElementById("klynger").innerHTML = KLYNGER.map(([c,v,ex])=>
+  `<tr><td class="no" style="font-size:17px">${c}</td><td class="vn">${v}</td><td class="ex">${renderEx(ex)}</td></tr>`).join("");
+
+// Chữ câm
+document.getElementById("stumme").innerHTML = STUMME.map(([n,r,ex])=>
+  `<tr><td class="no" style="font-size:17px">${n}</td><td>${r}</td><td class="ex">${renderEx(ex)}</td></tr>`).join("");
+
+// Máy đánh vần
+document.getElementById("stavemaskin").innerHTML = STAVE.map(s=>`
+  <div class="spell">
+    <div class="spellrow">
+      ${s.parts.map(p=>`<span class="piece">${p}</span>`).join('<span class="plus">+</span>')}
+      <span class="arrow">→</span>
+      <span class="whole">${s.whole}</span>
+      <span class="vn">${s.vn}</span>
+      ${playBtn(s.whole)}
+    </div>
+    <p class="say"><b>${s.mean}.</b> ${s.note}</p>
+  </div>`).join("");
+
+// Thanh điệu
+document.getElementById("toner").innerHTML = TONER.map(r=>
+  `<tr>${r.map((c,idx)=>{
+    if(idx===2) return `<td class="ex">${c}</td>`;
+    const [n,v,m] = c.split("|");
+    return `<td><span class="no" style="font-size:17px">${n}</span> ${playBtn(n)}<br><span class="vn">${v}</span> <span class="ex">${m}</span></td>`;
+  }).join("")}</tr>`).join("");
+
+// 40 từ
+document.getElementById("ordliste").innerHTML = ORD.map(([n,v,m])=>
+  `<div class="w">${playBtn(n)}<div class="txt">
+     <div class="l1">${n}</div><div class="l2">[${v}]</div><div class="l3">${m}</div>
+   </div></div>`).join("");
+
+/* ============ FLASHCARD ============ */
+let deck = ORD.slice(), idx = 0, flipped = false;
+const cardEl = document.getElementById("card");
+const posEl = document.getElementById("cardpos");
+function drawCard(){
+  const [n,v,m] = deck[idx];
+  cardEl.innerHTML = flipped
+    ? `<div class="big">${n}</div><div class="sub"><span class="vn">${v}</span> — ${m}</div>
+       <div class="hint">Bấm để lật lại</div>`
+    : `<div class="big">${n}</div><div class="hint">Tự đọc thành tiếng, rồi bấm để kiểm tra</div>`;
+  posEl.textContent = `${idx+1} / ${deck.length}`;
+}
+function flip(){ flipped = !flipped; drawCard(); if(flipped) say(deck[idx][0]); }
+cardEl.addEventListener("click", flip);
+cardEl.addEventListener("keydown", e=>{ if(e.key===" "||e.key==="Enter"){e.preventDefault();flip();} });
+document.getElementById("next").onclick = ()=>{ idx=(idx+1)%deck.length; flipped=false; drawCard(); };
+document.getElementById("prev").onclick = ()=>{ idx=(idx-1+deck.length)%deck.length; flipped=false; drawCard(); };
+document.getElementById("shuffle").onclick = ()=>{
+  for(let i=deck.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [deck[i],deck[j]]=[deck[j],deck[i]]; }
+  idx=0; flipped=false; drawCard();
+};
+drawCard();
+
+/* ============ QUIZ ============ */
+let done = 0, right = 0;
+document.getElementById("quizbox").innerHTML = QUIZ.map((q,qi)=>`
+  <div class="q">
+    <div class="qn">Câu ${qi+1}</div>
+    <div class="qt">${q.q}</div>
+    <div class="opts">
+      ${q.o.map((o,oi)=>`<button class="opt" data-q="${qi}" data-o="${oi}">${o}</button>`).join("")}
+    </div>
+    <p class="why" id="why${qi}">${q.w}</p>
+  </div>`).join("");
+
+document.getElementById("quizbox").addEventListener("click", e=>{
+  const b = e.target.closest(".opt");
+  if(!b || b.disabled) return;
+  const qi = +b.dataset.q, oi = +b.dataset.o, q = QUIZ[qi];
+  const group = b.parentElement.querySelectorAll(".opt");
+  group.forEach((btn,i)=>{
+    btn.disabled = true;
+    if(i === q.a) btn.classList.add("right");
+    else if(i === oi) btn.classList.add("wrong");
+  });
+  document.getElementById("why"+qi).classList.add("show");
+  done++; if(oi === q.a) right++;
+  const s = document.getElementById("score");
+  s.textContent = done < QUIZ.length
+    ? `Đúng ${right} / ${done} câu đã làm`
+    : (right >= 8 ? `Xong: ${right}/10. Tốt — sẵn sàng cho phần 2.`
+                  : `Xong: ${right}/10. Nên xem lại mục tổ hợp phụ âm và chữ câm trước khi đi tiếp.`);
+});
+
+/* ============ ĐIỀU HƯỚNG ============ */
+const links = [...document.querySelectorAll("nav a")];
+const secs = links.map(a=>document.querySelector(a.getAttribute("href")));
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      links.forEach(l=>l.classList.remove("on"));
+      const i = secs.indexOf(en.target);
+      if(i > -1) links[i].classList.add("on");
+    }
+  });
+}, {rootMargin:"-10% 0px -75% 0px"});
+secs.forEach(s=>s && io.observe(s));
+</script>
+</body>
+</html>
