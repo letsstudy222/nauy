@@ -657,8 +657,8 @@ footer{margin-top:50px;padding-top:22px;border-top:1px solid var(--line);font-si
 .pgrow .txt small{display:block;color:var(--ink-3);font-weight:500;font-size:12px}
 .pgrow .progress{width:120px}
 .pgrow .right{text-align:right;font-size:13px;color:var(--ink-2);font-weight:600;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.weeks{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 20px}
-.week{width:44px;text-align:center}
+.weeks{display:grid;grid-template-columns:repeat(8,minmax(0,44px));gap:6px;margin:10px 0 20px}
+.week{min-width:0;text-align:center}
 .week .bar{height:44px;border-radius:10px;background:var(--line);display:flex;flex-direction:column-reverse;overflow:hidden}
 .week .bar i{display:block;background:var(--green);border-top:2px solid var(--card)}
 .week .bar i.short{background:var(--yellow)}
@@ -719,3 +719,12 @@ input[type=range]{width:100%;accent-color:var(--accent)}
   main{padding:0}body{background:#fff}
   .part{page-break-before:always}
 }
+
+/* Learning guide and recall controls share the active light/dark palette. */
+.learning-guide{margin:24px 0;padding:20px;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
+.learning-guide h2{margin-top:0}
+.learning-guide li{margin:10px 0;line-height:1.65}
+.learning-guide a{overflow-wrap:anywhere}
+.recall-direction{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0;font-weight:600}
+.recall-direction select{max-width:100%}
+#dc-fb{overflow-wrap:anywhere}

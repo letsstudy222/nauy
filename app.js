@@ -12,10 +12,12 @@ const $$ = (sel, root) => [...(root || document).querySelectorAll(sel)];
 const DAY = 86400000;
 const pick = a => a[Math.floor(Math.random() * a.length)];
 function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function html(s) { return String(s).replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]); }
 function attr(s) { return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;"); }
 function esc(s) { return String(s).replace(/'/g, "\\'"); }
 function startOfDay(t) { const d = new Date(t); d.setHours(0, 0, 0, 0); return d.getTime(); }
 function today() { return startOfDay(Date.now()); }
+function calendarDay(t, days) { const d = new Date(t); d.setDate(d.getDate() + days); return startOfDay(d.getTime()); }
 /* thứ hai đầu tuần (ISO) */
 function weekStart(t) { const d = new Date(startOfDay(t)); const wd = (d.getDay() + 6) % 7; d.setDate(d.getDate() - wd); return d.getTime(); }
 const PLAY_ICON = '<svg><use href="#i-volume"/></svg>';
@@ -24,15 +26,68 @@ function playBtn(text) { return `<button class="play" type="button" data-say="${
 /* ---------- LƯU TIẾN ĐỘ ---------- */
 const KEY = "heinorsk.v1";
 const DEF = () => ({ v: 1, name: "", theme: "auto", rate: 0.85, voice: "", done: {}, quiz: {}, srs: {}, log: [], dict: { ok: 0, total: 0 }, sess: null, lastPart: "p1" });
-let S = DEF();
+/* Import only documented fields; never merge arbitrary JSON into live state. */
+function readState(o) {
+  const object = v => v && typeof v === "object" && !Array.isArray(v);
+  const integer = (v, min, max) => Number.isInteger(v) && v >= min && v <= max;
+  const time = v => Number.isFinite(v) && v > 0 && v <= 8640000000000000;
+  if (!object(o) || o.v !== 1 || !object(o.srs) || !object(o.done) || !object(o.quiz)
+      || !Array.isArray(o.log) || !o.log.every(time) || !object(o.dict)
+      || !integer(o.dict.total, 0, Number.MAX_SAFE_INTEGER) || !integer(o.dict.ok, 0, o.dict.total)) throw new Error("Invalid progress");
+  const result = DEF(), cards = new Set(N.cards.map(c => c.id)), sessions = new Set(N.schedule.map(x => x.id));
+  for (const [id, value] of Object.entries(o.done)) {
+    if (!sessions.has(id) || !time(value)) throw new Error("Invalid session");
+    result.done[id] = value;
+  }
+  for (const [id, value] of Object.entries(o.quiz)) {
+    if (!(id === "exam" || N.partById(id)) || !integer(value, 0, id === "exam" ? 30 : 10)) throw new Error("Invalid quiz");
+    result.quiz[id] = value;
+  }
+  for (const [id, value] of Object.entries(o.srs)) {
+    if (!cards.has(id) || !object(value) || !integer(value.b, 0, 4) || !time(value.d) || !integer(value.n, 0, Number.MAX_SAFE_INTEGER)) throw new Error("Invalid card");
+    result.srs[id] = { b: value.b, d: value.d, n: value.n };
+  }
+  result.log = o.log.slice(); result.dict = { ok: o.dict.ok, total: o.dict.total };
+  result.name = typeof o.name === "string" ? o.name.slice(0, 20) : "";
+  result.voice = typeof o.voice === "string" ? o.voice : "";
+  if (["auto", "light", "dark"].includes(o.theme)) result.theme = o.theme;
+  if (Number.isFinite(o.rate) && o.rate >= 0.6 && o.rate <= 1.1) result.rate = o.rate;
+  if (N.partById(o.lastPart)) result.lastPart = o.lastPart;
+  if (o.sess != null) {
+    if (!object(o.sess) || !sessions.has(o.sess.id) || !integer(o.sess.step, 0, 100)) throw new Error("Invalid active session");
+    result.sess = { id: o.sess.id, step: o.sess.step };
+  }
+  result._ob = o._ob === true;
+  return result;
+}
+let S = DEF(), recoveredInvalidState = false;
 function load() {
-  try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(DEF(), JSON.parse(raw)); } catch (e) { S = DEF(); }
+  let raw;
+  try { raw = localStorage.getItem(KEY); if (raw) S = readState(JSON.parse(raw)); }
+  catch (e) {
+    S = DEF();
+    // Keep the original bytes recoverable before subsequent saves replace invalid live state.
+    if (raw) {
+      try {
+        if (!localStorage.getItem(KEY + ".recovery")) localStorage.setItem(KEY + ".recovery", raw);
+        recoveredInvalidState = true;
+      } catch (_) { /* Storage may be unavailable; the normal save warning still applies. */ }
+    }
+  }
 }
 let saveTimer = null;
 function save() {
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { toast("Không lưu được tiến độ (bộ nhớ trình duyệt bị chặn?)"); } }, 120);
+  saveTimer = setTimeout(flushSave, 120);
 }
+
+function flushSave() {
+  clearTimeout(saveTimer);
+  try { localStorage.setItem(KEY, JSON.stringify(S)); }
+  catch (e) { toast("Không lưu được tiến độ. Hãy xuất bản sao lưu ở trang Tiến độ."); }
+}
+window.addEventListener("pagehide", flushSave);
+document.addEventListener("visibilitychange", () => { if (document.hidden) flushSave(); });
 
 /* ---------- GIỌNG ĐỌC ---------- */
 let voices = [], voice = null, voiceReady = false;
@@ -40,10 +95,9 @@ function isNo(v) { return /^n[bno](-|_|$)/i.test(v.lang) || /norsk|norw/i.test(v
 function pickVoice() {
   if (!("speechSynthesis" in window)) return;
   voices = speechSynthesis.getVoices();
-  if (!voices.length) return;
-  voiceReady = true;
+  voiceReady = voices.length > 0;
   const nor = voices.filter(isNo);
-  const chosen = S.voice ? voices.find(v => v.name === S.voice) : null;
+  const chosen = S.voice ? nor.find(v => v.name === S.voice) : null;
   voice = chosen || nor.find(v => /nb/i.test(v.lang) && /online|natural|neural|premium|enhanced/i.test(v.name)) || nor.find(v => /nb/i.test(v.lang)) || nor[0] || null;
   const dot = $("voicedot");
   if (dot) { dot.classList.toggle("ok", !!voice); dot.classList.toggle("bad", !voice); dot.title = voice ? "Giọng: " + voice.name : "Chưa có giọng tiếng Na Uy trên máy này"; }
@@ -60,6 +114,7 @@ if ("speechSynthesis" in window) { speechSynthesis.onvoiceschanged = pickVoice; 
 function say(text, rate) {
   if (!("speechSynthesis" in window)) { toast("Trình duyệt này không có giọng đọc"); return; }
   if (!voiceReady) pickVoice();
+  if (!voice) { toast("Chưa có giọng Na Uy. Xem hướng dẫn bật giọng ở trang Lộ trình.", 4500); return; }
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(String(text).replace(/\s+/g, " ").trim());
   u.lang = "nb-NO"; if (voice) u.voice = voice;
@@ -98,7 +153,7 @@ const rendered = {};
 function parseHash() {
   const h = (location.hash || "#home").slice(1);
   const m = h.match(/^(p\d)(?:-(.+))?$/);
-  if (m) return { view: m[1], anchor: m[2] ? `${m[1]}-${m[2]}` : null };
+  if (m && VIEWS.includes(m[1])) return { view: m[1], anchor: m[2] ? `${m[1]}-${m[2]}` : null };
   return { view: VIEWS.includes(h) ? h : "home", anchor: null };
 }
 function route() {
@@ -159,8 +214,8 @@ function updateToc(part) {
    2. CÁC MÁY
    ===================================================================== */
 /* ---------- flashcard trong bài (xem lướt, không chấm) ---------- */
-function cardBack(c) {
-  return `<div class="big">${c.f}</div><div class="sub">${c.p ? `<span class="vn">${c.p}</span><br>` : ""}${c.x ? `<b>${c.x}</b><br>` : ""}${c.m}</div><div class="hint">Bấm để lật lại · mũi tên → thẻ kế</div>`;
+function cardBack(c, hint) {
+  return `<div class="big">${c.f}</div><div class="sub">${c.p ? `<span class="vn">${c.p}</span><br>` : ""}${c.x ? `<b>${c.x}</b><br>` : ""}${c.m}</div><div class="hint">${hint || "Bấm để lật lại · mũi tên → thẻ kế"}</div>`;
 }
 function cardFront(c, hint) { return `<div class="big">${c.f}</div><div class="hint">${hint || "Tự đọc to và tự dịch, rồi bấm để kiểm tra"}</div>`; }
 function Flash(part, filterTag) {
@@ -245,8 +300,11 @@ const SRS = {
   answer(c, ok) {
     const st = S.srs[c.id] || (S.srs[c.id] = { b: 0, d: today(), n: 0 });
     st.n++;
-    if (ok) { st.b = Math.min(4, st.b + 1); st.d = today() + N.meta.boxDays[st.b] * DAY; }
-    else { st.b = 0; st.d = today() + DAY; }
+    if (ok) {
+      // First successful recall waits one day. A failed card repeated this session stays due tomorrow.
+      if (st.n > 1 && st.d <= today()) st.b = Math.min(4, st.b + 1);
+      st.d = calendarDay(today(), N.meta.boxDays[st.b]);
+    } else { st.b = 0; st.d = calendarDay(today(), 1); }
     save();
   },
   /* phần xa nhất đã có phiên hoàn thành (để chọn thẻ mới) */
@@ -277,16 +335,18 @@ const Review = {
   start(mode, part, limit, onFinish) {
     part = part || $("rv-part").value || "all";
     this.mode = mode; this.onFinish = onFinish || null; this.results = { ok: 0, no: 0 };
-    if (mode === "due") this.deck = shuffle(SRS.due(part)).slice(0, limit || 25);
+    this.repeated = new Set();
+    if (mode === "due") this.deck = shuffle(SRS.due(part)).slice(0, limit == null ? Infinity : limit);
     else {
-      let pool = SRS.unseen(part === "all" ? SRS.furthestPart() : part);
-      if (!pool.length && part === "all") pool = SRS.unseen("all");
+      const upto = N.partIndex[SRS.furthestPart()];
+      const pool = SRS.unseen(part).filter(c => part !== "all" || N.partIndex[c.part] <= upto);
       this.deck = pool.slice(0, N.meta.newPerSession); SRS.intro(this.deck);
     }
     this.idx = 0; this.flipped = false;
     if (!this.deck.length) {
+      this.deck = [];
       $("rv-card").innerHTML = `<div class="rvempty">${mode === "due" ? "Không có thẻ nào đến hạn. Học thẻ mới hoặc quay lại ngày mai." : "Không còn thẻ mới ở phần này."}</div>`;
-      $("rv-btns").hidden = true; if (this.onFinish) this.onFinish(this.results); return;
+      $("rv-btns").hidden = true; if (this.onFinish) { const f = this.onFinish; this.onFinish = null; f(this.results); } return;
     }
     $("rv-card").scrollIntoView({ block: "center", behavior: "smooth" });
     this.draw();
@@ -295,7 +355,7 @@ const Review = {
     const c = this.deck[this.idx], st = S.srs[c.id] || { b: 0 };
     const p = N.partById(c.part);
     const head = `<span class="tagline">Phần ${p.num} · ${p.short}${c.tag ? " · " + c.tag : ""}</span><span class="badge purple box">Hộp ${st.b + 1}</span>`;
-    $("rv-card").innerHTML = head + (this.flipped ? cardBack(c) : `<div class="big">${this.mode === "new" ? c.f : c.f}</div><div class="hint">${this.mode === "new" ? "Thẻ mới — bấm để xem nghĩa và nghe" : "Nói to câu trả lời, rồi bấm để kiểm tra"}</div>`);
+    $("rv-card").innerHTML = head + (this.flipped ? cardBack(c, "Tự đánh giá: đã nhớ được trước khi lật hay chưa?") : `<div class="big">${$("rv-direction").value === "vi-no" ? html(c.m) : c.f}</div><div class="hint">${this.mode === "new" ? "Thẻ mới — bấm để xem nghĩa và nghe" : "Nói to câu trả lời, rồi bấm để kiểm tra"}</div>`);
     $("rv-btns").hidden = !this.flipped;
     $("rv-pos").textContent = `Thẻ ${this.idx + 1} / ${this.deck.length} · thuộc ${this.results.ok} · chưa ${this.results.no}`;
   },
@@ -304,10 +364,9 @@ const Review = {
     if (!this.deck.length || !this.flipped) return;
     const c = this.deck[this.idx];
     SRS.answer(c, ok); this.results[ok ? "ok" : "no"]++;
-    if (!ok && this.mode === "due" && !c._again) { c._again = true; this.deck.push(c); }
+    if (!ok && !this.repeated.has(c.id)) { this.repeated.add(c.id); this.deck.push(c); }
     this.idx++; this.flipped = false;
     if (this.idx >= this.deck.length) {
-      this.deck.forEach(x => delete x._again);
       $("rv-card").innerHTML = `<div class="rvempty">Xong ${this.idx} thẻ · thuộc ${this.results.ok} · chưa ${this.results.no}.<br>Thẻ "chưa" sẽ quay lại ngày mai.</div>`;
       $("rv-btns").hidden = true; this.deck = []; this.boxes(); updateDueBadges();
       if (this.onFinish) { const f = this.onFinish; this.onFinish = null; f(this.results); }
@@ -325,7 +384,7 @@ function dictSearch(q) {
 }
 
 /* ---------- chép chính tả ---------- */
-function norm(s) { return s.toLowerCase().replace(/[.,!?…:;"«»]/g, "").replace(/\s+/g, " ").trim(); }
+function norm(s) { return s.normalize("NFC").toLowerCase().replace(/[.,!?…:;"«»]/g, "").replace(/\s+/g, " ").trim(); }
 /* so khớp ký tự (LCS) để tô đỏ chỗ sai */
 function diffMark(target, typed) {
   const a = [...target], b = [...typed];
@@ -333,15 +392,16 @@ function diffMark(target, typed) {
   for (let i = m - 1; i >= 0; i--) for (let j = n - 1; j >= 0; j--) L[i][j] = a[i] === b[j] ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
   let i = 0, j = 0, out = "";
   while (i < m && j < n) {
-    if (a[i] === b[j]) { out += `<span class="g">${a[i]}</span>`; i++; j++; }
-    else if (L[i + 1][j] >= L[i][j + 1]) { out += `<span class="r">${a[i]}</span>`; i++; }
-    else j++;
+    if (a[i] === b[j]) { out += `<span class="g">${html(a[i])}</span>`; i++; j++; }
+    else if (L[i + 1][j] >= L[i][j + 1]) { out += `<span class="r">${html(a[i])}</span>`; i++; }
+    else { out += `<del class="r">${html(b[j])}</del>`; j++; }
   }
-  while (i < m) out += `<span class="r">${a[i++]}</span>`;
+  while (i < m) out += `<span class="r">${html(a[i++])}</span>`;
+  while (j < n) out += `<del class="r">${html(b[j++])}</del>`;
   return out;
 }
 const Dict = {
-  cur: null, pool: [], next: null, ok: 0, total: 0, slow: false,
+  cur: null, pool: [], next: null, timer: null, audioTimer: null, checked: false, ok: 0, total: 0, slow: false,
   refresh() {
     const sel = $("dc-part");
     if (!sel.options.length) {
@@ -359,23 +419,26 @@ const Dict = {
     this.next = cycle(this.pool); this.newItem();
   },
   newItem() {
+    clearTimeout(this.timer); clearTimeout(this.audioTimer);
+    this.checked = false; $("dc-check").disabled = false;
     this.cur = this.next ? this.next() : null; this.slow = false;
     $("dc-input").value = ""; $("dc-fb").textContent = ""; $("dc-fb").className = "fb"; $("dc-diff").innerHTML = "";
     $("dc-meta").innerHTML = this.cur ? `${$("dc-hint").checked ? `<b>${this.cur.m}</b> · ` : ""}Phần ${this.cur.part.slice(1)} · ${[...this.cur.d].length} ký tự · bấm loa để nghe` : "Chưa có thẻ.";
-    if (this.cur) setTimeout(() => say(this.cur.d), 250);
+    if (this.cur) this.audioTimer = setTimeout(() => { if (currentView === "dictation") say(this.cur.d); }, 250);
   },
   play() { if (!this.cur) return; say(this.cur.d, this.slow ? 0.6 : undefined); this.slow = !this.slow; },
   check() {
-    if (!this.cur) return;
+    if (!this.cur || this.checked) return;
     const typed = norm($("dc-input").value), target = norm(this.cur.d);
     if (!typed) { $("dc-input").focus(); return; }
+    this.checked = true; $("dc-check").disabled = true;
     const ok = typed === target;
     S.dict.total++; if (ok) S.dict.ok++; save();
     $("dc-fb").className = "fb " + (ok ? "ok" : "no");
     $("dc-fb").innerHTML = ok ? `Đúng: <b>${this.cur.d}</b> — ${this.cur.m}` : `Chưa đúng. Đáp án: <b>${this.cur.d}</b> — ${this.cur.m}${this.cur.p ? ` [${this.cur.p}]` : ""}`;
     $("dc-diff").innerHTML = ok ? "" : diffMark(target, typed);
     $("dc-score").textContent = `${S.dict.ok} / ${S.dict.total} đúng (tổng)`;
-    if (ok) setTimeout(() => this.newItem(), 1400);
+    if (ok) this.timer = setTimeout(() => { if (currentView === "dictation") this.newItem(); }, 1400);
   }
 };
 
@@ -391,7 +454,7 @@ const Exam = {
       const pass = right >= 24;
       el.className = "score " + (pass ? "pass" : "fail");
       const worst = Object.entries(wrong).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([p, n]) => `phần ${p.slice(1)} (${n} sai)`).join(", ");
-      el.innerHTML = pass ? `Xong: ${right} / ${total}. Đạt mốc A1. Sang chặng A2 theo hướng dẫn ở trang Lộ trình.` : `Xong: ${right} / ${total}. Chưa đạt 24. Sai nhiều nhất ở ${worst || "—"} — quay lại phần đó, làm lại sau một tuần.`;
+      el.innerHTML = pass ? `Xong: ${right} / ${total}. Đạt mục tiêu bài trắc nghiệm. Hãy tự kiểm tra thêm nghe, nói, đọc, viết ở 4 mốc; kết quả này không chứng nhận trình độ A1.` : `Xong: ${right} / ${total}. Chưa đạt 24. Sai nhiều nhất ở ${worst || "—"} — quay lại phần đó, làm lại sau một tuần.`;
       el.scrollIntoView({ block: "center", behavior: "smooth" });
     });
     $("ex-box").scrollIntoView({ block: "start", behavior: "smooth" });
@@ -984,7 +1047,7 @@ const TOTAL = N.schedule.length;
 function tocLabel(sec) { const a = document.querySelector(`.toc a[href="#${sec}"]`); return a ? a.textContent : sec; }
 function nextSession() { return N.schedule.find(s => !S.done[s.id]) || null; }
 function partSessionsDone(p) { return p.sessions.filter((s, i) => S.done[`${p.id}-s${i + 1}`]).length; }
-function weekCount(ws) { return S.log.filter(t => t >= ws && t < ws + 7 * DAY).length; }
+function weekCount(ws) { return S.log.filter(t => t >= ws && t < calendarDay(ws, 7)).length; }
 function markDone(id) {
   if (S.done[id]) return;
   S.done[id] = Date.now(); S.log.push(Date.now());
@@ -1006,23 +1069,28 @@ const Session = {
       const L = { kort: "Luyện: lật hết bộ thẻ của phần, đọc to — 10 phút", drill: "Luyện: máy luyện, ít nhất 15 câu — 10 phút", quiz: "Quiz 10 câu, mục tiêu ≥ 8. Dưới 8 thì đọc lại mục sai rồi làm lại", dictation: "Chép chính tả 10 câu — 10 phút", stave: "Máy đánh vần: đọc to từng từ trước khi bấm nghe — 10 phút" };
       steps.push({ kind: "practice", label: L[s.practice], hash: H[s.practice], practice: s.practice });
     } else {
-      steps.push({ kind: "srs", label: "Ôn toàn bộ thẻ đến hạn, không giới hạn", hash: "#review", limit: 999 });
+      steps.push({ kind: "srs", label: "Ôn toàn bộ thẻ đến hạn, không giới hạn", hash: "#review", limit: undefined });
       steps.push({ kind: "tasks", label: "Làm 4 việc của phiên ôn tổng (danh sách ở trang Lộ trình)", hash: "#home" });
     }
     steps.push({ kind: "done", label: "Đánh dấu hoàn thành phiên", hash: "#home" });
     const idx = N.schedule.indexOf(s);
     return { id, step: 0, steps, part: s.part, title: s.t, kind: s.kind, num: idx + 1 };
   },
-  start(id) { this.cur = this.build(id); if (!this.cur) return; S.sess = { id, step: 0 }; save(); this.go(); },
+  start(id) { clearTimeout(this.timer); this.cur = this.build(id); if (!this.cur) return; S.sess = { id, step: 0 }; save(); this.go(); },
   resume() { if (!S.sess) return; this.cur = this.build(S.sess.id); if (!this.cur) { S.sess = null; return; } this.cur.step = Math.min(S.sess.step, this.cur.steps.length - 1); this.show(); },
   go() {
     const st = this.cur.steps[this.cur.step];
     if (location.hash !== st.hash) location.hash = st.hash; else route();
-    if (st.kind === "srs") setTimeout(() => {
+    clearTimeout(this.timer);
+    const session = this.cur;
+    if (st.kind === "srs") this.timer = setTimeout(() => {
+      if (this.cur !== session || this.cur.steps[this.cur.step] !== st) return;
       if (SRS.due("all").length) Review.start("due", "all", st.limit);
       else { $("rv-part").value = this.cur.part; Review.start("new", this.cur.part); toast("Không có thẻ đến hạn — học " + N.meta.newPerSession + " thẻ mới của phần này."); }
     }, 350);
-    if (st.kind === "practice" && st.practice === "dictation") setTimeout(() => Dict.setPart(this.cur.part), 350);
+    if (st.kind === "practice" && st.practice === "dictation") this.timer = setTimeout(() => {
+      if (this.cur === session && this.cur.steps[this.cur.step] === st) Dict.setPart(this.cur.part);
+    }, 350);
     this.show();
   },
   next() {
@@ -1030,10 +1098,10 @@ const Session = {
     if (this.cur.steps[this.cur.step].kind === "done") { this.finish(); return; }
     this.cur.step++; S.sess.step = this.cur.step; save(); this.go();
   },
-  quit() { this.cur = null; S.sess = null; save(); $("sessionbar").hidden = true; if (currentView === "home") renderHome(); },
+  quit() { clearTimeout(this.timer); this.cur = null; S.sess = null; save(); $("sessionbar").hidden = true; if (currentView === "home") renderHome(); },
   finish() {
     const { id, part, num } = this.cur;
-    markDone(id); this.cur = null; S.sess = null; save();
+    clearTimeout(this.timer); markDone(id); this.cur = null; S.sess = null; save();
     $("sessionbar").hidden = true;
     const wk = weekCount(weekStart(Date.now()));
     toast(`Xong phiên ${num}/${TOTAL}. Tuần này ${wk}/${N.meta.weeklyGoal} phiên.` + (wk === N.meta.weeklyGoal ? " Tuần đạt!" : ""), 4000);
@@ -1069,7 +1137,7 @@ function renderHome() {
       <div class="row"><button class="btn solid big" id="home-start">Bắt đầu phiên</button><a class="btn" href="#${p.id}">Xem phần ${p.num}</a></div>`;
     $("home-start").onclick = () => Session.start(nx.id);
   } else {
-    box.innerHTML = `<div class="info"><p class="kicker">Xong 52 / 52 phiên</p><h3>Bạn đã đi hết A1. Giờ là chặng A2.</h3><p class="small muted" style="margin:0">Giữ thói quen ôn thẻ mỗi ngày và bắt đầu NTNU NoW theo mục Chặng dài bên dưới.</p></div><a class="btn solid big" href="#exam">Thi thử lại</a>`;
+    box.innerHTML = `<div class="info"><p class="kicker">Xong ${TOTAL} / ${TOTAL} phiên</p><h3>Bạn đã đi hết lộ trình. Hãy kiểm tra đủ bốn kỹ năng trước chặng A2.</h3><p class="small muted" style="margin:0">Giữ thói quen ôn thẻ mỗi ngày và bắt đầu NTNU NoW theo mục Chặng dài bên dưới.</p></div><a class="btn solid big" href="#exam">Thi thử lại</a>`;
   }
   const wk = weekCount(weekStart(Date.now())), doneN = Object.keys(S.done).filter(k => N.schedule.some(s => s.id === k)).length;
   $("home-stats").innerHTML = `
@@ -1124,11 +1192,19 @@ function renderNavParts() {
   $$(".navpart").forEach(a => a.classList.toggle("on", a.dataset.part === currentView));
 }
 
+function resetPractice() {
+  clearTimeout(Session.timer); clearTimeout(Dict.timer); clearTimeout(Dict.audioTimer);
+  Session.cur = null; Review.deck = []; Review.onFinish = null;
+  $("rv-btns").hidden = true;
+  $("rv-card").innerHTML = '<div class="rvempty">Chọn ôn thẻ đến hạn hoặc học thẻ mới để bắt đầu.</div>';
+  Dict.cur = null; Dict.next = null; Dict.checked = false;
+}
+
 /* ---------- tiến độ ---------- */
 let settingsBound = false;
 function renderProgress() {
   const doneN = Object.keys(S.done).filter(k => N.schedule.some(s => s.id === k)).length;
-  const ws = weekStart(Date.now()), weeks = []; for (let i = 7; i >= 0; i--) weeks.push(ws - i * 7 * DAY);
+  const ws = weekStart(Date.now()), weeks = []; for (let i = 7; i >= 0; i--) weeks.push(calendarDay(ws, -i * 7));
   const good = weeks.filter(w => weekCount(w) >= N.meta.weeklyGoal).length;
   const acc = S.dict.total ? Math.round(S.dict.ok / S.dict.total * 100) + "%" : "—";
   $("pg-stats").innerHTML = `
@@ -1141,22 +1217,33 @@ function renderProgress() {
   $("pg-parts").innerHTML = N.parts.map(p => { const d = partSessionsDone(p), t = p.sessions.length, known = N.cardsFor(p.id).filter(c => S.srs[c.id] && S.srs[c.id].b >= 2).length;
     return `<div class="pgrow" data-part="${p.id}"><div class="num">${p.num}</div><div class="txt">${p.title}<small>${d}/${t} phiên · ${known}/${N.cardsFor(p.id).length} thẻ thuộc</small></div><div class="right"><span>${S.quiz[p.id] != null ? "quiz " + S.quiz[p.id] + "/10" : "chưa quiz"}</span><div class="progress"><i style="width:${d / t * 100}%"></i></div></div></div>`; }).join("");
   $("set-rate").value = S.rate; $("set-rate-val").textContent = S.rate + "×"; $("set-theme").value = S.theme; $("set-name").value = S.name; fillVoiceSelect();
+  try { $("pg-recovery").hidden = !localStorage.getItem(KEY + ".recovery"); } catch (_) { $("pg-recovery").hidden = true; }
   if (settingsBound) return; settingsBound = true;
   $("set-rate").oninput = e => { S.rate = +e.target.value; $("set-rate-val").textContent = S.rate + "×"; save(); };
   $("set-rate").onchange = () => say("Hei, hvordan går det?");
   $("set-voice").onchange = e => { S.voice = e.target.value; save(); pickVoice(); say("Hei, hvordan går det?"); };
   $("set-theme").onchange = e => { S.theme = e.target.value; save(); applyTheme(); };
   $("set-name").onchange = e => { S.name = e.target.value.trim(); save(); };
+  $("pg-recovery").onclick = () => {
+    const raw = localStorage.getItem(KEY + ".recovery"); if (!raw) return;
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([raw], { type: "application/json" }));
+    a.download = "hei-norsk-tiendo-khoi-phuc.json"; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  };
   $("pg-export").onclick = () => {
     const blob = new Blob([JSON.stringify(S, null, 1)], { type: "application/json" }), a = document.createElement("a");
     a.href = URL.createObjectURL(blob); a.download = `hei-norsk-tiendo-${new Date().toISOString().slice(0, 10)}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   };
   $("pg-import").onchange = e => {
     const f = e.target.files[0]; if (!f) return;
-    f.text().then(txt => { const o = JSON.parse(txt); if (!o || o.v !== 1 || !o.srs) throw 0; S = Object.assign(DEF(), o); save(); applyTheme(); renderProgress(); renderNavParts(); updateDueBadges(); toast("Đã nhập tiến độ."); })
+    if (f.size > 2 * 1024 * 1024) { toast("File quá lớn (tối đa 2 MB)."); e.target.value = ""; return; }
+    f.text().then(txt => {
+      const restored = readState(JSON.parse(txt));
+      if (!confirm("Thay tiến độ hiện tại bằng file này? Hãy xuất bản sao lưu trước nếu cần giữ cả hai.")) return;
+      resetPractice(); S = restored; flushSave(); Session.resume(); applyTheme(); renderProgress(); renderNavParts(); updateDueBadges(); toast("Đã nhập tiến độ.");
+    })
       .catch(() => toast("File không đúng định dạng.")); e.target.value = "";
   };
-  $("pg-reset").onclick = () => { if (confirm("Xoá toàn bộ tiến độ (phiên, thẻ, quiz)? Không hoàn tác được.")) { S = DEF(); save(); Session.cur = null; $("sessionbar").hidden = true; applyTheme(); renderProgress(); renderNavParts(); updateDueBadges(); toast("Đã xoá."); } };
+  $("pg-reset").onclick = () => { if (confirm("Xoá toàn bộ tiến độ (phiên, thẻ, quiz)? Không hoàn tác được.")) { resetPractice(); S = DEF(); flushSave(); $("sessionbar").hidden = true; applyTheme(); renderProgress(); renderNavParts(); updateDueBadges(); toast("Đã xoá."); } };
 }
 
 /* ---------- khởi động ---------- */
@@ -1172,11 +1259,12 @@ function init() {
   /* ôn thẻ */
   $("rv-start-due").onclick = () => Review.start("due");
   $("rv-start-new").onclick = () => Review.start("new");
+  $("rv-direction").onchange = () => { if (Review.deck.length) { Review.flipped = false; Review.draw(); } };
   $("rv-card").onclick = () => Review.flip();
   $("rv-yes").onclick = () => Review.answer(true); $("rv-no").onclick = () => Review.answer(false);
   $("dict-q").oninput = e => dictSearch(e.target.value);
   document.addEventListener("keydown", e => {
-    if (currentView !== "review" || /INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) return;
+    if (currentView !== "review" || document.activeElement.closest("input,select,textarea,button,a,[contenteditable=true]")) return;
     if (e.key === " " || e.key === "Enter") { e.preventDefault(); Review.flip(); }
     if (e.key === "1") Review.answer(false); if (e.key === "2") Review.answer(true);
   });
@@ -1194,8 +1282,9 @@ function init() {
     const mk = e.target.closest("[data-mark]"); if (mk) { markDone(mk.dataset.mark); renderPartHead(mk.dataset.mark.split("-")[0]); toast("Đã đánh dấu xong."); }
   });
   window.addEventListener("hashchange", route);
-  route();
   Session.resume();
+  route();
+  if (recoveredInvalidState) toast("Tiến độ cũ chưa đọc được. Bản gốc đã được giữ: vào Tiến độ → Tải bản gốc để khôi phục.", 7000);
   if (!location.hash) history.replaceState(null, "", "#home");
 }
 document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", init) : init();

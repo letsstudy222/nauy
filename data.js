@@ -45,7 +45,7 @@ NORSK.parts = [
       { t:"Máy luyện bốn dạng và thẻ", secs:["p3-drill","p3-kort"], practice:"drill" },
       { t:"Quiz, mẹo học, Góc Norskprøve", secs:["p3-quiz","p3-rad","p3-exam"], practice:"quiz" }
     ]},
-  { id:"p4", num:4, title:"Động từ & trật tự từ V2", short:"Động từ & V2", desc:"Thì hiện tại thêm -r, quy tắc V2 chi phối mọi câu, vị trí ikke, cách đặt câu hỏi.",
+  { id:"p4", num:4, title:"Động từ & trật tự từ V2", short:"Động từ & V2", desc:"Thì hiện tại thêm -r, quy tắc V2 trong câu kể chính, vị trí ikke, cách đặt câu hỏi.",
     sessions:[
       { t:"Thì hiện tại và 9 động từ bất quy tắc", secs:["p4-presens","p4-uregelrett"], practice:"kort" },
       { t:"Quy tắc V2 và sơ đồ ô câu", secs:["p4-v2","p4-skjema"], practice:"drill" },
@@ -66,7 +66,7 @@ NORSK.parts = [
   { id:"p6", num:6, title:"Quá khứ, tương lai, mệnh đề phụ", short:"Trục thời gian", desc:"Bốn dạng động từ, bốn nhóm yếu, động từ mạnh, quá khứ vs hoàn thành, skal/vil, mệnh đề phụ với ikke.",
     sessions:[
       { t:"Bốn dạng động từ và bốn nhóm yếu", secs:["p6-fireformer","p6-svake"], practice:"drill" },
-      { t:"Động từ mạnh — học thuộc 30 từ", secs:["p6-sterke"], practice:"kort" },
+      { t:"Động từ mạnh và bất quy tắc thường gặp", secs:["p6-sterke"], practice:"kort" },
       { t:"Quá khứ hay hoàn thành? + cụm quá khứ", secs:["p6-pretvsperf","p6-fortid"], practice:"drill" },
       { t:"Tương lai và động từ khiếm khuyết", secs:["p6-framtid","p6-modal"], practice:"kort" },
       { t:"Mệnh đề phụ, når / da, kể chuyện", secs:["p6-leddsetning","p6-narda","p6-igar"], practice:"dictation" },
@@ -108,7 +108,7 @@ NORSK.milestones = [
   { id:"m1", after:"p2", when:"Sau phần 2", title:"Tự giới thiệu 60 giây", desc:"Tên, tuổi, quê, nơi ở, ngôn ngữ, nghề — nói liền không nhìn giấy. Ghi âm rồi tự nghe lại." },
   { id:"m2", after:"p4", when:"Sau phần 4", title:"Hỏi–đáp 8 câu, có phủ định", desc:"Trả lời 8 câu hỏi giám khảo với V2 đúng và ikke đúng chỗ. Không trả lời cụt Ja/Nei." },
   { id:"m3", after:"p6", when:"Sau phần 6", title:"Kể lại ngày hôm qua", desc:"8 câu thì quá khứ theo mốc giờ, kết bằng một câu tương lai với skal." },
-  { id:"m4", after:"p8", when:"Sau phần 8", title:"Thi thử A1 ≥ 24/30 + 4 hội thoại", desc:"Làm bài thi thử tổng và đóng cả hai vai trong 4 hội thoại phần 8. Xong là sang chặng A2." }
+  { id:"m4", after:"p8", when:"Sau phần 8", title:"Thi thử A1 ≥ 24/30 + 4 hội thoại", desc:"Làm bài thi thử tổng và đóng cả hai vai trong 4 hội thoại phần 8. Đối chiếu thêm khả năng nghe, đọc, nói, viết trước khi chuyển sang A2." }
 ];
 
 /* ---------- GÓC NORSKPRØVE ----------
@@ -119,16 +119,16 @@ NORSK.exam = {
       prompt:"Giám khảo hỏi: «Hva heter du? Kan du stave det?» Trả lời, rồi đánh vần tên bạn bằng tên chữ cái Na Uy (bảng chữ cái ở đầu phần). Sau đó đọc to 10 từ: kake · kino · kysse · gate · gift · jeg · hva · hjem · skole · ski.",
       model:["Jeg heter Duy.|Tôi tên là Duy.","Det staves D – U – Y.|Đánh vần là D – U – Y (đọc tên chữ: đê – uy – uy — u và y khác nhau ở độ tròn môi).","Jeg kommer fra Vietnam.|Tôi đến từ Việt Nam."],
       note:"Norskprøve muntlig ở mọi mức đều mở đầu bằng vài câu về bản thân; giám khảo có thể yêu cầu đánh vần tên hoặc địa chỉ. Phát âm không cần chuẩn — cần nhất quán: u, y, ø, æ phải nghe khác nhau.",
-      check:["Ba chữ æ ø å đọc được khi đứng trong từ","kj (kino, kysse) và skj / sk (skole, ski) không đọc thành k / s","jeg, hva, hjem: chữ câm không đọc"] },
+      check:["Ba chữ æ ø å đọc được khi đứng trong từ","Phân biệt kj trong kino, kysse với âm sj trong ski; sk trong skole vẫn là /sk/","jeg, hva, hjem: chữ câm không đọc"] },
     p2: { title:"Tự giới thiệu 30–60 giây",
       prompt:"Giám khảo nói: «Fortell litt om deg selv.» Nói tên, tuổi, quê, nơi ở, ngôn ngữ, nghề — không nhìn giấy. Ghi âm bằng điện thoại và nghe lại.",
       model:["Hei! Jeg heter Duy.|Chào! Tôi tên là Duy.","Jeg er trettito år gammel.|Tôi 32 tuổi.","Jeg kommer fra Vietnam, fra Hanoi.|Tôi đến từ Việt Nam, từ Hà Nội.","Nå bor jeg i Oslo.|Bây giờ tôi sống ở Oslo.","Jeg snakker vietnamesisk og litt engelsk, og jeg lærer norsk.|Tôi nói tiếng Việt và một chút tiếng Anh, và tôi đang học tiếng Na Uy.","Jeg jobber med netthandel.|Tôi làm về thương mại điện tử.","Hyggelig å hilse på deg!|Rất vui được gặp bạn!"],
-      note:"Đây là phần mở đầu của mọi kỳ Norskprøve muntlig. Giám khảo chấm: có nói liên tục không, có hiểu câu hỏi không. Ở A1, sai mạo từ không bị trừ điểm — ngừng quá lâu mới bị.",
+      note:"Đây là phần mở đầu của mọi kỳ Norskprøve muntlig. Giám khảo chấm: có nói liên tục không, có hiểu câu hỏi không. Đánh giá năng lực nói xét nhiều tiêu chí: khả năng truyền đạt, độ trôi chảy, phát âm, từ vựng và ngữ pháp. Không có quy tắc miễn mọi lỗi mạo từ hoặc ngưỡng dừng cố định cho mọi bài.",
       check:["Nói liền 30 giây, không dừng quá 3 giây","Đổi tên, tuổi, thành phố thành của bạn","Có một câu mở đầu bằng trạng từ (Nå bor jeg…) mà động từ vẫn đứng thứ hai"] },
     p3: { title:"Tả căn phòng bạn đang ngồi",
       prompt:"Giám khảo hỏi: «Hva ser du rundt deg?» Kể 6 đồ vật, mỗi đồ nói đúng en / ei / et, rồi nhắc lại ở dạng xác định (bordet, boka…). Dùng «Her er det…», «Det er…».",
       model:["Jeg sitter i stua.|Tôi đang ngồi trong phòng khách.","Her er det et bord og fire stoler.|Ở đây có một cái bàn và bốn cái ghế.","På bordet ligger det ei bok og en telefon.|Trên bàn có một quyển sách và một cái điện thoại.","Boka er på norsk.|Quyển sách bằng tiếng Na Uy.","Ved vinduet står det ei lampe og en plante.|Cạnh cửa sổ có một cái đèn và một cái cây.","Jeg ser ut av vinduet.|Tôi nhìn ra ngoài cửa sổ.","Barna leker på gulvet.|Bọn trẻ đang chơi trên sàn."],
-      note:"Muntlig A1–A2 có bài «beskriv bildet»: giám khảo đưa ảnh phòng khách, bếp hoặc công viên và bạn kể thấy gì. Cấu trúc «Det er en/ei/et …» + «Her er …» là đủ điểm ở mức này.",
+      note:"Muntlig A1–A2 có bài «beskriv bildet»: giám khảo đưa ảnh phòng khách, bếp hoặc công viên và bạn kể thấy gì. Luyện cấu trúc «Det er en/ei/et …» và «Her er …» để mô tả đồ vật; một mẫu câu riêng lẻ không bảo đảm kết quả thi.",
       check:["Mỗi danh từ nói kèm en / ei / et","Nhắc lại ít nhất 3 từ ở dạng xác định (bordet, boka, vinduet)","Số nhiều đúng đuôi: stoler, barna"] },
     p4: { title:"Trả lời 8 câu hỏi của giám khảo",
       prompt:"Giám khảo hỏi liên tiếp, bạn trả lời mỗi câu 1–2 câu đầy đủ (không «Ja» / «Nei» cụt), chú ý V2 và vị trí ikke: Hvor bor du? · Hva jobber du med? · Hva liker du å gjøre? · Snakker du engelsk? · Hvorfor lærer du norsk? · Har du bil? · Når står du opp? · Hva gjør du i helgen?",
@@ -143,7 +143,7 @@ NORSK.exam = {
     p6: { title:"Kể lại ngày hôm qua",
       prompt:"Giám khảo hỏi: «Hva gjorde du i går?» Kể 8 câu theo thứ tự giờ, toàn bộ ở thì quá khứ, kết bằng một câu tương lai («I morgen skal jeg…»).",
       model:["I går var det søndag, så jeg sto opp klokka ni.|Hôm qua là chủ nhật, nên tôi dậy lúc 9 giờ.","Jeg spiste frokost og drakk te.|Tôi ăn sáng và uống trà.","Etterpå gikk jeg en tur i parken.|Sau đó tôi đi dạo trong công viên.","Det var kaldt, men sola skinte.|Trời lạnh, nhưng có nắng.","Om ettermiddagen ringte jeg til foreldrene mine.|Buổi chiều tôi gọi cho bố mẹ.","Vi snakket i en time.|Chúng tôi nói chuyện một tiếng.","Om kvelden så jeg en film, og jeg la meg klokka elleve.|Buổi tối tôi xem một bộ phim, và đi ngủ lúc 11 giờ.","I morgen skal jeg jobbe.|Ngày mai tôi sẽ đi làm."],
-      note:"Kể chuyện quá khứ chắc chắn có ở muntlig A2 và là đề viết A2 phổ biến («Fortell om helgen din / en reise»). Giám khảo đếm động từ quá khứ đúng: var, sto, spiste, drakk, gikk, så, la.",
+      note:"Kể chuyện quá khứ là bài luyện hữu ích cho A2, không phải cam kết đề thi. Tự kiểm tra cả việc truyền đạt câu chuyện lẫn cách dùng var, sto, spiste, drakk, gikk, så, la.",
       check:["Không lẫn dạng hiện tại: spiser → spiste, drikker → drakk","Trạng từ mở câu (Etterpå, Om kvelden) → động từ đứng thứ hai","Câu cuối dùng skal + nguyên thể"] },
     p7: { title:"Tả một bức tranh",
       prompt:"Mở một tấm ảnh bất kỳ trên điện thoại (công viên, bếp, phố). Giám khảo nói: «Beskriv bildet.» Nói 8 câu: có gì, ở đâu (til venstre, bak, på), mỗi danh từ đi kèm một tính từ đúng dạng.",
@@ -245,7 +245,7 @@ const KLYNGER = [
 
 const STUMME = [
   ["1","<b>h</b> câm trước v và j","hva|va|cái gì · hvor|vur|ở đâu · hjem|yem|về nhà"],
-  ["2","<b>d</b> câm ở cuối từ sau nguyên âm hoặc sau l, n","god|gu|tốt · med|me|với · land|lan|đất nước · glad|gla|vui"],
+  ["2","<b>d</b> thường câm trong một số từ thông dụng; không phải mọi d cuối từ (tid vẫn đọc d)","god|gu|tốt · med|me|với · land|lan|đất nước · glad|gla|vui"],
   ["3","<b>g</b> câm trong đuôi -ig","viktig|vík-ti|quan trọng · dårlig|đór-li|tệ"],
   ["4","<b>t</b> câm trong det và đuôi -et","det|đe|nó, cái đó · huset|huy-sơ|căn nhà đó"],
   ["5","<b>v</b> câm trong vài từ quen thuộc","selv|sel|tự · tolv|tol|mười hai · halv|hal|một nửa"],
@@ -290,9 +290,9 @@ const QUIZ = [
    w:"Đây là âm [ʂ] quặt lưỡi. Người nói giọng miền Nam đã có sẵn âm này trong chữ s."},
   {q:"Tại sao <span class='no'>takk</span> có nguyên âm ngắn còn <span class='no'>tak</span> có nguyên âm dài?",
    o:["Vì takk là từ mượn","Vì hai phụ âm sau nguyên âm làm nó ngắn lại","Vì nó có thanh điệu 2","Không có quy tắc, phải học thuộc"],a:1,
-   w:"Quy tắc: một phụ âm theo sau thì nguyên âm dài, từ hai phụ âm trở lên thì ngắn."},
+   w:"Trong âm tiết có trọng âm, phụ âm đôi thường báo nguyên âm ngắn: tak /ɑː/ và takk /ɑ/. Đây là quy tắc gợi ý, có ngoại lệ như từ chức năng và từ mượn."},
   {q:"Từ <span class='no'>god</span> (tốt) đọc thế nào?",o:["gôđ","gót","gu","gu-đơ"],a:2,
-   w:"o thành u, và d cuối từ sau nguyên âm thì câm. Chỉ còn lại hai âm."},
+   w:"Trong god, o thường là /uː/ và d thường câm. Không suy ra mọi d cuối từ đều câm: ví dụ tid vẫn có /d/."},
   {q:"Ba nguyên âm nào không có tương đương trong tiếng Việt?",
    o:["a, e, i","æ, å, o","u, y, ø","e, æ, å"],a:2,
    w:"Cả ba đều cần tròn môi ở vị trí lưỡi mà tiếng Việt không tròn môi."},
@@ -438,7 +438,7 @@ const PRIS = [
 const QUIZ = [
   {q:"Bạn gặp sếp mới ở Na Uy. Bạn xưng hô thế nào?",
    o:["Dùng <span class='no'>De</span> cho lịch sự","Dùng <span class='no'>du</span> và gọi thẳng tên","Gọi bằng chức danh + họ","Tránh xưng hô, chỉ dùng câu bị động"],a:1,
-   w:"Dạng De đã chết từ thập niên 1970. Dùng nó bây giờ nghe kỳ quặc chứ không lịch sự."},
+   w:"Trong giao tiếp hiện nay, du và tên riêng thường là lựa chọn tự nhiên. De vẫn tồn tại trong một số ngữ cảnh trang trọng nhưng rất ít dùng."},
   {q:"<span class='no'>Jeg heter Duy</span> nghĩa là gì?",o:["Tôi sống ở đây","Tôi tên là Duy","Tôi đến từ Duy","Tôi là người Duy"],a:1,
    w:"heter = tên là. Đây là cách chuẩn để nói tên, dùng nhiều hơn Jeg er Duy."},
   {q:"Chuyển <span class='no'>Du snakker norsk</span> thành câu hỏi:",
@@ -453,7 +453,7 @@ const QUIZ = [
    o:["han est, de ere","han er, de erer","han er, de er","han har, de er"],a:2,
    w:"Động từ tiếng Na Uy không đổi theo ngôi. Một dạng dùng cho tất cả."},
   {q:"Số 47 viết là gì?",o:["førti sju","sjuogførti","førtisju","fire-sju"],a:2,
-   w:"Viết liền một chữ, chục trước đơn vị sau. Dạng sjuogførti là hệ đếm cũ đã bỏ."},
+   w:"Viết liền một chữ, chục trước đơn vị sau. Dạng sjuogførti thuộc cách đếm cũ, vẫn có thể nghe thấy. Khóa học dùng cách chục trước đơn vị sau: førtisju."},
   {q:"Ai đó nói <span class='no'>Tusen takk!</span> Bạn đáp lại thế nào?",
    o:["Vær så god.","Unnskyld.","God natt.","Hvordan går det?"],a:0,
    w:"Vær så god là câu đáp lời cảm ơn phổ biến nhất. Ingen årsak cũng dùng được."},
@@ -729,9 +729,9 @@ const QUIZ = [
    w:"Bỏ å, thêm -r. Dạng này dùng cho tất cả các ngôi."},
   {q:"Câu nào đúng?",o:["I dag jeg går på jobb.","I dag går jeg på jobb.","Jeg i dag går på jobb.","Går i dag jeg på jobb."],a:1,
    w:"Quy tắc V2: I dag chiếm vị trí 1, động từ phải đứng thứ hai."},
-  {q:"<span class='no'>ikke</span> đứng ở đâu trong câu kể?",
+  {q:"<span class='no'>ikke</span> đứng ở đâu trong câu <span class='no'>Jeg snakker ikke norsk</span>?",
    o:["Trước động từ","Ngay sau động từ chia","Cuối câu","Đầu câu"],a:1,
-   w:"Ngược với tiếng Việt. Jeg snakker ikke norsk, không phải Jeg ikke snakker."},
+   w:"Trong câu chính trung tính: Jeg snakker ikke norsk. Khi trạng ngữ đứng đầu: I dag snakker jeg ikke norsk — ikke đứng sau chủ ngữ jeg."},
   {q:"Dạng hiện tại của <span class='no'>å være</span> là gì?",o:["værer","er","var","vær"],a:1,
    w:"Đây là động từ bất quy tắc quan trọng nhất: å være → er."},
   {q:"Chuyển <span class='no'>Du bor i Bergen</span> thành câu hỏi:",
@@ -739,13 +739,13 @@ const QUIZ = [
    w:"Đưa động từ lên đầu. Không thêm trợ động từ nào."},
   {q:"Ai đó hỏi <span class='no'>Liker du ikke fisk?</span> Bạn thích cá. Trả lời sao?",
    o:["Ja.","Nei.","Jo.","Ikke."],a:2,
-   w:"jo dùng riêng để phản bác câu hỏi phủ định. Tiếng Việt không có từ tương đương."},
+   w:"jo dùng riêng để phản bác câu hỏi phủ định. Ở đây dùng jo để xác nhận ý khẳng định: có, tôi thích cá."},
   {q:"Dạng hiện tại của <span class='no'>å vite</span> (biết) là gì?",o:["viter","vet","vitte","visste"],a:1,
    w:"Bất quy tắc: å vite → vet. Đừng nhầm với å vente → venter."},
   {q:"Câu nào đúng sau động từ khiếm khuyết?",
    o:["Jeg kan snakker norsk.","Jeg kan å snakke norsk.","Jeg kan snakke norsk.","Jeg kan snakket norsk."],a:2,
    w:"Sau kan, vil, skal, må là nguyên thể trần: không å, không chia."},
-  {q:"Vị trí 1 trong câu tiếng Na Uy chứa được bao nhiêu thành phần?",
+  {q:"Vị trí trước động từ chia trong câu kể chính theo V2 chứa bao nhiêu thành phần?",
    o:["Một","Hai","Không giới hạn","Tùy loại câu"],a:0,
    w:"Chỉ một. Đây chính là lý do chủ ngữ bị đẩy ra sau động từ khi có trạng ngữ đứng đầu."},
   {q:"Trong mệnh đề sau <span class='no'>fordi</span>, <span class='no'>ikke</span> đứng ở đâu?",
@@ -797,7 +797,7 @@ const FAMILIE = [
   ["foreldre","fo-rél-đrơ","bố mẹ (chỉ số nhiều)","x"],
   ["ei søster","sớs-tơr","chị, em gái","f"],
   ["en bror","brur","anh, em trai","m"],
-  ["søsken","sớs-kơn","anh chị em (chỉ số nhiều)","x"],
+  ["søsken","sớs-kơn","anh chị em; et søsken = một anh/chị/em","x"],
   ["ei datter","đát-tơr","con gái","f"],
   ["en sønn","sơn","con trai","m"],
   ["et barn","ban","đứa con","n"],
@@ -1068,7 +1068,7 @@ const FRAM3 = [
 ];
 const MODAL = [
   ["kan","kunne","có thể","Jeg kan snakke litt norsk.|yây kan snák-kơ lit nosk|Tôi nói được chút tiếng Na Uy"],
-  ["vil","ville","muốn","Jeg vil ha kaffe.|yây vil ha káf-fơ|Tôi muốn cà phê"],
+  ["vil","ville","muốn; cũng diễn đạt dự đoán","Jeg vil ha kaffe.|yây vil ha káf-fơ|Tôi muốn cà phê"],
   ["skal","skulle","sẽ, định","Jeg skal jobbe i morgen.|yây skal yób-bơ i mór-ơn|Mai tôi sẽ làm việc"],
   ["må","måtte","phải","Jeg må gå nå.|yây mô gô nô|Tôi phải đi bây giờ"],
   ["bør","burde","nên","Du bør sove mer.|đuy bơr sô-vơ mêr|Bạn nên ngủ nhiều hơn"],
@@ -1077,7 +1077,7 @@ const MODAL = [
 const MODALPAR = [
   ["Jeg kan å snakke norsk.","Jeg kan snakke norsk.","Sau động từ khiếm khuyết là nguyên thể trần, không có å"],
   ["Jeg må går nå.","Jeg må gå nå.","Động từ theo sau không được chia"],
-  ["Jeg vil reise i morgen. (ý: tôi sẽ đi)","Jeg skal reise i morgen.","vil nghĩa là muốn, không phải sẽ"]
+  ["Jeg skal å reise i morgen.","Jeg skal reise i morgen.","Sau skal dùng nguyên thể không å. Vil cũng có thể diễn đạt tương lai tùy ngữ cảnh."]
 ];
 const LEDDRADER = [
   ["fordi","jeg","ikke","liker","kaffe","bởi vì tôi không thích cà phê"],
@@ -1157,18 +1157,18 @@ const QUIZ = [
    w:"Mệnh đề phụ không theo V2. ikke đứng trước động từ."},
   {q:"<span class='no'>Jeg vil ha kaffe</span> nghĩa là gì?",
    o:["Tôi sẽ có cà phê","Tôi muốn cà phê","Tôi đã uống cà phê","Tôi phải uống cà phê"],a:1,
-   w:"vil là muốn, không phải will. Đây là bẫy lớn nhất với người có nền tiếng Anh."},
+   w:"Trong Jeg vil ha kaffe, vil diễn đạt mong muốn. Trong ngữ cảnh khác, vil cũng có thể diễn đạt dự đoán hoặc tương lai."},
   {q:"Chọn câu đúng cho ý 'Tôi từng ở Na Uy':",
    o:["Jeg var i Norge.","Jeg har vært i Norge.","Jeg er i Norge.","Jeg skal være i Norge."],a:1,
    w:"Nói kinh nghiệm mà không nêu thời điểm thì dùng thì hoàn thành."},
-  {q:"Cách nào phổ biến nhất để nói về tương lai?",
-   o:["kommer til å + nguyên thể","vil + nguyên thể","Dùng luôn thì hiện tại kèm cụm thời gian","skal ha + nguyên thể"],a:2,
-   w:"Jeg reiser i morgen. Người Na Uy dùng thì hiện tại cho tương lai nhiều hơn hẳn."},
+  {q:"Cách nào dùng thì hiện tại để diễn đạt một kế hoạch tương lai?",
+   o:["kommer til å + nguyên thể","vil + nguyên thể","Dùng thì hiện tại kèm cụm thời gian tương lai","skal ha + nguyên thể"],a:2,
+   w:"Jeg reiser i morgen diễn đạt một chuyến đi đã dự định. Tương lai còn có thể dùng skal, vil hoặc kommer til å tùy ý nghĩa."},
   {q:"Sau động từ khiếm khuyết thì động từ chính ở dạng nào?",
    o:["Nguyên thể có å","Nguyên thể không có å","Thì hiện tại","Thì quá khứ"],a:1,
    w:"Jeg kan snakke norsk. Không å, không chia."},
   {q:"Dạng quá khứ của <span class='no'>å kunne</span> là gì?",o:["kan","kunne","kunnet","kande"],a:1,
-   w:"Với động từ khiếm khuyết, dạng quá khứ trùng với dạng nguyên thể."},
+   w:"Riêng kunne: nguyên thể å kunne, hiện tại kan, quá khứ kunne. Không áp dụng cho mọi từ trong bảng: bør → burde; få → fikk."},
   {q:"Câu nào đúng cho 'Hồi tôi còn nhỏ'?",
    o:["Når jeg var barn","Da jeg var barn","Hvis jeg var barn","At jeg var barn"],a:1,
    w:"Một giai đoạn đã qua dùng da. når dùng cho việc lặp lại hoặc tương lai."},
@@ -1327,7 +1327,7 @@ const BEVEGELSE = [
 ];
 const IPA = [
   ["i Norge","i nor-ghơ","ở Na Uy"],["i Oslo","i ós-lu","ở Oslo"],
-  ["i Vietnam","i vi-et-nam","ở Việt Nam"],["på Island","pô ís-lan","ở Iceland — đảo dùng på"],
+  ["i Vietnam","i vi-et-nam","ở Việt Nam"],["på Island","pô ís-lan","ở Iceland — học giới từ theo địa danh"],
   ["på Hamar","pô há-mar","ở Hamar — một số thị trấn dùng på"],
   ["i byen","i búy-ơn","trong thành phố"],["på landet","pô lán-nơ","ở nông thôn"],
   ["på jobb","pô yob","ở chỗ làm"],["på skolen","pô skú-lơn","ở trường"],
@@ -1377,8 +1377,8 @@ const QUIZ = [
   {q:"Dạng trung tính của <span class='no'>liten</span> là gì?",o:["litet","liten","lite","lille"],a:2,
    w:"liten có năm dạng: liten, lita, lite, små, lille. Đây là tính từ bất quy tắc nhất."},
   {q:"Vì sao là <span class='no'>i Norge</span> nhưng <span class='no'>på Island</span>?",
-   o:["Vì Island không thuộc Bắc Âu","Vì đảo dùng på, không có lý do sâu xa hơn","Vì Island là giống trung tính","Vì cả hai đều sai"],a:1,
-   w:"Không có quy tắc suy ra được. Đảo và một số thị trấn trong đất liền dùng på, phải học thuộc."}
+   o:["Vì Island không thuộc Bắc Âu","Vì đây là cách dùng theo địa danh; không phải mọi đảo đều dùng på","Vì Island là giống trung tính","Vì cả hai đều sai"],a:1,
+   w:"Học i / på theo từng địa danh: på Island nhưng i Irland và i Japan. Không dùng quy tắc mọi đảo đều đi với på."}
 ];
   return { PREDIKATIV, UNNTAK, ENDRING, UREGADJ, DOBBEL, DOBBELPAR, EIENDOM, GRAD, MERORD, UREGKOMP, SAMMEN, MOTSATT, FARGER, PREP, BEVEGELSE, IPA, DRILL_FORM, DRILL_KOMP, QUIZ };
 })();
@@ -1588,12 +1588,12 @@ const QUIZ = [
    w:"Jeg har time klokka to = tôi có hẹn lúc hai giờ. Ngữ cảnh phân biệt."},
   {q:"<span class='no'>til venstre</span> nghĩa là gì?",o:["bên phải","bên trái","thẳng phía trước","quay lại"],a:1,
    w:"venstre trái, høyre phải. Nhầm hai từ này là đi ngược hướng."},
-  {q:"Chủ nhật ở Na Uy, siêu thị lớn thế nào?",
-   o:["Mở cả ngày như thường","Đóng cửa theo luật","Mở muộn hơn ngày thường","Chỉ mở buổi sáng"],a:1,
-   w:"Chỉ vài cửa hàng nhỏ như Bunnpris hay Joker được mở. Người ta đi chợ thứ bảy."},
-  {q:"Ở hiệu thuốc hay bưu điện Na Uy, việc đầu tiên bạn phải làm là gì?",
+  {q:"Chủ nhật thông thường ở Na Uy, đa số siêu thị lớn thế nào?",
+   o:["Mở cả ngày như thường","Thường đóng cửa, có ngoại lệ","Mở muộn hơn ngày thường","Chỉ mở buổi sáng"],a:1,
+   w:"Có ngoại lệ cho một số cửa hàng nhỏ, khu du lịch hoặc thời điểm đặc biệt. Kiểm tra giờ mở cửa của cửa hàng cụ thể; không suy ra từ tên chuỗi."},
+  {q:"Ở quầy có máy phát kølapp, bạn nên làm gì để chờ tới lượt?",
    o:["Xếp hàng","Lấy số thứ tự","Gọi nhân viên","Đăng ký ở quầy"],a:1,
-   w:"Gọi là kølapp. Không có hàng người đứng, chỉ có số."},
+   w:"Kølapp là phiếu số thứ tự. Lấy số và chờ số của mình; không phải mọi cửa hàng đều dùng hệ thống này."},
   {q:"Số điện thoại cấp cứu y tế ở Na Uy là số nào?",o:["110","112","113","115"],a:2,
    w:"110 cứu hoả, 112 cảnh sát, 113 cấp cứu y tế."},
   {q:"Câu nào dùng để nói 'tôi đau bụng'?",
@@ -1601,7 +1601,7 @@ const QUIZ = [
    w:"Cấu trúc: ha vondt i + bộ phận cơ thể."},
   {q:"Ở quán ăn Na Uy bình thường, tiền boa thế nào?",
    o:["Bắt buộc 10%","Bắt buộc 15%","Không cần, giá đã gồm phục vụ","Luôn phải đưa tiền mặt"],a:2,
-   w:"Ở nhà hàng sang thì làm tròn số lên là đủ lịch sự."},
+   w:"Tiền boa là tự nguyện; cách làm tròn hay số tiền phụ thuộc mức hài lòng và hoàn cảnh."},
   {q:"Bạn muốn đổi cuộc hẹn sang ngày khác, không phải huỷ. Nói gì?",
    o:["Jeg må avbestille timen.","Kan jeg flytte timen?","Jeg vil bestille time.","Det passer bra."],a:1,
    w:"flytte = dời chỗ, dời lịch. avbestille là huỷ hẳn."}

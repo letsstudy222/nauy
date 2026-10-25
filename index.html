@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=20261025">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232B6FE6'/%3E%3Ccircle cx='50' cy='50' r='12' fill='%23F0525A'/%3E%3Ctext x='10' y='42' font-family='sans-serif' font-weight='800' font-size='26' fill='white'%3EHei%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -77,13 +77,13 @@
   <div class="stats" id="home-stats"></div>
 
   <div id="voicewarn" hidden>
-    <b>Máy này chưa có giọng đọc tiếng Na Uy.</b> Nút 🔊 sẽ dùng giọng khác nên đọc sai — xem cách bật trong mục "Bắt đầu ở đây" bên dưới, hoặc tra từ trên <a href="https://forvo.com/languages/no/" target="_blank" rel="noopener">forvo.com</a>.
+    <b>Máy này chưa có giọng đọc tiếng Na Uy.</b> Nút 🔊 sẽ tạm không phát âm để tránh dùng nhầm ngôn ngữ — xem cách bật trong mục "Bắt đầu ở đây" bên dưới, hoặc tra từ trên <a href="https://forvo.com/languages/no/" target="_blank" rel="noopener">forvo.com</a>.
   </div>
 
   <details class="onboard" id="onboard">
     <summary>Bắt đầu ở đây — 5 phút đọc trước khi học buổi đầu</summary>
     <ol>
-      <li><span><b>Bật giọng đọc tiếng Na Uy cho máy.</b> Toàn bộ nút 🔊 trên web dùng giọng có sẵn trong hệ điều hành. Chưa bật thì máy đọc bằng giọng Anh và bạn học sai phát âm ngay từ ngày đầu. Cách bật ở ngay dưới danh sách này.</span></li>
+      <li><span><b>Bật giọng đọc tiếng Na Uy cho máy.</b> Toàn bộ nút 🔊 trên web dùng giọng có sẵn trong hệ điều hành. Nếu chưa có giọng Na Uy, web sẽ nhắc bạn cài thay vì dùng giọng khác. Cách bật ở ngay dưới danh sách này.</span></li>
       <li><span><b>Học theo phiên, không học theo hứng.</b> Trang Lộ trình luôn chỉ đúng một việc: "Phiên tiếp theo". Bấm <i>Bắt đầu phiên</i>, thanh dưới màn hình dẫn bạn qua 3 bước: ôn thẻ → đọc mục mới → luyện. Xong bấm <i>Hoàn thành</i> để tính phiên.</span></li>
       <li><span><b>Đọc to, không đọc thầm.</b> Bấm 🔊, lặp lại thành tiếng, rồi mới đọc phiên âm. Phiên âm tiếng Việt trong khoá này chỉ là "phao" — gần đúng, không chính xác.</span></li>
       <li><span><b>Thẻ từ vựng tự nhắc bạn.</b> Mỗi từ bạn đánh dấu "Thuộc" sẽ quay lại sau 1 → 3 → 7 → 14 → 30 ngày. Ôn thẻ đến hạn mỗi lần mở web, kể cả ngày không học bài mới.</span></li>
@@ -100,13 +100,35 @@
     <p class="small muted" style="margin-top:12px">Kiểm tra: chấm tròn cạnh chữ "Giọng đọc" ở góc trên chuyển sang xanh lá là máy đã có giọng Na Uy.</p>
   </details>
 
-  <div class="section-title"><h2>8 phần A1</h2><span class="muted">48 phiên · học đúng thứ tự</span></div>
+  <section class="learning-guide" aria-labelledby="learning-title">
+    <h2 id="learning-title">Học để tự nói được, không chỉ nhận ra đáp án</h2>
+    <p>Mỗi buổi 20–40 phút, điều chỉnh theo sức của bạn. Ưu tiên thẻ đến hạn trước; giảm số từ mới nếu phần ôn đang quá tải.</p>
+    <ol>
+      <li><b>Tự nhớ trước khi xem:</b> nhìn từ hoặc nghĩa tiếng Việt, nói câu trả lời rồi mới lật thẻ. Chọn “Thuộc” khi tự nhớ được, không chỉ thấy quen.</li>
+      <li><b>Nghe có mục tiêu:</b> chọn đoạn ngắn vừa sức, nghe lấy ý chính, nghe lại để tìm chi tiết, rồi đối chiếu bản chép. Cuối cùng nhắc lại một câu và đổi một chi tiết.</li>
+      <li><b>Dùng kiến thức mới:</b> tự nói 30–60 giây hoặc viết 3–5 câu về mình. So với mẫu và kiểm tra một lỗi cụ thể như V2, giống danh từ hoặc thời của động từ.</li>
+      <li><b>Ôn cách quãng và sửa lỗi:</b> quay lại vào các ngày khác nhau; sau khi học từng mẫu, trộn các mẫu đã hiểu. Lịch 1–3–7–14–30 ngày là lịch gợi ý của web, không phải công thức tối ưu cho mọi người.</li>
+    </ol>
+    <details>
+      <summary>Nguồn tham khảo và cách tự đối chiếu</summary>
+      <ul>
+        <li><a href="https://doi.org/10.1177/1529100612453266" target="_blank" rel="noopener">Dunlosky và cộng sự (2013)</a>: tổng quan về tự kiểm tra và học phân bố theo thời gian.</li>
+        <li><a href="https://doi.org/10.1111/j.1467-9280.2006.01693.x" target="_blank" rel="noopener">Roediger &amp; Karpicke (2006)</a>: nghiên cứu về luyện nhớ lại và ghi nhớ dài hạn.</li>
+        <li><a href="https://www.ntnu.edu/now" target="_blank" rel="noopener">NTNU Norwegian on the Web</a>: bài học, ngữ pháp và nghe mẫu.</li>
+        <li><a href="https://ordbokene.no/" target="_blank" rel="noopener">Ordbøkene</a>: tra nghĩa, giống danh từ và dạng chia; khóa này dùng Bokmål.</li>
+        <li><a href="https://prove.hkdir.no/" target="_blank" rel="noopener">HK-dir</a>: thông tin và bài mẫu Norskprøve; <a href="https://www.udi.no/" target="_blank" rel="noopener">UDI</a>: yêu cầu theo hồ sơ cư trú/quốc tịch.</li>
+      </ul>
+      <p class="small muted">Đây là tài liệu để đọc và đối chiếu thêm. Bài luyện của web không thay thế bài đánh giá đủ bốn kỹ năng.</p>
+    </details>
+  </section>
+
+  <div class="section-title"><h2>8 phần A1</h2><span class="muted">48 phiên bài học + 4 phiên ôn tổng · học đúng thứ tự</span></div>
   <div class="roadgrid" id="roadmap"></div>
 
   <div class="section-title" style="margin-top:28px"><h2>4 mốc kiểm tra năng lực thật</h2><span class="muted">không phải quiz — là việc bạn làm được ngoài đời</span></div>
   <div class="milestones" id="milestones"></div>
 
-  <div class="section-title" style="margin-top:28px"><h2>Chặng dài: 2 năm tới Norskprøve</h2></div>
+  <div class="section-title" style="margin-top:28px"><h2>Chặng dài: lộ trình tham khảo tới Norskprøve</h2></div>
   <div class="phases">
     <div class="phase now" data-part="p1">
       <div class="lvl">A1</div><div class="when">Tháng 1–4 · khoá này</div>
@@ -133,7 +155,7 @@
         <li>Giáo trình <i>Stein på stein</i> hoặc lớp B1 nếu đã ở Na Uy</li>
         <li>Nghe NRK không phụ đề, xem <i>Skam</i>/<i>Lykkeland</i> có phụ đề Na Uy</li>
         <li>Viết 150 từ/tuần, nhờ người bản xứ sửa (r/norsk, italki)</li>
-        <li>Mốc: thi <i>Norskprøve A2–B1</i> — mức B1 nói là ngưỡng quốc tịch hiện hành</li>
+        <li>Mốc: tham khảo đề mẫu Norskprøve của HK-dir; kiểm tra yêu cầu hồ sơ hiện hành trên UDI</li>
       </ul>
     </div>
   </div>
@@ -149,13 +171,17 @@
   </div>
   <div class="rvhead">
     <button class="btn solid" id="rv-start-due" style="--accent:var(--purple);--accent-ink:var(--purple-ink)">Ôn thẻ đến hạn <span class="badge" id="rv-duecount" style="background:rgba(255,255,255,.25);color:#fff">0</span></button>
-    <button class="btn" id="rv-start-new">Học 10 thẻ mới</button>
-    <select id="rv-part" aria-label="Chọn phần"><option value="all">Mọi phần đã mở</option></select>
+    <button class="btn" id="rv-start-new">Học 12 thẻ mới</button>
+    <select id="rv-part" aria-label="Chọn phần"><option value="all">Tự chọn: các phần đã học</option></select>
   </div>
+  <label class="recall-direction">Chiều ôn
+    <select id="rv-direction"><option value="no-vi">Na Uy → tự nhớ nghĩa</option><option value="vi-no">Tiếng Việt → tự nói tiếng Na Uy</option></select>
+  </label>
+  <p class="small muted">Nút ôn đến hạn lấy toàn bộ thẻ của phạm vi đã chọn; trong phiên học, lượt ôn đầu giới hạn 25 thẻ. Thẻ trả lời sai được thử lại cuối lượt và vẫn đến hạn ngày mai.</p>
   <div class="boxes" id="rv-boxes"></div>
   <div id="rv-area">
     <div class="cardwrap">
-      <div class="card rvcard" id="rv-card" role="button" tabindex="0" aria-label="Lật thẻ"><div class="rvempty">Bấm "Ôn thẻ đến hạn" hoặc "Học 10 thẻ mới" để bắt đầu.</div></div>
+      <div class="card rvcard" id="rv-card" role="button" tabindex="0" aria-label="Lật thẻ"><div class="rvempty">Bấm "Ôn thẻ đến hạn" hoặc "Học 12 thẻ mới" để bắt đầu.</div></div>
       <div class="rvbtns" id="rv-btns" hidden>
         <button class="btn red" id="rv-no">Chưa thuộc<small>về hộp 1 · hỏi lại mai</small></button>
         <button class="btn green" id="rv-yes">Thuộc<small>lên hộp kế</small></button>
@@ -208,7 +234,7 @@
   <div class="viewhead">
     <p class="kicker" style="color:var(--yellow-ink)">Mốc 4 · sau phần 8</p>
     <h1>Thi thử tổng A1</h1>
-    <p class="lede">30 câu rút ngẫu nhiên từ 80 câu của 8 phần, trộn thứ tự. Mục tiêu ≥ 24/30. Dưới 24: xem phần nào sai nhiều rồi quay lại phần đó, làm lại sau một tuần.</p>
+    <p class="lede">30 câu rút ngẫu nhiên từ 80 câu của 8 phần, trộn thứ tự. Đây là bài luyện từ vựng/ngữ pháp nội bộ, không phải đề Norskprøve chính thức và không chứng nhận A1. Mục tiêu ≥ 24/30. Dưới 24: xem phần nào sai nhiều rồi quay lại phần đó, làm lại sau một tuần.</p>
   </div>
   <div class="exbar">
     <button class="btn solid big" id="ex-start" style="--accent:var(--yellow);--accent-ink:var(--yellow-ink);color:#3A2600">Bắt đầu 30 câu</button>
@@ -241,6 +267,7 @@
   <div class="row">
     <button class="btn" id="pg-export"><svg><use href="#i-download"/></svg>Xuất tiến độ (.json)</button>
     <label class="btn">Nhập từ file<input type="file" id="pg-import" accept=".json,application/json" hidden></label>
+    <button class="btn" id="pg-recovery" hidden>Tải bản gốc để khôi phục</button>
     <button class="btn danger" id="pg-reset">Xoá toàn bộ tiến độ</button>
   </div>
 </section>
@@ -258,7 +285,7 @@
 <header class="hero">
   <p class="trio"><span>Æ</span><span>Ø</span><span>Å</span></p>
   <h1>Ba chữ cái này là thứ đầu tiên bạn phải làm quen</h1>
-  <p>Chúng đứng cuối bảng chữ cái tiếng Na Uy, không có trong tiếng Việt, và xuất hiện trong những từ bạn dùng mỗi ngày. Trang này dạy bạn đọc được toàn bộ chữ viết tiếng Na Uy — từng chữ cái, từng tổ hợp, từng cái bẫy.</p>
+  <p>Chúng đứng cuối bảng chữ cái tiếng Na Uy, không có trong tiếng Việt, và xuất hiện trong những từ bạn dùng mỗi ngày. Phần này giới thiệu các quy tắc phát âm thường gặp. Chính tả không dự đoán được mọi cách đọc; hãy nghe mẫu và lưu ý khác biệt phương ngữ.</p>
 </header>
 
 
@@ -298,7 +325,7 @@
   </div>
 
   <h3>Dài hay ngắn — quy tắc duy nhất cần nhớ</h3>
-  <p>Nguyên âm <b>dài</b> khi sau nó có một phụ âm hoặc không có phụ âm nào. Nguyên âm <b>ngắn</b> khi sau nó có hai phụ âm trở lên. Đây là lý do tiếng Na Uy hay gấp đôi phụ âm.</p>
+  <p>Trong âm tiết <b>có trọng âm</b>, một phụ âm theo sau thường đi với nguyên âm dài; phụ âm đôi thường báo nguyên âm ngắn. Đây là dấu hiệu để đoán, có ngoại lệ như <span class="no">han</span> và từ mượn. Nghe mẫu để xác nhận.</p>
   <table>
     <thead><tr><th style="width:180px">Dài</th><th style="width:180px">Ngắn</th><th>Khác nghĩa hoàn toàn</th></tr></thead>
     <tbody id="p1-lengde"></tbody>
@@ -375,7 +402,7 @@
   </table>
   <p>Ở giọng Oslo: thanh 1 bắt đầu thấp ở âm tiết nhấn rồi đi lên. Thanh 2 bắt đầu cao, tụt xuống rồi nhấc lên ở cuối — hơi giống thanh hỏi Bắc Bộ kéo dài qua hai âm tiết. Quy luật thô: gốc từ một âm tiết (kể cả khi đã thêm đuôi -en, -er) mang thanh 1, gốc từ hai âm tiết mang thanh 2 — cặp <span class="no">tanken</span> ở bảng trên là ví dụ sạch nhất.</p>
   <div class="note">
-    <p><b>Đừng lo lắng về phần này ở trình độ A1.</b> Sai thanh điệu không làm người ta hiểu nhầm — ngữ cảnh cứu bạn. Nhưng nếu bạn nghe kỹ và bắt chước ngay từ đầu, giọng bạn sẽ tự nhiên hơn hẳn những người học nhiều năm mà bỏ qua nó. Ngoài ra: một số phương ngữ (Bergen, Bắc Na Uy) gần như không dùng thanh điệu.</p>
+    <p><b>Đừng lo lắng về phần này ở trình độ A1.</b> Sai thanh điệu không làm người ta hiểu nhầm — ngữ cảnh cứu bạn. Nhưng nếu bạn nghe kỹ và bắt chước ngay từ đầu, giọng bạn sẽ tự nhiên hơn hẳn những người học nhiều năm mà bỏ qua nó. Ngoài ra: một số phương ngữ không phân biệt hai thanh điệu từ; không thể khái quát cho toàn bộ miền Bắc. Học theo một mẫu giọng nhất quán, rồi tập làm quen giọng khác.</p>
   </div>
 </section>
 
@@ -422,8 +449,8 @@
 
   <h3>Tài nguyên miễn phí đáng dùng nhất</h3>
   <p><b>forvo.com</b> — nghe từ bất kỳ do người bản xứ đọc, có ghi rõ vùng miền. Đây là công cụ tra phát âm tốt nhất, dùng thay từ điển.<br>
-  <b>ordbokene.no</b> — từ điển chính thức, có audio và cả dạng chia của từ.<br>
-  <b>NTNU "Norwegian on the Web"</b> — giáo trình A1–A2 miễn phí đầy đủ, có bài nghe.<br>
+  <b>ordbokene.no</b> — từ điển Bokmål/Nynorsk để tra nghĩa và dạng chia.<br>
+  <b>NTNU "Norwegian on the Web"</b> — giáo trình nhập môn miễn phí, có bài nghe.<br>
   <b>Klar Tale</b> — báo viết bằng tiếng Na Uy đơn giản, có bản đọc.<br>
   <b>NRK TV</b> — truyền hình quốc gia, nhiều chương trình có phụ đề tiếng Na Uy.</p>
 </section>
@@ -490,7 +517,7 @@
 <section id="p2-duform">
   <h2>Xưng hô: chỉ có một chữ <span class="no">du</span></h2>
   <p>Tiếng Việt có "anh, chị, em, cô, chú, bác, thầy". Tiếng Na Uy có <span class="no">du</span> — hết. Bạn dùng nó với sếp, với thủ tướng, với người lớn tuổi gấp đôi mình.</p>
-  <p>Dạng kính ngữ <span class="no">De</span> vẫn nằm trong từ điển nhưng đã chết trong đời sống từ thập niên 1970. Dùng nó bây giờ nghe kỳ quặc hoặc mỉa mai, chứ không lịch sự.</p>
+  <p>Trong giao tiếp hiện nay, <span class="no">du</span> và tên riêng rất phổ biến. <span class="no">De</span> vẫn tồn tại nhưng ít dùng, chủ yếu ở một số ngữ cảnh trang trọng. Lịch sự còn thể hiện ở giọng điệu và cách đề nghị.</p>
   <div class="tip">
     <p>Người Na Uy cũng gọi thẳng tên, không kèm chức danh. Giáo sư tên Ingrid thì sinh viên gọi là <span class="no">Ingrid</span>. Với người Việt đây là thứ khó quen nhất — cảm giác như đang hỗn. Nhưng gọi kiểu trang trọng mới là thứ làm người ta khó xử.</p>
   </div>
@@ -771,7 +798,7 @@
     <tbody id="p3-flertallsregler"></tbody>
   </table>
   <div class="note">
-    <p><b>Dạng số nhiều xác định luôn là <span class="no">-ene</span></b>, không có ngoại lệ đáng kể ở trình độ A1. Kể cả danh từ trung tính một âm tiết không thêm gì ở số nhiều thường, thì số nhiều xác định vẫn là <span class="no">husene, bordene</span>.</p>
+    <p><b>Dạng số nhiều xác định thường dùng <span class="no">-ene</span></b>: <span class="no">husene, bordene</span>. Có ngoại lệ rất thường gặp như <span class="no">barna</span> và <span class="no">lærerne</span>. Trong Bokmål, nhiều danh từ trung tính cũng có biến thể đuôi <span class="no">-a</span>; hãy tra dạng của từng từ.</p>
   </div>
 </section>
 
@@ -903,8 +930,8 @@
   <p class="v2hero">
     <span class="slot n1">1</span><span class="slot n2">2</span><span class="slot n3">3</span>
   </p>
-  <h1>Động từ luôn đứng ở vị trí thứ hai. Luôn luôn.</h1>
-  <p>Đây là quy tắc chi phối mọi câu tiếng Na Uy. Nó không giống tiếng Việt, không giống tiếng Anh, và là thứ người học sai nhiều nhất kể cả sau vài năm. Nắm được nó ở đây thì bảy phần còn lại nhẹ hẳn.</p>
+  <h1>Câu kể chính: động từ chia đứng ở thành phần thứ hai.</h1>
+  <p>Quy tắc V2 áp dụng cho câu kể chính: vị trí được tính theo thành phần, không theo số từ. Câu hỏi có/không, câu mệnh lệnh và mệnh đề phụ có trật tự khác; các ví dụ bên dưới giúp bạn phân biệt.</p>
 </header>
 
 
@@ -972,7 +999,7 @@
 
 <section id="p4-ikke">
   <h2>Phủ định với <span class="no">ikke</span></h2>
-  <p><span class="no">ikke</span> <span class="vn">ík-kơ</span> đứng <b>sau</b> động từ, không đứng trước. Đây là điểm ngược hoàn toàn với tiếng Việt, nơi "không" luôn đứng trước động từ.</p>
+  <p>Trong câu chính trung tính, <span class="no">ikke</span> đứng sau động từ chia và thường sau cả chủ ngữ nếu có đảo: <span class="no">Jeg snakker ikke norsk</span>; <span class="no">I dag snakker jeg ikke norsk</span>. Trong mệnh đề phụ: <span class="no">fordi jeg ikke snakker norsk</span>.</p>
   <div id="p4-ikkepar"></div>
   <div class="frases" id="p4-ikkeliste"></div>
 </section>
@@ -1360,7 +1387,7 @@
     <span class="a">å snakke</span><span class="dot">·</span><span class="b">snakker</span><span class="dot">·</span><span class="c">snakket</span><span class="dot">·</span><span class="d">har snakket</span>
   </p>
   <h1>Mỗi động từ có bốn dạng. Bạn đã biết hai.</h1>
-  <p>Phần này lắp thêm hai dạng còn lại để bạn kể được chuyện đã qua và nói được chuyện sắp tới. Kèm theo là mệnh đề phụ — chỗ duy nhất trong tiếng Na Uy mà quy tắc V2 ngừng áp dụng.</p>
+  <p>Phần này lắp thêm hai dạng còn lại để bạn kể được chuyện đã qua và nói được chuyện sắp tới. Kèm theo là mệnh đề phụ — một cấu trúc cần phân biệt với V2 trong câu kể chính.</p>
 </header>
 
 
@@ -1373,7 +1400,7 @@
     <tbody id="p6-firetabell"></tbody>
   </table>
   <div class="note">
-    <p>Dạng thứ tư luôn đi kèm <span class="no">har</span> (hoặc <span class="no">hadde</span>), không bao giờ đứng một mình. Người ta gọi cả cụm <span class="no">har snakket</span> là thì hoàn thành.</p>
+    <p>Trong bảng này, cột thứ tư ghi cả cụm hoàn thành <span class="no">har snakket</span>. Riêng <span class="no">snakket</span> là phân từ quá khứ; nó còn được dùng trong cấu trúc khác như bị động, không chỉ sau har/hadde.</p>
   </div>
 </section>
 
@@ -1382,7 +1409,7 @@
   <p class="lede">Động từ yếu là động từ thêm đuôi vào gốc mà không đổi nguyên âm. Chúng chiếm phần lớn từ vựng, và chia thành bốn nhóm theo đuôi.</p>
   <div class="grupper" id="p6-gruppene"></div>
   <div class="warn">
-    <p><b>Quy tắc trên đúng khoảng 80%.</b> Có ngoại lệ thật sự: <span class="no">å kjenne</span> có gốc kết thúc bằng hai phụ âm nhưng lại theo nhóm 2 (<span class="no">kjente</span>), và <span class="no">å glemme</span> cũng vậy (<span class="no">glemte</span>). Nguyên tắc bổ sung: nếu gốc kết thúc bằng phụ âm đôi <span class="no">ll, nn, mm</span> thì thường theo nhóm 2.</p>
+    <p><b>Đây là mẹo nhận diện, không phải công thức chắc chắn.</b> Có ngoại lệ thật sự: <span class="no">å kjenne</span> có gốc kết thúc bằng hai phụ âm nhưng lại theo nhóm 2 (<span class="no">kjente</span>), và <span class="no">å glemme</span> cũng vậy (<span class="no">glemte</span>). Nguyên tắc bổ sung: nếu gốc kết thúc bằng phụ âm đôi <span class="no">ll, nn, mm</span> thì thường theo nhóm 2.</p>
     <p>Đừng cố hoàn thiện quy tắc. Dùng nó để đoán khi gặp từ lạ, còn với từ hay dùng thì học thuộc dạng quá khứ luôn.</p>
   </div>
   <div class="tip">
@@ -1404,13 +1431,13 @@
 
 <section id="p6-pretvsperf">
   <h2>Quá khứ hay hoàn thành</h2>
-  <p>Hai thì này dịch sang tiếng Việt đều thành "đã", nên người Việt hay dùng lẫn. Sự khác biệt nằm ở chỗ bạn có nói rõ <b>thời điểm</b> hay không.</p>
+  <p>Hai thì này dịch sang tiếng Việt đều thành "đã", nên người Việt hay dùng lẫn. Hãy xét sự việc thuộc một khoảng quá khứ đã kết thúc hay còn liên hệ với hiện tại; không chỉ xét có ghi thời gian hay không.</p>
   <table>
     <thead><tr><th style="width:44%">Quá khứ — có mốc thời gian</th><th>Hoàn thành — không nói thời điểm</th></tr></thead>
     <tbody id="p6-pptabell"></tbody>
   </table>
   <div class="tip">
-    <p><b>Mẹo nhanh:</b> trong câu có <span class="no">i går, i fjor, klokka to, forrige uke</span> hay bất kỳ mốc thời gian cụ thể nào thì dùng <b>quá khứ</b>. Không có mốc nào, chỉ nói việc đó từng xảy ra hoặc còn ảnh hưởng tới hiện tại, thì dùng <b>hoàn thành</b>.</p>
+    <p><b>Mẹo nhanh:</b> với thời gian đã kết thúc như <span class="no">i går, i fjor, forrige uke</span>, thường dùng quá khứ. Hoàn thành dùng cho kinh nghiệm hoặc liên hệ hiện tại, và vẫn đi được với thời gian: <span class="no">Jeg har bodd her siden 2020</span> (tôi sống ở đây từ năm 2020 đến nay). Không nêu thời gian cũng chưa đủ để bắt buộc dùng hoàn thành.</p>
   </div>
   <div class="note">
     <p>Câu hỏi về kinh nghiệm luôn dùng hoàn thành: <span class="no">Har du vært i Norge?</span> (bạn từng ở Na Uy chưa?). Nhưng khi trả lời có kèm thời điểm thì chuyển sang quá khứ: <span class="no">Ja, jeg var der i fjor.</span></p>
@@ -1426,7 +1453,7 @@
   <h2>Tương lai — ba cách, và một cái bẫy</h2>
 
   <h3>Cách 1: dùng luôn thì hiện tại</h3>
-  <p>Đây là cách <b>phổ biến nhất</b> và người học hay bỏ qua. Chỉ cần thêm một cụm chỉ thời gian tương lai là xong, không đổi động từ.</p>
+  <p>Đây là một cách thường dùng để nói về lịch trình hoặc kế hoạch. Chỉ cần thêm một cụm chỉ thời gian tương lai là xong, không đổi động từ.</p>
   <div class="words" id="p6-framtid1"></div>
 
   <h3>Cách 2: <span class="no">skal</span> + nguyên thể</h3>
@@ -1434,12 +1461,12 @@
   <div class="words" id="p6-framtid2"></div>
 
   <h3>Cách 3: <span class="no">kommer til å</span> + nguyên thể</h3>
-  <p>Dùng cho dự đoán, chuyện sẽ xảy ra dù ai muốn hay không.</p>
+  <p>Thường dùng cho dự đoán hoặc diễn tiến tương lai; cách chọn còn phụ thuộc ý nghĩa và ngữ cảnh.</p>
   <div class="words" id="p6-framtid3"></div>
 
   <div class="warn">
-    <p><b>Cái bẫy lớn nhất phần này:</b> <span class="no">vil</span> <em>không</em> phải "will". Nó nghĩa là <b>muốn</b>.</p>
-    <p><span class="no">Jeg vil ha kaffe</span> = tôi muốn cà phê, không phải "tôi sẽ có cà phê". Người học từ tiếng Anh sang dùng sai từ này liên tục. Muốn nói tương lai thì dùng <span class="no">skal</span> hoặc thì hiện tại.</p>
+    <p><b>Cái bẫy lớn nhất phần này:</b> <span class="no">vil</span> thường diễn đạt <b>mong muốn</b>, nhưng cũng có thể diễn đạt dự đoán hoặc tương lai tùy ngữ cảnh.</p>
+    <p><span class="no">Jeg vil ha kaffe</span> = tôi muốn cà phê, không phải "tôi sẽ có cà phê". Người học từ tiếng Anh sang dùng sai từ này liên tục. Để nói kế hoạch, tập dùng <span class="no">skal</span> hoặc hiện tại kèm thời gian. Không coi mọi câu có vil là sai khi nói tương lai.</p>
   </div>
 </section>
 
@@ -1451,7 +1478,7 @@
     <tbody id="p6-modaltabell"></tbody>
   </table>
   <div class="tip">
-    <p>Để ý một điều tiện: <b>dạng quá khứ của động từ khiếm khuyết chính là dạng nguyên thể của nó</b>. <span class="no">å kunne → kunne</span>, <span class="no">å ville → ville</span>, <span class="no">å måtte → måtte</span>. Học một lần được cả hai.</p>
+    <p>Để ý một điều tiện: <b>một số động từ khiếm khuyết có quá khứ trùng nguyên thể</b>. <span class="no">å kunne → kunne</span>, <span class="no">å ville → ville</span>, <span class="no">å måtte → måtte</span>. Không suy rộng ra toàn bộ bảng: <span class="no">å burde → bør → burde</span>, còn <span class="no">å få → får → fikk</span>. Få có thể dùng với nghĩa được phép nhưng chia như động từ thông thường.</p>
   </div>
   <div id="p6-modalpar"></div>
 </section>
@@ -1764,7 +1791,7 @@
 
 <section id="p7-ipa">
   <h2><span class="no">i</span> hay <span class="no">på</span></h2>
-  <p>Câu hỏi này không có lời giải logic. Ngay cả người Na Uy cũng không giải thích được vì sao là <span class="no">i Norge</span> nhưng <span class="no">på Island</span>. Cách duy nhất là học thuộc từng cụm.</p>
+  <p>Giới từ phụ thuộc vào địa danh và cách dùng đã thành thói quen. Học theo cụm: <span class="no">i Norge, på Island, i Irland, i Japan</span>. Không áp dụng quy tắc “mọi đảo đều dùng på”.</p>
   <div class="words" id="p7-ipaliste"></div>
   <div class="warn">
     <p><b>Một chỗ thật sự lạ:</b> hầu hết thành phố dùng <span class="no">i</span> — <span class="no">i Oslo, i Bergen, i Hanoi</span>. Nhưng một số thị trấn trong đất liền lại dùng <span class="no">på</span> — <span class="no">på Hamar, på Lillehammer, på Gjøvik</span>. Đảo cũng dùng <span class="no">på</span>: <span class="no">på Island</span>. Người bản xứ chỉ biết theo thói quen, không theo quy tắc.</p>
@@ -2032,21 +2059,21 @@
   <h3>Ba việc nên làm ngay tuần này</h3>
   <p><b>Bắt đầu nghe mỗi ngày.</b> Bạn đã có đủ ngữ pháp để hiểu được cấu trúc câu, giờ vấn đề chỉ là tai. Podcast <i>Lær norsk nå</i> nói chậm và có bản chép. Nghe 15 phút mỗi ngày quan trọng hơn học thêm ngữ pháp lúc này.</p>
   <p><b>Đọc Klar Tale.</b> Báo viết bằng tiếng Na Uy đơn giản, có bản đọc kèm. Mỗi ngày một bài, tra không quá năm từ mới. Nếu phải tra nhiều hơn thì bài đó khó quá, chọn bài khác.</p>
-  <p><b>Tìm người để nói.</b> Đây là thứ không tự học được. Tandem, HelloTalk, hoặc lớp học tại chỗ nếu bạn đã ở Na Uy. Một giờ nói chuyện thật bằng mười giờ làm bài tập.</p>
+  <p><b>Tìm người để nói.</b> Đây là thứ không tự học được. Tandem, HelloTalk, hoặc lớp học tại chỗ nếu bạn đã ở Na Uy. Kết hợp nói chuyện với ôn từ và phản hồi lỗi; không có tỷ lệ quy đổi giờ cố định cho mọi người.</p>
 
   <h3>Chặng tiếp theo: A2</h3>
-  <p>Trình độ A2 mở rộng chứ không đổi nền tảng: thêm thì quá khứ hoàn thành, đại từ quan hệ với <span class="no">som</span>, câu bị động, nhiều liên từ hơn, và khoảng 1.500 từ vựng. Giáo trình chuẩn là <i>Stein på stein</i>, tiếp nối bộ <i>På vei</i> của A1–A2.</p>
+  <p>Ở A2, tập xử lý tình huống quen thuộc, hiểu thông tin thường ngày và viết những đoạn ngắn có liên kết. Có thể tiếp tục với NTNU NoW hoặc giáo trình <i>På vei</i> (A1–A2). <i>Stein på stein</i> hướng tới B1. Mức CEFR dựa trên việc bạn làm được bằng ngôn ngữ, không có một số từ vựng cố định bảo đảm đạt mức.</p>
 
   <h3>Về kỳ thi <span class="no">Norskprøven</span></h3>
-  <p>Nếu bạn tính sang Na Uy học hoặc làm việc, đây là kỳ thi bạn sẽ gặp. Nó có bốn phần — nghe, đọc, viết, nói — và chấm theo mức A1, A2, B1, B2. Xin quốc tịch Na Uy hiện yêu cầu tối thiểu mức B1 phần nói. Đó là mục tiêu xa, còn khoảng hai năm học đều đặn từ chỗ bạn đang đứng.</p>
+  <p>Nếu bạn tính sang Na Uy học hoặc làm việc, đây là kỳ thi bạn sẽ gặp. Nó có bốn phần — nghe, đọc, viết, nói — và chấm theo mức A1, A2, B1, B2. Cấu trúc thi và yêu cầu cho từng hồ sơ có thể thay đổi. Xem thông tin chính thức của HK-dir về kỳ thi và UDI về cư trú/quốc tịch; khóa học này không xác nhận bạn đáp ứng điều kiện pháp lý.</p>
 
   <h3>Kỳ vọng thực tế về thời gian</h3>
-  <p>Viện Ngoại giao Mỹ xếp tiếng Na Uy vào nhóm dễ nhất, khoảng 600–750 giờ để đạt mức làm việc được. Với một giờ mỗi ngày, đó là chừng hai năm. A1 mà bạn vừa xong tương đương khoảng 80–100 giờ.</p>
+  <p>Thời gian học phụ thuộc ngôn ngữ nền, cơ hội sử dụng và chất lượng luyện tập. Ước tính FSI dành cho người nói tiếng Anh trong chương trình chuyên sâu, không thể áp thẳng cho người Việt tự học hoặc quy đổi thành số giờ đạt A1. Dùng các mốc thực hành để tự kiểm tra thay vì hứa một ngày hoàn thành cố định.</p>
   <p>Con số này không nhằm làm bạn nản. Nó để bạn biết rằng cảm giác "học mãi mà chưa nói được" ở tháng thứ ba là hoàn toàn bình thường, chứ không phải bạn kém.</p>
 
   <h3>Tài nguyên miễn phí, nhắc lại lần cuối</h3>
   <p><b>forvo.com</b> — nghe người bản xứ đọc bất kỳ từ nào, có ghi vùng miền<br>
-  <b>ordbokene.no</b> — từ điển chính thức, có audio và đầy đủ dạng chia<br>
+  <b>ordbokene.no</b> — từ điển Bokmål/Nynorsk để tra nghĩa và dạng chia<br>
   <b>NTNU Norwegian on the Web</b> — giáo trình A1–A2 miễn phí, có bài nghe<br>
   <b>Klar Tale</b> — báo tiếng Na Uy đơn giản, có bản đọc<br>
   <b>NRK TV</b> — truyền hình quốc gia, nhiều chương trình có phụ đề tiếng Na Uy<br>
@@ -2108,7 +2135,7 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <button class="totop" id="totop" type="button" aria-label="Lên đầu trang">↑</button>
 
-<script src="data.js" charset="utf-8"></script>
-<script src="app.js" charset="utf-8"></script>
+<script src="data.js?v=20261025" charset="utf-8"></script>
+<script src="app.js?v=20261025" charset="utf-8"></script>
 </body>
 </html>
